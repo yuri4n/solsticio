@@ -1,6 +1,6 @@
 <template>
     <div>
-        <header class="bg-primary text-white">
+        <header class="background-overlay text-white">
         <div class="container text-center">
             <h1>Bienvenido a la página de Solsticio</h1>
             <p class="lead">Parque Residencial etapa 5</p>
@@ -51,7 +51,18 @@
 <style>
     header {
         padding: 154px 0 100px;
-        }
+        position: relative;
+        background: url(http://localhost/solsticio/public/images/background.jpg);
+        background-size: cover;      
+    }
+
+    .background-overlay {
+        background: rgba(127, 0, 0,.6);
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
 
     @media (min-width: 992px) {
         header {

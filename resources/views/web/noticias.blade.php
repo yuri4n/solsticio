@@ -13,7 +13,7 @@
     <body>
         <div id="app">
             <navbar></navbar>
-            <example-component></example-component>
+            <noticias></noticias>
             <footer-component></footer-component>    
         </div>
 
