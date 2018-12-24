@@ -52,7 +52,7 @@
     header {
         padding: 154px 0 100px;
         position: relative;
-        background: url(http://localhost/solsticio/public/images/background.jpg);
+        background: url(/images/background.jpg);
         background-size: cover;      
     }
 

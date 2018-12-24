@@ -1,6 +1,6 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/solsticio/public/inicio">Solsticio Parque Residencial</a>
+        <a class="navbar-brand" href="/solsticio/public/inicio">Solsticio Parque Residencial | <small class="text-muted">Etapa 5</small> </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -14,22 +14,22 @@
                 <a class="nav-link" href="/solsticio/public/noticias">Noticias</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Servicios</a>
+                <a class="nav-link" href="/solsticio/public/servicios">Servicios</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Archivos</a>
+                <a class="nav-link" href="/solsticio/public/archivos">Archivos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Clasificados</a>
+                <a class="nav-link" href="/solsticio/public/clasificados">Clasificados</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Peticiones</a>
+                <a class="nav-link" href="/solsticio/public/peticiones">Peticiones</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Censo</a>
+                <a class="nav-link" href="/solsticio/public/censo">Censo</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Pagos</a>
+                <a class="nav-link" href="/solsticio/public/pagos">Pagos</a>
             </li>
             </ul>
         </div>

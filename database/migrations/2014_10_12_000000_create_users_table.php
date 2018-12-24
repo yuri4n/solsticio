@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('role_id');
+            $table->integer('role_id')->unsigned();
 
             $table->string('name');
             $table->string('username', 128)->unique()->nullable();
@@ -25,10 +25,6 @@ class CreateUsersTable extends Migration
             $table->string('profile_img', 128)->nullable();
             $table->rememberToken();
             $table->timestamps();
-
-            //Relation
-            $table->foreign('user_id')->references('id')->on('users')
-                ->onUpdate('cascade');
         });
     }
 

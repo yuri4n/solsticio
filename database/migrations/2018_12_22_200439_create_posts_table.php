@@ -20,10 +20,10 @@ class CreatePostsTable extends Migration
             
             $table->string('title', 128);
             $table->string('slug', 128)->unique();
-            $table->mediumText('excerpt')-nullable();            
+            $table->mediumText('excerpt')->nullable();            
             $table->text('body');
             $table->string('file', 128)->nullable();
-            $table->enum('status', ['PUBLISHED', 'DRAFT'])->default(['DRAFT']);
+            $table->enum('status', ['PUBLISHED', 'DRAFT'])->default('DRAFT');
             
             $table->timestamps();
 

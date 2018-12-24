@@ -5879,7 +5879,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nheader {\n    padding: 154px 0 100px;\n    position: relative;\n    background: url(http://localhost/solsticio/public/images/background.jpg);\n    background-size: cover;\n}\n.background-overlay {\n    background: rgba(127, 0, 0,.6);\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n}\n@media (min-width: 992px) {\nheader {\n        padding: 156px 0 100px;\n}\n}\n", ""]);
+exports.push([module.i, "\nheader {\n    padding: 154px 0 100px;\n    position: relative;\n    background: url(/images/background.jpg);\n    background-size: cover;\n}\n.background-overlay {\n    background: rgba(127, 0, 0,.6);\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n}\n@media (min-width: 992px) {\nheader {\n        padding: 156px 0 100px;\n}\n}\n", ""]);
 
 // exports
 
@@ -37303,7 +37303,10 @@ var staticRenderFns = [
             staticClass: "navbar-brand",
             attrs: { href: "/solsticio/public/inicio" }
           },
-          [_vm._v("Solsticio Parque Residencial")]
+          [
+            _vm._v("Solsticio Parque Residencial | "),
+            _c("small", { staticClass: "text-muted" }, [_vm._v("Etapa 5")])
+          ]
         ),
         _vm._v(" "),
         _c(
@@ -37353,39 +37356,69 @@ var staticRenderFns = [
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "nav-item" }, [
-                _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                  _vm._v("Servicios")
-                ])
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { href: "/solsticio/public/servicios" }
+                  },
+                  [_vm._v("Servicios")]
+                )
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "nav-item" }, [
-                _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                  _vm._v("Archivos")
-                ])
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { href: "/solsticio/public/archivos" }
+                  },
+                  [_vm._v("Archivos")]
+                )
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "nav-item" }, [
-                _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                  _vm._v("Clasificados")
-                ])
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { href: "/solsticio/public/clasificados" }
+                  },
+                  [_vm._v("Clasificados")]
+                )
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "nav-item" }, [
-                _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                  _vm._v("Peticiones")
-                ])
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { href: "/solsticio/public/peticiones" }
+                  },
+                  [_vm._v("Peticiones")]
+                )
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "nav-item" }, [
-                _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                  _vm._v("Censo")
-                ])
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { href: "/solsticio/public/censo" }
+                  },
+                  [_vm._v("Censo")]
+                )
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "nav-item" }, [
-                _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                  _vm._v("Pagos")
-                ])
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { href: "/solsticio/public/pagos" }
+                  },
+                  [_vm._v("Pagos")]
+                )
               ])
             ])
           ]

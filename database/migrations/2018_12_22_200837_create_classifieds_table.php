@@ -23,11 +23,11 @@ class CreateClassifiedsTable extends Migration
             $table->string('slug', 128)->unique();
             $table->mediumText('excerpt')->nullable();
             $table->text('body');
-            $table->enum('status', ['PUBLISHED', 'DRAFT', 'PENDING'])->default(['DRAFT']);
+            $table->enum('status', ['PUBLISHED', 'DRAFT', 'PENDING'])->default('DRAFT');
 
             $table->timestamps();
 
-            //Relation
+            //relation
             $table->foreign('user_id')->references('id')->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');

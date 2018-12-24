@@ -1,5 +1,7 @@
 <p align="center">
 <img src="https://laravel.com/assets/img/components/logo-laravel.svg">
+</p>
+<p align="center">
 <img src="https://vuejs.org/images/logo.png">
 </p>
 
@@ -8,6 +10,7 @@
 - *1.0*   => Initial Commit: Workflow scheme.
 - *1.2*   => Building the migrations: Stablishing the architecture.
 - *1.2.5* => Few changes in the migrations.
+- *1.2.8* => Probably ultimate migration commit.
 
 ## About Laravel
 
