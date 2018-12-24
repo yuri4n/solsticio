@@ -15,13 +15,20 @@ class CreateReservationsTable extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->increments('id');
+
+            $table->integer('user_id')->unsigned();
+
             $table->string('nombre_responsable');
-            $table->string('cc_responsable');
-            $table->enum('type', ['BBQ', 'SS', 'SC']);
-            $table->dateTime('fecha_solicitada');
-            $table->text('additional_info')->nullable();
+            $table->enum('type', ['BBQ', 'SS', 'SJ']);
+            $table->date('fecha_solicitada');
+            $table->text('additional_info');
 
             $table->timestamps();
+
+            //Relation
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 

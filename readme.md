@@ -1,12 +1,13 @@
 <p align="center">
 <img src="https://laravel.com/assets/img/components/logo-laravel.svg">
-<img src="https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjwzbuqjbXfAhVv0FkKHSQCAToQjRx6BAgBEAU&url=https%3A%2F%2Fpngimage.net%2Fvue-png-4%2F&psig=AOvVaw1-y6ha3hVS82N3Cau-RM5D&ust=1545625256472911">
+<img src="https://vuejs.org/images/logo.png">
 </p>
 
 ## Project Changelog
 
-1.0 => Initial Commit: Workflow scheme.
-1.2 => Building the migrations: Stablishing the architecture.
+- *1.0*   => Initial Commit: Workflow scheme.
+- *1.2*   => Building the migrations: Stablishing the architecture.
+- *1.2.5* => Few changes in the migrations.
 
 ## About Laravel
 
@@ -28,4 +29,4 @@ Vue (pronounced /vjuː/, like view) is a progressive framework for building user
 
 ## License
 
-Copyright &copy; Solsticio Parque Residencial etapa 5 2018
+Copyright &copy; Solsticio Parque Residencial Etapa 5. 2018.

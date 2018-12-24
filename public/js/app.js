@@ -5879,7 +5879,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nheader {\n    padding: 154px 0 100px;\n    position: relative;\n    background: url(http://localhost/solsticio/public/images/background.jpg);\n    background-size: cover;\n    min-height: 400px;\n}\n.background-overlay {\n    background: rgba(127, 0, 0,.7);\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n}\n@media (min-width: 992px) {\nheader {\n        padding: 156px 0 100px;\n}\n}\n", ""]);
+exports.push([module.i, "\nheader {\n    padding: 154px 0 100px;\n    position: relative;\n    background: url(http://localhost/solsticio/public/images/background.jpg);\n    background-size: cover;\n}\n.background-overlay {\n    background: rgba(127, 0, 0,.6);\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n}\n@media (min-width: 992px) {\nheader {\n        padding: 156px 0 100px;\n}\n}\n", ""]);
 
 // exports
 
