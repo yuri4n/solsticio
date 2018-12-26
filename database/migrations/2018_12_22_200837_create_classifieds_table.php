@@ -23,6 +23,7 @@ class CreateClassifiedsTable extends Migration
             $table->string('slug', 128)->unique();
             $table->mediumText('excerpt')->nullable();
             $table->text('body');
+            $table->string('file')->nullable();
             $table->enum('status', ['PUBLISHED', 'DRAFT', 'PENDING'])->default('DRAFT');
 
             $table->timestamps();
