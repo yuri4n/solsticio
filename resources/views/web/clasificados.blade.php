@@ -13,7 +13,7 @@
     <body>
         <div id="app">
             <navbar></navbar>
-            <h1>ALGO</h1>
+            <clasificados></clasificados>
             <footer-component></footer-component>    
         </div>
 

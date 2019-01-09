@@ -13,6 +13,7 @@
 - *1.2.8* => Probably ultimate migration commit.
 - *1.3* => Seeders.
 - *1.4* => Posts and Archives pages.
+- *1.4.2* => Classifieds view.
 
 ## About Laravel
 
