@@ -11,7 +11,8 @@
 - *1.2*   => Building the migrations: Stablishing the architecture.
 - *1.2.5* => Few changes in the migrations.
 - *1.2.8* => Probably ultimate migration commit.
-- *1.3* => Seeders
+- *1.3* => Seeders.
+- *1.4* => Posts and Archives pages.
 
 ## About Laravel
 

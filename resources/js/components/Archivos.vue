@@ -4,23 +4,30 @@
             <!-- Blog Entries Column -->
             <div class="col-md-8">
 
-            <h1 class="my-4">Noticias
-                <small class="text-muted">Lo último de tu conjunto</small>
-            </h1>
+            <h1 class="my-4">Archivos</h1>
             <!-- 
                 750x300
              -->
-            <!-- Blog Post -->
-            <div v-for="post in posts" v-bind:key="post.id" class="card mb-4">
-                <img class="card-img-top" :src="post.file" alt="Card image cap" style="width:750;height:300;">
+            <!-- Table -->
+            <div class="card mb-3">
                 <div class="card-body">
-                <h2 class="card-title">{{ post.title }}</h2>
-                <p class="card-text">{{ post.excerpt }}</p>
-                <a :href="postRoute(post)" class="btn btn-primary">Leer Más &rarr;</a>
-                </div>
-                <div class="card-footer text-muted">
-                Posted on January 1, 2017 by
-                <a href="#">Lady Rincon</a>
+                    <h2 class="card-title">Lista de Archivos</h2>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">Descargar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="file in files" :key="file.id">
+                                <th scope="row">{{ file.id }}</th>
+                                <td>{{ file.description }}</td>
+                                <td><button class="btn btn-primary">Descargar</button></td>
+                            </tr>
+                        </tbody>
+                    </table>                    
                 </div>
             </div>
 
@@ -72,17 +79,17 @@ export default {
     },
     data() {
         return {
-            posts: [],
+            files: [],
             pagination: {}
         }
     },
     methods: {
         readPosts(page_url) {
             let vm = this;
-            page_url = page_url || '/api/posts';
+            page_url = page_url || '/api/files';
             axios.get(page_url)
                 .then(response => {
-                this.posts = response.data.data;
+                this.files = response.data.data;
                 vm.makePagination(response.data);
                 })
                 .catch(err => console.log(err));
@@ -95,9 +102,6 @@ export default {
                 prev_page_url: meta.prev_page_url
             };
             this.pagination = pagination;
-        },
-        postRoute(post) {
-            return "noticias/" + post.slug;
         },
     }
 }

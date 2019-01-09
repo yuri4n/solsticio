@@ -14,7 +14,8 @@ class ClassifiedController extends Controller
      */
     public function index()
     {
-        //
+        $classifieds = Classified::orderBy('id', 'DESC')->where('status', 'PUBLISHED')->paginate(8);
+        return $classifieds;
     }
 
     /**

@@ -14,7 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::orderBy('id', 'DESC')->where('status', 'PUBLISHED')->paginate(8);
+        return $categories;
     }
 
     /**

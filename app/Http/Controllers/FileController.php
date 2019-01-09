@@ -14,7 +14,8 @@ class FileController extends Controller
      */
     public function index()
     {
-        //
+        $files = File::orderBy('id', 'DESC')->paginate(15);
+        return $files;
     }
 
     /**

@@ -14,7 +14,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::orderBy('id', 'DESC')->where('status', 'PUBLISHED')->paginate(8);
+        return $posts;
     }
 
     /**
@@ -44,9 +45,10 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Post $slug)
     {
-        //
+        $post = Post::where('slug', $slug)->first();
+        return $post;
     }
 
     /**
