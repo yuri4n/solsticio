@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
-        <title>Solsticio</title>
+        <title>Solsticio Etapa 5</title>
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{asset('css/app.css')}}">
@@ -14,7 +14,7 @@
     <body>
         <div id="app">
             <navbar></navbar>
-            <index></index>
+            <salonsocial></salonsocial>
             <footer-component></footer-component>    
         </div>
 

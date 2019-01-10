@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>Solsticio</title>
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+        <title>Solsticio Etapa 5</title>
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{asset('css/app.css')}}">
@@ -13,7 +14,7 @@
     <body>
         <div id="app">
             <navbar></navbar>
-            <h1>ALGO</h1>
+            <servicios></servicios>
             <footer-component></footer-component>    
         </div>
 

@@ -7,10 +7,10 @@ Route::view('/inicio', 'web.inicio');
 Route::view('/noticias', 'web.noticias');
 Route::view('/noticias/{slug}', 'web.noticia');
 
-Route::view('/servicios', 'web.servicios');
-Route::view('/servicios/salon-de-juntas', 'web.salon-de-juntas');
-Route::view('/servicios/salon-social', 'web.salon-social');
-Route::view('/servicios/bbq', 'web.bbq');
+Route::view('/servicios', 'web.servicios.servicios');
+Route::view('/servicios/salon-de-juntas', 'web.servicios.salon-de-juntas');
+Route::view('/servicios/salon-social', 'web.servicios.salon-social');
+Route::view('/servicios/bbq', 'web.servicios.bbq');
 
 Route::view('/archivos', 'web.archivos');
 
