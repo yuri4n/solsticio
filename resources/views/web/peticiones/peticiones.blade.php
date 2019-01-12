@@ -14,7 +14,7 @@
     <body>
         <div id="app">
             <navbar></navbar>
-            <h1>ALGO</h1>
+            <peticiones></peticiones>
             <footer-component></footer-component>    
         </div>
 

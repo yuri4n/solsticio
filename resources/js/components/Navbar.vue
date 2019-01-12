@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="inicio">
-            <!-- <img :src="'public/images/logo.png'" width="30" height="30" alt=""> -->
+        <a class="navbar-brand" href="http://solsticio.local/inicio/">
+            <img src="http://solsticio.local/images/icon.png" width="30" height="30" alt="">
             Solsticio Parque Residencial | 
             <small class="text-muted">Etapa 5</small> 
         </a>

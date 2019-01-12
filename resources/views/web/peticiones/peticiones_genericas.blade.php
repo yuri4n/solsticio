@@ -14,7 +14,7 @@
     <body>
         <div id="app">
             <navbar></navbar>
-            <censo></censo>
+            <generica></generica>
             <footer-component></footer-component>    
         </div>
 

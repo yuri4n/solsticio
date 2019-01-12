@@ -11,7 +11,7 @@
         <div class="container mt-5">
             <div class="row">
             <div class="col-lg-8 mx-auto">
-                <h2>About this page</h2>
+                <h2>Acerca de esta página</h2>
                 <p class="lead">This is a great place to talk about your webpage. This template is purposefully unstyled so you can use it as a boilerplate or starting point for you own landing page designs! This template features:</p>
                 <ul>
                 <li>Clickable nav links that smooth scroll to page sections</li>
@@ -52,16 +52,8 @@
     header {
         width: 100%;
         height: 100%;
-        background: url(http://solsticio.local/images/background.jpg);
+        background-image: url(http://solsticio.local/images/background.jpg);
         background-size: cover;      
-    }
-
-    .background-overlay {
-        background: rgba(127, 0, 0,.6);
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
     }
 
     @media (min-width: 992px) {

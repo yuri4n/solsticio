@@ -14,7 +14,7 @@
     <body>
         <div id="app">
             <navbar></navbar>
-            <censo></censo>
+            <parqueadero></parqueadero>
             <footer-component></footer-component>    
         </div>
 

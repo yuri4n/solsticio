@@ -18,6 +18,13 @@ Vue.component('salondejuntas', require('./components/Servicios/SalonDeJuntas.vue
 Vue.component('salonsocial', require('./components/Servicios/SalonSocial.vue').default);
 Vue.component('bbq', require('./components/Servicios/Bbq.vue').default);
 
+//Peticiones
+Vue.component('peticiones', require('./components/Peticiones/Peticiones.vue').default);
+Vue.component('generica', require('./components/Peticiones/Generica.vue').default);
+Vue.component('parqueadero', require('./components/Peticiones/Parqueadero.vue').default);
+
+Vue.component('censo', require('./components/Censo.vue').default);
+
 const app = new Vue({
     el: '#app'
 });

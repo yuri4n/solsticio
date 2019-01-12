@@ -17,9 +17,9 @@ Route::view('/archivos', 'web.archivos');
 Route::view('/clasificados', 'web.clasificados');
 Route::view('/clasificados/{slug}', 'web.clasificado');
 
-Route::view('/peticiones', 'web.peticiones');
-Route::view('/peticiones/genericas', 'web.peticiones_genericas');
-Route::view('/peticiones/parqueadero', 'web.peticion_parqueadero');
+Route::view('/peticiones', 'web.peticiones.peticiones');
+Route::view('/peticiones/genericas', 'web.peticiones.peticiones_genericas');
+Route::view('/peticiones/parqueadero', 'web.peticiones.peticion_parqueadero');
 
 Route::view('/censo', 'web.censo');
 
