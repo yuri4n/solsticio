@@ -17,8 +17,38 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Reserva Ya!</h4>
-                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipiscing elit varius nascetur rhoncus eros, neque facilisi parturient ligula nam orci convallis fusce netus dignissim facilisis augue, risus a et quis mollis euismod suscipit quam purus laoreet. Vivamus eros volutpat euismod tortor curae tellus, phasellus est proin molestie aliquam. Ultrices id elementum nec sem accumsan laoreet at mauris lobortis, class inceptos mattis a maecenas nisl eget ut, mus orci fusce in ac cursus proin nullam. Luctus est erat condimentum sociosqu torquent maecenas eros ridiculus venenatis, dui quam interdum consequat netus vestibulum leo imperdiet, lectus massa molestie senectus vitae risus augue fringilla.</p>
-                        <a href="#" class="btn btn-primary">Enviar</a>
+                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipiscing elit varius nascetur rhoncus eros, neque facilisi parturient ligula nam orci convallis fusce netus dignissim facilisis augue, risus a et quis mollis.</p>
+                        <form action>
+                            <div class="form-group">
+                                <label for="name">Nombre del responsable</label>
+                                <input
+                                type="text"
+                                name="nombre"
+                                id="name"
+                                class="form-control"
+                                placeholder
+                                aria-describedby="helpId"
+                                >
+                                <small id="helpId" class="text-muted">Help text</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="cedula">Número de cédula</label>
+                                <input
+                                type="text"
+                                name="Cédula"
+                                id="cedula"
+                                class="form-control"
+                                placeholder
+                                aria-describedby="helpId"
+                                >
+                                <small id="helpId" class="text-muted">Help text</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="texto">Texto</label>
+                                <textarea class="form-control" id="texto" rows="6"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary mb-2">Enviar</button>
+                        </form>
                     </div>
                 </div>
             </div>

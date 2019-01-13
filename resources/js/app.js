@@ -24,6 +24,7 @@ Vue.component('generica', require('./components/Peticiones/Generica.vue').defaul
 Vue.component('parqueadero', require('./components/Peticiones/Parqueadero.vue').default);
 
 Vue.component('censo', require('./components/Censo.vue').default);
+Vue.component('pagos', require('./components/Pagos.vue').default);
 
 const app = new Vue({
     el: '#app'

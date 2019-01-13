@@ -6221,7 +6221,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nheader {\n    width: 100%;\n    height: 100%;\n    background-image: url(http://solsticio.local/images/background2.jpg);\n    background-size: cover;\n}\n@media (min-width: 992px) {\nheader {\n        padding: 156px 0 100px;\n}\n}\n", ""]);
+exports.push([module.i, "\nheader {\n    width: 100%;\n    height: 100%;\n    background-image: url(http://solsticio.local/images/background.jpg);\n    background-size: cover;\n}\n@media (min-width: 992px) {\nheader {\n        padding: 156px 0 100px;\n}\n}\n", ""]);
 
 // exports
 
@@ -37749,7 +37749,7 @@ var staticRenderFns = [
                       },
                       [
                         _vm._v(
-                          "\n                        First radio\n                    "
+                          "\n                            First radio\n                        "
                         )
                       ]
                     )
@@ -37774,7 +37774,7 @@ var staticRenderFns = [
                       },
                       [
                         _vm._v(
-                          "\n                        Second radio\n                    "
+                          "\n                            Second radio\n                        "
                         )
                       ]
                     )
@@ -37800,7 +37800,7 @@ var staticRenderFns = [
                       },
                       [
                         _vm._v(
-                          "\n                        Third disabled radio\n                    "
+                          "\n                            Third disabled radio\n                        "
                         )
                       ]
                     )
@@ -37829,7 +37829,7 @@ var staticRenderFns = [
                     },
                     [
                       _vm._v(
-                        "\n                    Acepta usted que su información lorem ipsum dolor sit amet, consectetur adipisicing elit?\n                    "
+                        "\n                        Acepta usted que su información lorem ipsum dolor sit amet, consectetur adipisicing elit?\n                        "
                       )
                     ]
                   )
@@ -38749,6 +38749,120 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pagos.vue?vue&type=template&id=19215c9f&":
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pagos.vue?vue&type=template&id=19215c9f& ***!
+  \********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container my-5" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-8" }, [
+          _c("div", { staticClass: "card text-left" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _c("h4", { staticClass: "card-title" }, [
+                _vm._v("Paga tu administración online")
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "card-text" }, [
+                _vm._v(
+                  "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque facere quibusdam, dolorem voluptatem sapiente deleniti praesentium, est qui accusantium voluptatibus consequuntur porro. Laborum voluptatem tempore velit voluptatibus! Recusandae, consectetur quia."
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga autem, nam ipsam repellat pariatur corporis hic placeat cum repellendus quos impedit deserunt voluptatem neque vitae necessitatibus inventore, repudiandae quibusdam dolorum."
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card text-left" }, [
+                _c("div", { staticClass: "card-body" }, [
+                  _c("p", { staticClass: "card-text" }, [
+                    _c("img", {
+                      staticStyle: { width: "100%" },
+                      attrs: {
+                        src:
+                          "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Banco_AV_Villas_logo.svg/1280px-Banco_AV_Villas_logo.svg.png",
+                        alt: "Av Villas"
+                      }
+                    })
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-4" }, [
+          _c("div", { staticClass: "card text-left" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _c("h4", { staticClass: "card-title" }, [
+                _vm._v("Revisa tus estractos")
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "card-text" }, [
+                _vm._v(
+                  "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum iusto, temporibus explicabo tempora asperiores eveniet tempore expedita eaque odio. Voluptatem, dicta distinctio aliquam reiciendis quae consequuntur repudiandae velit doloremque natus."
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card text-left" }, [
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h4", { staticClass: "card-title" }, [
+                    _vm._v("Enero 2019")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    { staticClass: "btn btn-primary", attrs: { href: "#" } },
+                    [_vm._v("Descargar")]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card text-left mt-3" }, [
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h4", { staticClass: "card-title" }, [
+                    _vm._v("Diciembre 2018")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    { staticClass: "btn btn-primary", attrs: { href: "#" } },
+                    [_vm._v("Descargar")]
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Peticiones/Generica.vue?vue&type=template&id=530dcb61&":
 /*!**********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Peticiones/Generica.vue?vue&type=template&id=530dcb61& ***!
@@ -38862,7 +38976,7 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("p", { staticClass: "card-text" }, [
                 _vm._v(
-                  "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto, in numquam quibusdam quisquam ad dolorum itaque deleniti impedit? Ea ad blanditiis possimus aliquid! Rerum blanditiis, culpa pariatur esse quibusdam odit."
+                  "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto, in numquam quibusdam quisquam."
                 )
               ])
             ])
@@ -38913,6 +39027,72 @@ var staticRenderFns = [
                 _vm._v(
                   "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae aperiam voluptates mollitia nulla ipsa iusto accusantium eius corrupti blanditiis eum, deleniti ipsum? Vitae odio debitis sapiente saepe tempore consequatur aperiam?"
                 )
+              ]),
+              _vm._v(" "),
+              _c("form", { attrs: { action: "" } }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "name" } }, [
+                    _vm._v("Nombre del responsable")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "nombre",
+                      id: "name",
+                      placeholder: "",
+                      "aria-describedby": "helpId"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "small",
+                    { staticClass: "text-muted", attrs: { id: "helpId" } },
+                    [_vm._v("Help text")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "cedula" } }, [
+                    _vm._v("Número de cédula")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "Cédula",
+                      id: "cedula",
+                      placeholder: "",
+                      "aria-describedby": "helpId"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "small",
+                    { staticClass: "text-muted", attrs: { id: "helpId" } },
+                    [_vm._v("Help text")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "texto" } }, [_vm._v("Texto")]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    staticClass: "form-control",
+                    attrs: { id: "texto", rows: "6" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary mb-2",
+                    attrs: { type: "submit" }
+                  },
+                  [_vm._v("Enviar")]
+                )
               ])
             ])
           ])
@@ -38925,7 +39105,7 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("p", { staticClass: "card-text" }, [
                 _vm._v(
-                  "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto, in numquam quibusdam quisquam ad dolorum itaque deleniti impedit? Ea ad blanditiis possimus aliquid! Rerum blanditiis, culpa pariatur esse quibusdam odit."
+                  "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto, in numquam quibusdam."
                 )
               ])
             ])
@@ -39198,15 +39378,75 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("p", { staticClass: "card-text" }, [
                 _vm._v(
-                  "Lorem ipsum dolor sit amet consectetur adipiscing elit varius nascetur rhoncus eros, neque facilisi parturient ligula nam orci convallis fusce netus dignissim facilisis augue, risus a et quis mollis euismod suscipit quam purus laoreet. Vivamus eros volutpat euismod tortor curae tellus, phasellus est proin molestie aliquam. Ultrices id elementum nec sem accumsan laoreet at mauris lobortis, class inceptos mattis a maecenas nisl eget ut, mus orci fusce in ac cursus proin nullam. Luctus est erat condimentum sociosqu torquent maecenas eros ridiculus venenatis, dui quam interdum consequat netus vestibulum leo imperdiet, lectus massa molestie senectus vitae risus augue fringilla."
+                  "Lorem ipsum dolor sit amet consectetur adipiscing elit varius nascetur rhoncus eros, neque facilisi parturient ligula nam orci convallis fusce netus dignissim facilisis augue, risus a et quis mollis."
                 )
               ]),
               _vm._v(" "),
-              _c(
-                "a",
-                { staticClass: "btn btn-primary", attrs: { href: "#" } },
-                [_vm._v("Enviar")]
-              )
+              _c("form", { attrs: { action: "" } }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "name" } }, [
+                    _vm._v("Nombre del responsable")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "nombre",
+                      id: "name",
+                      placeholder: "",
+                      "aria-describedby": "helpId"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "small",
+                    { staticClass: "text-muted", attrs: { id: "helpId" } },
+                    [_vm._v("Help text")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "cedula" } }, [
+                    _vm._v("Número de cédula")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "Cédula",
+                      id: "cedula",
+                      placeholder: "",
+                      "aria-describedby": "helpId"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "small",
+                    { staticClass: "text-muted", attrs: { id: "helpId" } },
+                    [_vm._v("Help text")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "texto" } }, [_vm._v("Texto")]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    staticClass: "form-control",
+                    attrs: { id: "texto", rows: "6" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary mb-2",
+                    attrs: { type: "submit" }
+                  },
+                  [_vm._v("Enviar")]
+                )
+              ])
             ])
           ])
         ])
@@ -39346,15 +39586,75 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("p", { staticClass: "card-text" }, [
                 _vm._v(
-                  "Lorem ipsum dolor sit amet consectetur adipiscing elit varius nascetur rhoncus eros, neque facilisi parturient ligula nam orci convallis fusce netus dignissim facilisis augue, risus a et quis mollis euismod suscipit quam purus laoreet. Vivamus eros volutpat euismod tortor curae tellus, phasellus est proin molestie aliquam. Ultrices id elementum nec sem accumsan laoreet at mauris lobortis, class inceptos mattis a maecenas nisl eget ut, mus orci fusce in ac cursus proin nullam. Luctus est erat condimentum sociosqu torquent maecenas eros ridiculus venenatis, dui quam interdum consequat netus vestibulum leo imperdiet, lectus massa molestie senectus vitae risus augue fringilla."
+                  "Lorem ipsum dolor sit amet consectetur adipiscing elit varius nascetur rhoncus eros, neque facilisi parturient ligula nam orci convallis fusce netus dignissim facilisis augue, risus a et quis mollis."
                 )
               ]),
               _vm._v(" "),
-              _c(
-                "a",
-                { staticClass: "btn btn-primary", attrs: { href: "#" } },
-                [_vm._v("Enviar")]
-              )
+              _c("form", { attrs: { action: "" } }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "name" } }, [
+                    _vm._v("Nombre del responsable")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "nombre",
+                      id: "name",
+                      placeholder: "",
+                      "aria-describedby": "helpId"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "small",
+                    { staticClass: "text-muted", attrs: { id: "helpId" } },
+                    [_vm._v("Help text")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "cedula" } }, [
+                    _vm._v("Número de cédula")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "Cédula",
+                      id: "cedula",
+                      placeholder: "",
+                      "aria-describedby": "helpId"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "small",
+                    { staticClass: "text-muted", attrs: { id: "helpId" } },
+                    [_vm._v("Help text")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "texto" } }, [_vm._v("Texto")]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    staticClass: "form-control",
+                    attrs: { id: "texto", rows: "6" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary mb-2",
+                    attrs: { type: "submit" }
+                  },
+                  [_vm._v("Enviar")]
+                )
+              ])
             ])
           ])
         ])
@@ -39494,15 +39794,75 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("p", { staticClass: "card-text" }, [
                 _vm._v(
-                  "Lorem ipsum dolor sit amet consectetur adipiscing elit varius nascetur rhoncus eros, neque facilisi parturient ligula nam orci convallis fusce netus dignissim facilisis augue, risus a et quis mollis euismod suscipit quam purus laoreet. Vivamus eros volutpat euismod tortor curae tellus, phasellus est proin molestie aliquam. Ultrices id elementum nec sem accumsan laoreet at mauris lobortis, class inceptos mattis a maecenas nisl eget ut, mus orci fusce in ac cursus proin nullam. Luctus est erat condimentum sociosqu torquent maecenas eros ridiculus venenatis, dui quam interdum consequat netus vestibulum leo imperdiet, lectus massa molestie senectus vitae risus augue fringilla."
+                  "Lorem ipsum dolor sit amet consectetur adipiscing elit varius nascetur rhoncus eros, neque facilisi parturient ligula nam orci convallis fusce netus dignissim facilisis augue, risus a et quis mollis."
                 )
               ]),
               _vm._v(" "),
-              _c(
-                "a",
-                { staticClass: "btn btn-primary", attrs: { href: "#" } },
-                [_vm._v("Enviar")]
-              )
+              _c("form", { attrs: { action: "" } }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "name" } }, [
+                    _vm._v("Nombre del responsable")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "nombre",
+                      id: "name",
+                      placeholder: "",
+                      "aria-describedby": "helpId"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "small",
+                    { staticClass: "text-muted", attrs: { id: "helpId" } },
+                    [_vm._v("Help text")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "cedula" } }, [
+                    _vm._v("Número de cédula")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "Cédula",
+                      id: "cedula",
+                      placeholder: "",
+                      "aria-describedby": "helpId"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "small",
+                    { staticClass: "text-muted", attrs: { id: "helpId" } },
+                    [_vm._v("Help text")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "texto" } }, [_vm._v("Texto")]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    staticClass: "form-control",
+                    attrs: { id: "texto", rows: "6" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary mb-2",
+                    attrs: { type: "submit" }
+                  },
+                  [_vm._v("Enviar")]
+                )
+              ])
             ])
           ])
         ])
@@ -50925,6 +51285,7 @@ Vue.component('peticiones', __webpack_require__(/*! ./components/Peticiones/Peti
 Vue.component('generica', __webpack_require__(/*! ./components/Peticiones/Generica.vue */ "./resources/js/components/Peticiones/Generica.vue").default);
 Vue.component('parqueadero', __webpack_require__(/*! ./components/Peticiones/Parqueadero.vue */ "./resources/js/components/Peticiones/Parqueadero.vue").default);
 Vue.component('censo', __webpack_require__(/*! ./components/Censo.vue */ "./resources/js/components/Censo.vue").default);
+Vue.component('pagos', __webpack_require__(/*! ./components/Pagos.vue */ "./resources/js/components/Pagos.vue").default);
 var app = new Vue({
   el: '#app'
 });
@@ -51508,6 +51869,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Noticias_vue_vue_type_template_id_038bba79___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Noticias_vue_vue_type_template_id_038bba79___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Pagos.vue":
+/*!*******************************************!*\
+  !*** ./resources/js/components/Pagos.vue ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Pagos_vue_vue_type_template_id_19215c9f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Pagos.vue?vue&type=template&id=19215c9f& */ "./resources/js/components/Pagos.vue?vue&type=template&id=19215c9f&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _Pagos_vue_vue_type_template_id_19215c9f___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Pagos_vue_vue_type_template_id_19215c9f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Pagos.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Pagos.vue?vue&type=template&id=19215c9f&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/Pagos.vue?vue&type=template&id=19215c9f& ***!
+  \**************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Pagos_vue_vue_type_template_id_19215c9f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Pagos.vue?vue&type=template&id=19215c9f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pagos.vue?vue&type=template&id=19215c9f&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Pagos_vue_vue_type_template_id_19215c9f___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Pagos_vue_vue_type_template_id_19215c9f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
