@@ -14,7 +14,7 @@
     <body>
         <div id="app">
             <adminnavbar></adminnavbar>
-            <adminindex></adminindex>
+            <adminnoticias></adminnoticias>
             <footer-component></footer-component>    
         </div>
 

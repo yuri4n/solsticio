@@ -19,6 +19,17 @@ class PostController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function admin()
+    {
+        $posts = Post::orderBy('id', 'DESC')->where('status', 'PUBLISHED')->paginate(25);
+        return $posts;
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -45,10 +56,9 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $slug)
+    public function show(Post $post)
     {
-        $post = Post::where('slug', $slug)->first();
-        return $post;
+        //
     }
 
     /**
@@ -80,8 +90,11 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        if ($post) {
+            $post->delete();
+        }
     }
 }

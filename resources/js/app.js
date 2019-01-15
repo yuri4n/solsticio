@@ -1,6 +1,11 @@
+import Vue           from 'vue'
+import Notifications from 'vue-notification'
+
+Vue.use(Notifications)
+window.Vue = require('vue');
+
 require('./bootstrap');
 
-window.Vue = require('vue');
 
 Vue.component('navbar', require('./components/Navbar.vue').default);
 Vue.component('index', require('./components/Index.vue').default);
@@ -25,6 +30,11 @@ Vue.component('parqueadero', require('./components/Peticiones/Parqueadero.vue').
 
 Vue.component('censo', require('./components/Censo.vue').default);
 Vue.component('pagos', require('./components/Pagos.vue').default);
+
+//Admin
+Vue.component('adminnavbar', require('./components/Admin/AdminNavbar.vue').default);
+Vue.component('adminindex', require('./components/Admin/AdminIndex.vue').default);
+Vue.component('adminnoticias', require('./components/Admin/AdminNoticias.vue').default);
 
 const app = new Vue({
     el: '#app'

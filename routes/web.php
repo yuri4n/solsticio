@@ -27,3 +27,4 @@ Route::view('/pagos', 'web.pagos');
 
 //Admin
 Route::view('/admin', 'admin.index');
+Route::view('/admin/noticias', 'admin.noticias');
