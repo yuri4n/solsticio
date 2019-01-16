@@ -1,6 +1,8 @@
-import Vue           from 'vue'
-import Notifications from 'vue-notification'
+import Vue           from 'vue';
+import Notifications from 'vue-notification';
+import VueEditor from "vue2-editor";
 
+Vue.use(VueEditor)
 Vue.use(Notifications)
 window.Vue = require('vue');
 

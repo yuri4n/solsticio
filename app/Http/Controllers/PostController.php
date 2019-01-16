@@ -30,16 +30,6 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -47,7 +37,35 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'user_id' => 'required',
+            'title' => 'required',
+            'slug' => 'required',
+            'excerpt' => 'required',
+            'body' => 'required',
+            'file' => 'nullable',
+        ]);
+
+        $exploded = explode(',', $request->file);
+        $decoded = base64_decode($exploded[1]);
+
+        if(str_contains($exploded[0], 'jpeg')) {
+            $extension = 'jpg';
+        } else {
+            $extension = 'png';
+        }
+
+        $fileName = str_random().'.'.$extension;
+
+        $path = public_path().'/'.$fileName;
+
+        file_put_contents($path, $decoded);
+
+        Post::create($request->except('file') + [
+            'file' => $fileName,
+        ]);
+
+        return;
     }
 
     /**
@@ -62,26 +80,47 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Post $post)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'user_id' => 'required',
+            'title' => 'required',
+            'slug' => 'required',
+            'excerpt' => 'required',
+            'body' => 'required',
+            'file' => 'nullable',
+        ]);
+
+        if($request->file != '') {
+            $exploded = explode(',', $request->file);
+            $decoded = base64_decode($exploded[1]);
+
+            if(str_contains($exploded[0], 'jpeg')) {
+                $extension = 'jpg';
+            } else {
+                $extension = 'png';
+            }
+
+            $fileName = str_random().'.'.$extension;
+
+            $path = public_path().'/'.$fileName;
+
+            file_put_contents($path, $decoded);
+
+            Post::find($id)->update($request->except('file') + [
+                'file' => $fileName,
+            ]);
+        } else {
+            Post::find($id)->update($request->except('file'));
+        }
+
+        return;
     }
 
     /**

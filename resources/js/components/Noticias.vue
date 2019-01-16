@@ -12,7 +12,7 @@
              -->
             <!-- Blog Post -->
             <div v-for="post in posts" v-bind:key="post.id" class="card mb-4">
-                <img class="card-img-top" :src="post.file" alt="Card image cap" style="width:750;height:300;">
+                <img v-if="post.file" class="card-img-top" :src="post.file" alt="Card image cap" style="width:750;height:300;">
                 <div class="card-body">
                 <h2 class="card-title">{{ post.title }}</h2>
                 <p class="card-text">{{ post.excerpt }}</p>

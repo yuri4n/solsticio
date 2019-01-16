@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbar1">
         <a class="navbar-brand" href="http://solsticio.local/inicio/">
             <img src="http://solsticio.local/images/icon.png" width="30" height="30" alt="">
             Solsticio Parque Residencial | 
@@ -42,7 +42,7 @@
 
 <style lang="scss">
 
-    .navbar .navbar-expand-lg .navbar-light .bg-light {
+    #navbar1 {
         background-color: #fff !important;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
     }
