@@ -14,17 +14,8 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $reservations = Reservation::orderBy('id', 'DESC')->paginate(25);
+        return $reservations;
     }
 
     /**
@@ -35,7 +26,15 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'user_id' => 'required',
+            'nombre_responsable' => 'required',
+            'type' => 'required',
+            'fecha_solicitada' => 'required',
+            'additional_info' => 'required',
+        ]);
+
+        Reservation::create($request->all());
     }
 
     /**
@@ -45,17 +44,6 @@ class ReservationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Reservation $reservation)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Reservation  $reservation
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Reservation $reservation)
     {
         //
     }

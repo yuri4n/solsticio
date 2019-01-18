@@ -12,3 +12,5 @@ Route::get('/admin/posts', 'PostController@admin');
 Route::resource('files', 'FileController', array('except' => array('create', 'edit')));
 
 Route::resource('classifieds', 'ClassifiedController', array('except' => array('create', 'edit')));
+
+Route::resource('reservations', 'ReservationController', array('except' => array('create', 'edit')));

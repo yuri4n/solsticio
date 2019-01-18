@@ -24,7 +24,7 @@
                             <tr v-for="file in files" :key="file.id">
                                 <th scope="row">{{ file.id }}</th>
                                 <td>{{ file.description }}</td>
-                                <td><button class="btn btn-primary">Descargar</button></td>
+                                <td><a :href="'files/'+file.file" :download="file.file"><button type="button" class="btn btn-primary">Descargar</button></a></td>
                             </tr>
                         </tbody>
                     </table>                    

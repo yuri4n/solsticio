@@ -19,16 +19,6 @@ class FileController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -36,7 +26,33 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'description' => 'required',
+            'file' => 'required',
+        ]);
+
+        $exploded = explode(',', $request->file);
+        $decoded = base64_decode($exploded[1]);
+
+        if(str_contains($exploded[0], 'pdf')) {
+            $extension = 'pdf';
+        } else if(str_contains($exploded[0], 'docx')) {
+            $extension = 'docx';
+        } else if(str_contains($exploded[0], 'xls')) {
+            $extension = 'xls';
+        }
+
+        $fileName = str_random().'.'.$extension;
+
+        $path = public_path().'/files'.'/'.$fileName;
+
+        file_put_contents($path, $decoded);
+
+        File::create($request->except('file') + [
+            'file' => $fileName,
+        ]);
+
+        return;
     }
 
     /**
@@ -51,26 +67,45 @@ class FileController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\File  $file
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(File $file)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\File  $file
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, File $file)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'description' => 'required',
+            'file' => 'nullable',
+        ]);
+
+        if($request->file != '') {
+            $exploded = explode(',', $request->file);
+            $decoded = base64_decode($exploded[1]);
+
+            if(str_contains($exploded[0], 'pdf')) {
+                $extension = 'pdf';
+            } else if(str_contains($exploded[0], 'docx')) {
+                $extension = 'docx';
+            } else if(str_contains($exploded[0], 'xls')) {
+                $extension = 'xls';
+            }
+
+            $fileName = str_random().'.'.$extension;
+
+            $path = public_path().'/files'.'/'.$fileName;
+
+            file_put_contents($path, $decoded);
+
+            File::find($id)->update($request->except('file') + [
+                'file' => $fileName,
+            ]);
+        } else {
+            File::find($id)->update($request->except('file'));
+        }
+
+        return;
     }
 
     /**
@@ -79,8 +114,11 @@ class FileController extends Controller
      * @param  \App\File  $file
      * @return \Illuminate\Http\Response
      */
-    public function destroy(File $file)
+    public function destroy($id)
     {
-        //
+        $file = File::find($id);
+        if ($file) {
+            $file->delete();
+        }
     }
 }

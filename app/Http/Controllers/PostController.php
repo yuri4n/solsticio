@@ -57,12 +57,12 @@ class PostController extends Controller
 
         $fileName = str_random().'.'.$extension;
 
-        $path = public_path().'/'.$fileName;
+        $path = public_path().'/files'.'/'.$fileName;
 
         file_put_contents($path, $decoded);
 
         Post::create($request->except('file') + [
-            'file' => $fileName,
+            'file' => 'files/'.$fileName,
         ]);
 
         return;
@@ -109,12 +109,12 @@ class PostController extends Controller
 
             $fileName = str_random().'.'.$extension;
 
-            $path = public_path().'/'.$fileName;
+            $path = public_path().'/files'.'/'.$fileName;
 
             file_put_contents($path, $decoded);
 
             Post::find($id)->update($request->except('file') + [
-                'file' => $fileName,
+                'file' => 'files/'.$fileName,
             ]);
         } else {
             Post::find($id)->update($request->except('file'));

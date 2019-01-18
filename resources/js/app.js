@@ -37,6 +37,8 @@ Vue.component('pagos', require('./components/Pagos.vue').default);
 Vue.component('adminnavbar', require('./components/Admin/AdminNavbar.vue').default);
 Vue.component('adminindex', require('./components/Admin/AdminIndex.vue').default);
 Vue.component('adminnoticias', require('./components/Admin/AdminNoticias.vue').default);
+Vue.component('adminreservaciones', require('./components/Admin/AdminReservaciones.vue').default);
+Vue.component('adminarchivos', require('./components/Admin/AdminArchivos.vue').default);
 
 const app = new Vue({
     el: '#app'
