@@ -39,6 +39,10 @@ Vue.component('adminindex', require('./components/Admin/AdminIndex.vue').default
 Vue.component('adminnoticias', require('./components/Admin/AdminNoticias.vue').default);
 Vue.component('adminreservaciones', require('./components/Admin/AdminReservaciones.vue').default);
 Vue.component('adminarchivos', require('./components/Admin/AdminArchivos.vue').default);
+Vue.component('adminclasificados', require('./components/Admin/AdminClasificados.vue').default);
+Vue.component('adminpeticiones', require('./components/Admin/AdminPeticiones.vue').default);
+Vue.component('admincenso', require('./components/Admin/AdminCenso.vue').default);
+Vue.component('adminusuarios', require('./components/Admin/AdminUsuarios.vue').default);
 
 const app = new Vue({
     el: '#app'

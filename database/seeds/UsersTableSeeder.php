@@ -17,7 +17,9 @@ class UsersTableSeeder extends Seeder
             'name' => 'Julian Garzon',
             'username' => 'JulianGarzon',
         	'email'=> 'bryangarzon22@gmail.com',
-        	'password' => bcrypt('123')
+        	'password' => bcrypt('123'),
+        	'torre' => '1',
+        	'apartamento' => '404',
         ]);
     }
 }

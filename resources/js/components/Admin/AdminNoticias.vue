@@ -52,7 +52,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="file">Sube una imagen</label>
-                                <input type="file" class="form-control-file" id="file" @change="newFile">
+                                <input type="file" class="form-control-file" id="file" @change="fileNew">
                             </div>
                             <div class="form-group">
                                 <label for="excerpt">Resume</label>
@@ -200,7 +200,7 @@ export default {
                 .replace(/^-+/, '')             // Trim - from start of text
                 .replace(/-+$/, '');            // Trim - from end of text
         },
-        newFile(event) {
+        fileNew(event) {
             var fileReader = new FileReader();
             fileReader.readAsDataURL(event.target.files[0]);
             fileReader.onload = (event) => {

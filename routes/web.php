@@ -34,4 +34,3 @@ Route::view('/admin/clasificados', 'admin.clasificados');
 Route::view('/admin/peticiones', 'admin.peticiones');
 Route::view('/admin/censo', 'admin.censo');
 Route::view('/admin/usuarios', 'admin.usuarios');
-Route::view('/admin/extractos', 'admin.extractos');

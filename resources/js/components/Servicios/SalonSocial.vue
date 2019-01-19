@@ -1,9 +1,12 @@
 <template>
     <div class="container">
+        <notifications group="foo"
+                   position="bottom left"
+                   :speed="500" />
         <div class="row my-5">
             <div class="col-xl-7">
                 <div class="card">
-                    <div class="card-header"><h2>Salón Social</h2></div>
+                    <div class="card-header"><h2>Salon Social</h2></div>
                     <img class="card-img-top" src="http://placehold.it/1280x720" alt="">
                     <div class="card-body">
                         <h4 class="card-title">Normas y Requisitos</h4>
@@ -18,36 +21,21 @@
                     <div class="card-body">
                         <h4 class="card-title">Reserva Ya!</h4>
                         <p class="card-text">Lorem ipsum dolor sit amet consectetur adipiscing elit varius nascetur rhoncus eros, neque facilisi parturient ligula nam orci convallis fusce netus dignissim facilisis augue, risus a et quis mollis.</p>
-                        <form action>
+                        <form action="POST" v-on:submit.prevent="sendReservation()">
                             <div class="form-group">
                                 <label for="name">Nombre del responsable</label>
-                                <input
-                                type="text"
-                                name="nombre"
-                                id="name"
-                                class="form-control"
-                                placeholder
-                                aria-describedby="helpId"
-                                >
+                                <input type="text" name="nombre" id="name" v-model="newResponsable" class="form-control" placeholder autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label for="cedula">Fecha</label> <br>
+                                <date-picker :date="date" :option="option"></date-picker> <br>
                                 <small id="helpId" class="text-muted">Help text</small>
                             </div>
                             <div class="form-group">
-                                <label for="cedula">Número de cédula</label>
-                                <input
-                                type="text"
-                                name="Cédula"
-                                id="cedula"
-                                class="form-control"
-                                placeholder
-                                aria-describedby="helpId"
-                                >
-                                <small id="helpId" class="text-muted">Help text</small>
+                                <label for="texto">Información Adicional</label>
+                                <textarea class="form-control" v-model="newAditional" id="texto" rows="6"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="texto">Texto</label>
-                                <textarea class="form-control" id="texto" rows="6"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary mb-2">Enviar</button>
+                            <button type="submit" v-on:click="newType='SS'" class="btn btn-primary mb-2">Enviar</button>
                         </form>
                     </div>
                 </div>
@@ -55,3 +43,79 @@
         </div>
     </div>
 </template>
+
+<script>
+import myDatepicker from 'vue-datepicker'
+
+export default {
+    components: {
+        'date-picker': myDatepicker
+    },
+    data() {
+        return {
+            newResponsable: '',
+            newAditional: '',
+            newType: '',
+            errors:{},
+            date: {
+                time: '',
+            },
+            option: {
+                type: 'day',
+                week: ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do'],
+                month: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Deciembre'],
+                format: 'YYYY-MM-DD',
+                placeholder: 'Elige una Fecha',
+                inputStyle: {
+                'display': 'inline-block',
+                'padding': '6px',
+                'line-height': '22px',
+                'font-size': '16px',
+                'border': '2px solid #fff',
+                'box-shadow': '0 1px 3px 0 rgba(0, 0, 0, 0.2)',
+                'border-radius': '2px',
+                'color': '#5F5F5F'
+                },
+                color: {
+                header: '#ccc',
+                headerText: '#f00'
+                },
+                buttons: {
+                ok: 'Ok',
+                cancel: 'Cancelar'
+                },
+                overlayOpacity: 0.5,
+                dismissible: true,
+            },
+        }
+    },
+    methods: {
+        alert(alertType,alertMessage) {
+            this.$notify({
+                group: 'foo',
+                type: alertType,
+                title: 'BIEN',
+                text: alertMessage,
+            })
+        },
+        sendReservation() {
+            var url = 'http://solsticio.local/api/reservations';
+            axios.post(url, {
+                user_id: Math.random() * (29 - 1) + 1,
+                nombre_responsable: this.newResponsable,
+                additional_info: this.newAditional,
+                fecha_solicitada: this.date.time,
+                type: this.newType,
+            }).then(response => {
+                $('#create').modal('hide');
+                this.alert('success','La reservación ha sido solicitada');
+                this.newResponsable = '',
+                this.newAditional = '',
+                this.date.time = '';
+            }).catch(error => {
+                this.alert('error', 'Algo ha salido mal');
+            });
+        }
+    }
+}
+</script>

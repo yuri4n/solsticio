@@ -13,7 +13,8 @@
                             <th scope="col">ID</th>
                             <th scope="col">Fecha</th>
                             <th scope="col">Tipo</th>
-                            <th scope="col">Nombre e Info</th>
+                            <th scope="col">Nombre Responsable</th>
+                            <th scope="col">Usuario</th>
                             <th scope="col">Aprovar</th>
                             <th scope="col">Eliminar</th>
                         </tr>
@@ -22,8 +23,9 @@
                         <tr v-for="reservation in reservations" :key="reservation.id">
                             <th scope="row">{{ reservation.id }}</th>
                             <td>{{reservation.fecha_solicitada}}</td>
-                            <td>{{ reservation.type }}</td>
-                            <td>{{ reservation.nombre_responsable }}<br><small class="text-muted">{{ substract(reservation.additional_info) }}</small></td>
+                            <td>{{ typeToName(reservation.type) }}</td>
+                            <td><a href="#" class="btn btn-link">{{reservation.nombre_responsable}}</a></td>
+                            <td><a href="#" class="btn btn-link">{{reservation.user_id}}</a></td>
                             <td><button class="btn btn-success">Aprovar</button></td>
                             <td><button class="btn btn-danger">Rechazar</button></td>
                         </tr>
@@ -75,13 +77,22 @@ export default {
             };
             this.pagination = pagination;
         },
-        substract(str) {
-            if(str.length > 50) {
-                str = str.substring(0,50);
-                str = str + '...';
+        typeToName(type) {
+            switch(type) {
+                case 'BBQ': {
+                    return 'BBQ'
+                    break;
+                }
+                case 'SJ': {
+                    return 'Salon de Juntas'
+                    break;
+                }
+                case 'SS': {
+                    return 'Salon Social'
+                    break;
+                }
             }
-            return str;
         }
-    }
+    },
 }
 </script>

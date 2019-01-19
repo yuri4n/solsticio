@@ -35,9 +35,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="http://solsticio.local/admin/usuarios/">Usuarios</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="http://solsticio.local/admin/extractos/">Extractos</a>
-            </li>
             </ul>
         </div>
     </nav>

@@ -22,7 +22,10 @@ class CreateUsersTable extends Migration
             $table->string('username', 128)->unique()->nullable();
             $table->string('email', 128)->unique();
             $table->string('password');
+            $table->integer('torre')->unsigned();
+            $table->integer('apartamento')->unsigned();
             $table->string('profile_img', 128)->nullable();
+            $table->enum('status', ['PENDING', 'APPROVED'])->default('PENDING');
             $table->rememberToken();
             $table->timestamps();
         });

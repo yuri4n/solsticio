@@ -19,6 +19,17 @@ class ClassifiedController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function admin()
+    {
+        $classifieds = Classified::orderBy('id', 'DESC')->where('status', 'PENDING')->paginate(25);
+        return $classifieds;
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -74,13 +85,32 @@ class ClassifiedController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Classified  $classified
+     * @return \Illuminate\Http\Response
+     */
+    public function updateStatus(Request $request, $id)
+    {
+        $this->validate($request, [
+            'status' => 'required',
+        ]);
+
+        Classified::find($id)->update($request->all());
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Classified  $classified
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Classified $classified)
+    public function destroy($id)
     {
-        //
+        $classified = Classified::find($id);
+        if ($classified) {
+            $classified->delete();
+        }
     }
 }
