@@ -36,10 +36,12 @@ class FileController extends Controller
 
         if(str_contains($exploded[0], 'pdf')) {
             $extension = 'pdf';
-        } else if(str_contains($exploded[0], 'docx')) {
+        } elseif(str_contains($exploded[0], 'docx')) {
             $extension = 'docx';
-        } else if(str_contains($exploded[0], 'xls')) {
+        } elseif(str_contains($exploded[0], 'xls')) {
             $extension = 'xls';
+        } else {
+            $extension = 'cvs';
         }
 
         $fileName = str_random().'.'.$extension;

@@ -12,7 +12,7 @@
                             <th scope="col">Tipo</th>
                             <th scope="col">Torre</th>
                             <th scope="col">Apartamento</th>
-                            <th scope="col">Aprovar</th>
+                            <th scope="col">Aprobar</th>
                             <th scope="col">Rechazar</th>
                         </tr>
                     </thead>
@@ -21,10 +21,10 @@
                             <th scope="row">{{user.id}}</th>
                             <td>{{user.name}}</td>
                             <td>{{user.email}}</td>
-                            <td>{{user.role_id}}</td>
+                            <td>{{typeToRole(user.role_id)}}</td>
                             <td>{{user.torre}}</td>
                             <td>{{user.apartamento}}</td>
-                            <td><button class="btn btn-success">Aprovar</button></td>
+                            <td><button class="btn btn-success">Aprobar</button></td>
                             <td><button class="btn btn-danger">Rechazar</button></td>
                         </tr>
                     </tbody>
@@ -84,6 +84,22 @@ export default {
             };
             this.pagination = pagination;
         },
+        typeToRole(id) {
+            switch (id) {
+                case 1: {
+                    return 'Admin';
+                    break;
+                }
+                case 2: {
+                    return 'Propietario';
+                    break;
+                }
+                case 3: {
+                    return 'Residente';
+                    break;
+                }
+            }
+        }
     }
 }
 </script>

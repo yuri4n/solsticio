@@ -22,3 +22,4 @@ class RolesTableSeeder extends Seeder
         ]);
     }
 }
+

@@ -2662,6 +2662,27 @@ __webpack_require__.r(__webpack_exports__);
         prev_page_url: meta.prev_page_url
       };
       this.pagination = pagination;
+    },
+    typeToRole: function typeToRole(id) {
+      switch (id) {
+        case 1:
+          {
+            return 'Admin';
+            break;
+          }
+
+        case 2:
+          {
+            return 'Propietario';
+            break;
+          }
+
+        case 3:
+          {
+            return 'Residente';
+            break;
+          }
+      }
     }
   }
 });
@@ -7610,7 +7631,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -58064,7 +58085,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Aprovar")]
+                      [_vm._v("Aprobar")]
                     )
                   ]),
                   _vm._v(" "),
@@ -58172,7 +58193,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Categoría")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Aprovar")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Aprobar")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Rechazar")])
       ])
@@ -59142,7 +59163,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Usuario")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Aprovar")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Aprobar")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Eliminar")])
       ])
@@ -59153,7 +59174,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("td", [
-      _c("button", { staticClass: "btn btn-success" }, [_vm._v("Aprovar")])
+      _c("button", { staticClass: "btn btn-success" }, [_vm._v("Aprobar")])
     ])
   },
   function() {
@@ -59206,7 +59227,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(user.email))]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(user.role_id))]),
+                _c("td", [_vm._v(_vm._s(_vm.typeToRole(user.role_id)))]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(user.torre))]),
                 _vm._v(" "),
@@ -59308,7 +59329,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Apartamento")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Aprovar")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Aprobar")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Rechazar")])
       ])
@@ -59319,7 +59340,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("td", [
-      _c("button", { staticClass: "btn btn-success" }, [_vm._v("Aprovar")])
+      _c("button", { staticClass: "btn btn-success" }, [_vm._v("Aprobar")])
     ])
   },
   function() {

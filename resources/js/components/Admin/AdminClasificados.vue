@@ -12,7 +12,7 @@
                             <th scope="col">ID</th>
                             <th scope="col">Título</th>
                             <th scope="col">Categoría</th>
-                            <th scope="col">Aprovar</th>
+                            <th scope="col">Aprobar</th>
                             <th scope="col">Rechazar</th>
                         </tr>
                     </thead>
@@ -21,7 +21,7 @@
                             <th scope="row">{{ classified.id }}</th>
                             <td><a href="#" class="btn btn-link">{{classified.title}}</a></td>
                             <td><a href="#" class="btn btn-link">{{classified.category_id}}</a></td>
-                            <td><button class="btn btn-success" v-on:click="updateClassified(classified.id)">Aprovar</button></td>
+                            <td><button class="btn btn-success" v-on:click="updateClassified(classified.id)">Aprobar</button></td>
                             <td><button class="btn btn-danger" v-on:click.prevent="deleteClassified(classified)">Rechazar</button></td>
                         </tr>
                     </tbody>

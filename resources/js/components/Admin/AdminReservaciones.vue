@@ -15,7 +15,7 @@
                             <th scope="col">Tipo</th>
                             <th scope="col">Nombre Responsable</th>
                             <th scope="col">Usuario</th>
-                            <th scope="col">Aprovar</th>
+                            <th scope="col">Aprobar</th>
                             <th scope="col">Eliminar</th>
                         </tr>
                     </thead>
@@ -26,7 +26,7 @@
                             <td>{{ typeToName(reservation.type) }}</td>
                             <td><a href="#" class="btn btn-link">{{reservation.nombre_responsable}}</a></td>
                             <td><a href="#" class="btn btn-link">{{reservation.user_id}}</a></td>
-                            <td><button class="btn btn-success">Aprovar</button></td>
+                            <td><button class="btn btn-success">Aprobar</button></td>
                             <td><button class="btn btn-danger">Rechazar</button></td>
                         </tr>
                     </tbody>
