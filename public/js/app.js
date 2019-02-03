@@ -1921,7 +1921,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (confirmacion) {
         axios.delete(url).then(function (response) {
-          _this2.alert('warn', "El archivo ".concat(file.id, " ha sido eliminada"));
+          _this2.alert('warn', "El archivo ".concat(file.id, " ha sido eliminado"));
 
           _this2.readFiles();
         });
@@ -1957,7 +1957,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         $('#create').modal('hide');
 
-        _this5.alert('success', 'La noticia ha sido creada');
+        _this5.alert('success', 'El archivo ha sido creado');
 
         _this5.readFiles();
       }).catch(function (error) {
@@ -1982,7 +1982,7 @@ __webpack_require__.r(__webpack_exports__);
         };
         $('#edit').modal('hide');
 
-        _this6.alert('success', 'La noticia ha sido actualizada correctamente');
+        _this6.alert('success', 'El archivo ha sido actualizado correctamente');
       }).catch(function (error) {
         _this6.alert('error', 'Algo ha salido mal');
       });
@@ -2001,6 +2001,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -7574,7 +7576,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -58009,9 +58011,16 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [_c("div", { staticClass: "container my-5" })])
+  }
+]
 render._withStripped = true
 
 
@@ -59051,13 +59060,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(_vm.typeToName(reservation.type)))]),
                   _vm._v(" "),
-                  _c("td", [
-                    _c(
-                      "a",
-                      { staticClass: "btn btn-link", attrs: { href: "#" } },
-                      [_vm._v(_vm._s(reservation.nombre_responsable))]
-                    )
-                  ]),
+                  _c("td", [_vm._v(_vm._s(reservation.nombre_responsable))]),
                   _vm._v(" "),
                   _c("td", [
                     _c(
@@ -60831,7 +60834,8 @@ var staticRenderFns = [
                       name: "nombre",
                       id: "name",
                       placeholder: "",
-                      "aria-describedby": "helpId"
+                      "aria-describedby": "helpId",
+                      autocomplete: "off"
                     }
                   }),
                   _vm._v(" "),
@@ -60854,7 +60858,8 @@ var staticRenderFns = [
                       name: "Cédula",
                       id: "cedula",
                       placeholder: "",
-                      "aria-describedby": "helpId"
+                      "aria-describedby": "helpId",
+                      autocomplete: "off"
                     }
                   }),
                   _vm._v(" "),

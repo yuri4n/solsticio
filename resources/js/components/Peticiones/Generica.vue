@@ -18,6 +18,7 @@
                   class="form-control"
                   placeholder
                   aria-describedby="helpId"
+                  autocomplete="off"
                 >
                 <small id="helpId" class="text-muted">Help text</small>
               </div>
@@ -30,6 +31,7 @@
                   class="form-control"
                   placeholder
                   aria-describedby="helpId"
+                  autocomplete="off"
                 >
                 <small id="helpId" class="text-muted">Help text</small>
               </div>

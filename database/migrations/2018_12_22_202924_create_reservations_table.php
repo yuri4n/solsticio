@@ -22,6 +22,7 @@ class CreateReservationsTable extends Migration
             $table->enum('type', ['BBQ', 'SS', 'SJ']);
             $table->date('fecha_solicitada');
             $table->text('additional_info');
+            $table->enum('status', ['PENDING', 'APPROVED'])->default('PENDING');
 
             $table->timestamps();
 

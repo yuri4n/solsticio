@@ -8,6 +8,7 @@ $factory->define(App\Reservation::class, function (Faker $faker) {
         'nombre_responsable' => $faker->name($gender = null),
         'type' => $faker->randomElement(['BBQ', 'SS', 'SJ']),
         'fecha_solicitada' => $faker->date(),
-        'additional_info' => $faker->text(800)
+        'additional_info' => $faker->text(800),
+        'status' => $faker->randomElement(['PENDING', 'APPROVED']),
     ];
 });

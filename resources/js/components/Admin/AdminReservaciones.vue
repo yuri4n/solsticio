@@ -24,7 +24,7 @@
                             <th scope="row">{{ reservation.id }}</th>
                             <td>{{reservation.fecha_solicitada}}</td>
                             <td>{{ typeToName(reservation.type) }}</td>
-                            <td><a href="#" class="btn btn-link">{{reservation.nombre_responsable}}</a></td>
+                            <td>{{reservation.nombre_responsable}}</td>
                             <td><a href="#" class="btn btn-link">{{reservation.user_id}}</a></td>
                             <td><button class="btn btn-success">Aprobar</button></td>
                             <td><button class="btn btn-danger">Rechazar</button></td>

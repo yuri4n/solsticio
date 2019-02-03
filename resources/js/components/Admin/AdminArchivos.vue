@@ -152,7 +152,7 @@ export default {
             var confirmacion = confirm(`¿Seguro que deseas borrar el archivo ${file.id}?`);
             if(confirmacion) {
                 axios.delete(url).then(response => {
-                    this.alert('warn',`El archivo ${file.id} ha sido eliminada`);
+                    this.alert('warn',`El archivo ${file.id} ha sido eliminado`);
                     this.readFiles(); 
                 });
             }           
@@ -178,7 +178,7 @@ export default {
                 file: this.newFile,
             }).then(response => {
                 $('#create').modal('hide');
-                this.alert('success','La noticia ha sido creada');
+                this.alert('success','El archivo ha sido creado');
                 this.readFiles();
             }).catch(error => {
                 this.alert('error', 'Algo ha salido mal');
@@ -199,7 +199,7 @@ export default {
                     description: '',
                 };
                 $('#edit').modal('hide');
-                this.alert('success', 'La noticia ha sido actualizada correctamente');
+                this.alert('success', 'El archivo ha sido actualizado correctamente');
             }).catch(error => {
                 this.alert('error', 'Algo ha salido mal');
             });
