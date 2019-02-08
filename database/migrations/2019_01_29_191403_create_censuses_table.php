@@ -41,7 +41,14 @@ class CreateCensusesTable extends Migration
             $table->string('modelo_moto')->nullable();
             $table->integer('parqueadero_asign_moto')->nullable();
 
-            residentes($table, 10);
+            for ($i = 1; $i <= 10; $i++) { 
+                $table->string('residente'.$i)->nullable();
+                $table->enum('discapacitado'.$i, ['SI', 'NO'])->default('NO');
+                $table->integer('edad'.$i)->nullable();
+                $table->string('parentesco'.$i)->nullable();
+                $table->string('actividad'.$i)->nullable();
+                $table->string('celular'.$i)->nullable();
+            }
 
             $table->enum('internet', ['SI', 'NO'])->default('NO');
             $table->string('proveedor')->nullable();
@@ -55,20 +62,10 @@ class CreateCensusesTable extends Migration
 
             $table->string('elaborado');
             $table->date('fecha');
+            $table->enum('status', ['PENDING', 'SAVED'])->default('PENDING');
 
             $table->timestamps();
         });
-
-        function residentes($table, $n) {
-            for ($i = 1; $i <= $n; $i++) { 
-                $table->string('residente'.$i)->nullable();
-                $table->enum('discapacitado'.$i, ['SI', 'NO'])->default('NO');
-                $table->integer('edad'.$i)->nullable();
-                $table->string('parentesco'.$i)->nullable();
-                $table->string('actividad'.$i)->nullable();
-                $table->string('celular'.$i)->nullable();
-            }
-        }
     }
 
     /**

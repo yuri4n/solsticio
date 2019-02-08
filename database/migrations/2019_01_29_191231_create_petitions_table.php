@@ -18,9 +18,10 @@ class CreatePetitionsTable extends Migration
 
             $table->integer('user_id')->unsigned();
 
-            $table->integer('nombre_responsable');
+            $table->string('nombre_responsable');
             $table->integer('cedula');
             $table->text('additional');
+            $table->enum('status', ['PENDING', 'APPROVED'])->default('PENDING');
 
             $table->timestamps();
         });

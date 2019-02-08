@@ -46,24 +46,28 @@ class PostController extends Controller
             'file' => 'nullable',
         ]);
 
-        $exploded = explode(',', $request->file);
-        $decoded = base64_decode($exploded[1]);
+        if($request->file != '') {
+            $exploded = explode(',', $request->file);
+            $decoded = base64_decode($exploded[1]);
 
-        if(str_contains($exploded[0], 'jpeg')) {
-            $extension = 'jpg';
+            if(str_contains($exploded[0], 'jpeg')) {
+                $extension = 'jpg';
+            } else {
+                $extension = 'png';
+            }
+
+            $fileName = str_random().'.'.$extension;
+
+            $path = public_path().'/files'.'/'.$fileName;
+
+            file_put_contents($path, $decoded);
+
+            Post::create($request->except('file') + [
+                'file' => 'files/'.$fileName,
+            ]);
         } else {
-            $extension = 'png';
+            Post::create($request->except('file'));
         }
-
-        $fileName = str_random().'.'.$extension;
-
-        $path = public_path().'/files'.'/'.$fileName;
-
-        file_put_contents($path, $decoded);
-
-        Post::create($request->except('file') + [
-            'file' => 'files/'.$fileName,
-        ]);
 
         return;
     }

@@ -17,9 +17,8 @@ $factory->define(App\User::class, function (Faker $faker) {
     $number1 = $faker->numberBetween($min = 1, $max = 12);
     $number2 = $faker->numberBetween($min = 1, $max = 4);
     return [
-        'role_id' => rand(2,3),
+        'role' => $faker->randomElement(['PROPIETARIO', 'ARRENDATARIO']),
         'name' => $faker->name,
-        'username' => $faker->userName(),
         'email' => $faker->unique()->safeEmail,
         'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
         'torre' => $faker->numberBetween($min = 1, $max = 12),

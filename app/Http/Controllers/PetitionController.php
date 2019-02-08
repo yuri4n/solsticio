@@ -14,17 +14,8 @@ class PetitionController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $petitions = Petition::orderBy('id', 'DESC')->where('status', 'PENDING')->paginate(25);
+        return $petitions;
     }
 
     /**
@@ -35,7 +26,14 @@ class PetitionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'user_id' => 'required',
+            'nombre_responsable' => 'required',
+            'cedula' => 'required',
+            'additional' => 'required',
+        ]);
+
+        Petition::create($request->all());
     }
 
     /**
@@ -45,17 +43,6 @@ class PetitionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Petition $petition)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Petition  $petition
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Petition $petition)
     {
         //
     }

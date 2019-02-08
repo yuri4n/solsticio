@@ -18,3 +18,9 @@ Route::get('/admin/classifieds', 'ClassifiedController@admin');
 Route::put('/admin/classifieds/{classified}', 'ClassifiedController@updateStatus');
 
 Route::resource('reservations', 'ReservationController', array('except' => array('create', 'edit')));
+
+Route::resource('petitions', 'PetitionController', array('except' => array('create', 'edit')));
+
+Route::resource('parkings', 'ParkingsController', array('except' => array('create', 'edit')));
+
+Route::resource('censuses', 'CensusController', array('except' => array('create', 'edit')));

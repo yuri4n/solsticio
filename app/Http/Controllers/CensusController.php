@@ -14,7 +14,8 @@ class CensusController extends Controller
      */
     public function index()
     {
-        //
+        $censuses = Census::orderBy('id', 'DESC')->where('status', 'PENDING')->paginate(25);
+        return $censuses;
     }
 
     /**

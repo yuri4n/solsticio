@@ -21,7 +21,7 @@
                             <th scope="row">{{user.id}}</th>
                             <td>{{user.name}}</td>
                             <td>{{user.email}}</td>
-                            <td>{{typeToRole(user.role_id)}}</td>
+                            <td>{{user.role}}</td>
                             <td>{{user.torre}}</td>
                             <td>{{user.apartamento}}</td>
                             <td><button class="btn btn-success">Aprobar</button></td>
@@ -35,11 +35,11 @@
         <!-- Pagination -->
         <nav aria-label="Page navigation example">
             <ul class="pagination">
-                <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item"><a class="page-link" href="#" @click="readPosts(pagination.prev_page_url)">Anterior</a></li>
+                <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item"><a class="page-link" href="#" @click="readUsers(pagination.prev_page_url)">Anterior</a></li>
 
                 <li class="page-item disabled"><a class="page-link text-dark" href="#">Página {{ pagination.current_page }} de {{ pagination.last_page }}</a></li>
             
-                <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item"><a class="page-link" href="#" @click="readPosts(pagination.next_page_url)">Siguiente</a></li>
+                <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item"><a class="page-link" href="#" @click="readUsers(pagination.next_page_url)">Siguiente</a></li>
             </ul>
         </nav>
     </div>
@@ -84,22 +84,6 @@ export default {
             };
             this.pagination = pagination;
         },
-        typeToRole(id) {
-            switch (id) {
-                case 1: {
-                    return 'Admin';
-                    break;
-                }
-                case 2: {
-                    return 'Propietario';
-                    break;
-                }
-                case 3: {
-                    return 'Residente';
-                    break;
-                }
-            }
-        }
     }
 }
 </script>

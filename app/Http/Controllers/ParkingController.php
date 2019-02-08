@@ -14,7 +14,8 @@ class ParkingController extends Controller
      */
     public function index()
     {
-        //
+        $parkings = Parking::orderBy('id', 'DESC')->where('status', 'PENDING')->paginate(25);
+        return $parkings;
     }
 
     /**

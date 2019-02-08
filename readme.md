@@ -1,10 +1,3 @@
-<p align="center">
-<img src="https://laravel.com/assets/img/components/logo-laravel.svg">
-</p>
-<p align="center" style="width:100px;height:100px">
-<img src="https://vuejs.org/images/logo.png">
-</p>
-
 ## Project Changelog
 
 - *1.0*   => Initial Commit: Workflow scheme.

@@ -43,6 +43,8 @@ class CreateParkingsTable extends Migration
             $table->string('marca');
             $table->string('modelo');
 
+            $table->enum('status', ['PENDING', 'APPROVED'])->default('PENDING');
+
             $table->timestamps();
         });
     }
