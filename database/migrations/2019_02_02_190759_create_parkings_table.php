@@ -20,9 +20,11 @@ class CreateParkingsTable extends Migration
 
             $table->date('fecha');
             $table->enum('deudas', ['SI', 'NO'])->default('NO');
-            $table->enum('vehiculo', ['CARRO', 'MOTO']);
+            $table->enum('carro', ['SI', 'NO']);
+            $table->enum('moto', ['SI', 'NO']);
             $table->enum('discapacidad', ['SI', 'NO'])->default('NO');
             $table->enum('asignado', ['SI', 'NO']);
+            $table->integer('numero');
             $table->enum('tipo', ['PROPIETARIO', 'ARRIENDATARIO']);
 
             $table->string('nombre_propietario');
@@ -37,11 +39,27 @@ class CreateParkingsTable extends Migration
             $table->integer('torre');
             $table->integer('apartamento');
 
-            $table->string('placa');
-            $table->string('color');
-            $table->string('clase');
-            $table->string('marca');
-            $table->string('modelo');
+            $table->integer('cedula');
+            $table->integer('tarjeta_propiedad');
+            $table->integer('soat');
+            $table->integer('autorizacion')->nullable();
+
+            $table->string('placa1');
+            $table->string('color1');
+            $table->string('clase1');
+            $table->string('marca1');
+            $table->string('modelo1');
+
+            for ($i = 2; $i <= 3; $i++) { 
+                $table->string('placa'.$i)->nullable();
+                $table->string('color'.$i)->nullable();
+                $table->string('clase'.$i)->nullable();
+                $table->string('marca'.$i)->nullable();
+                $table->string('modelo'.$i)->nullable();
+            }
+
+            $table->string('diligenciador');
+            $table->string('documento');
 
             $table->enum('status', ['PENDING', 'APPROVED'])->default('PENDING');
 

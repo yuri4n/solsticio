@@ -41,6 +41,9 @@ class CreateCensusesTable extends Migration
             $table->string('modelo_moto')->nullable();
             $table->integer('parqueadero_asign_moto')->nullable();
 
+            $table->enum('bicicleta', ['SI', 'NO'])->default('NO');
+            $table->string('gancho')->nullable();
+
             for ($i = 1; $i <= 10; $i++) { 
                 $table->string('residente'.$i)->nullable();
                 $table->enum('discapacitado'.$i, ['SI', 'NO'])->default('NO');

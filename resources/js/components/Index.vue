@@ -53,7 +53,11 @@
         width: 100%;
         height: 100%;
         background-image: url(http://solsticio.local/images/background.jpg);
-        background-size: cover;      
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;    
     }
 
     @media (min-width: 992px) {
