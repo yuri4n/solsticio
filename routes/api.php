@@ -21,6 +21,6 @@ Route::resource('reservations', 'ReservationController', array('except' => array
 
 Route::resource('petitions', 'PetitionController', array('except' => array('create', 'edit')));
 
-Route::resource('parkings', 'ParkingsController', array('except' => array('create', 'edit')));
+Route::resource('parkings', 'ParkingController', array('except' => array('create', 'edit')));
 
 Route::resource('censuses', 'CensusController', array('except' => array('create', 'edit')));

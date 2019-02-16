@@ -24,7 +24,7 @@ class CreateParkingsTable extends Migration
             $table->enum('moto', ['SI', 'NO']);
             $table->enum('discapacidad', ['SI', 'NO'])->default('NO');
             $table->enum('asignado', ['SI', 'NO']);
-            $table->integer('numero');
+            $table->integer('numero')->nullable();
             $table->enum('tipo', ['PROPIETARIO', 'ARRIENDATARIO']);
 
             $table->string('nombre_propietario');
@@ -39,10 +39,10 @@ class CreateParkingsTable extends Migration
             $table->integer('torre');
             $table->integer('apartamento');
 
-            $table->integer('cedula');
-            $table->integer('tarjeta_propiedad');
-            $table->integer('soat');
-            $table->integer('autorizacion')->nullable();
+            $table->mediumText('cedula');
+            $table->mediumText('tarjeta_propiedad');
+            $table->mediumText('soat');
+            $table->mediumText('autorizacion')->nullable();
 
             $table->string('placa1');
             $table->string('color1');

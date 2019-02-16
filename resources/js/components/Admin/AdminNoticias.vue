@@ -169,7 +169,7 @@ export default {
                 vm.makePagination(response.data);
                 })
                 .catch(err => console.log(err));
-            },
+        },
         makePagination(meta) {
             let pagination = {
                 current_page: meta.current_page,

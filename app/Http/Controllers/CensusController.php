@@ -19,16 +19,6 @@ class CensusController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -46,17 +36,6 @@ class CensusController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Census $census)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Census  $census
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Census $census)
     {
         //
     }
