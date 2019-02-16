@@ -546,49 +546,48 @@ export default {
           this.alert("success", "La noticia ha sido creada");
           this.carro = false;
           this.moto = false;
-          this.deudas.value = '',
-          this.discapacidad.value = '';
-          this.asignado.value = '';
-          this.tipo.value = '';
-          this.numero = '';
+          (this.deudas.value = ""), (this.discapacidad.value = "");
+          this.asignado.value = "";
+          this.tipo.value = "";
+          this.numero = "";
 
-          this.nombre_propietario = '';
-          this.telefono_propietario = '';
-          this.direccion_propietario = '';
-          this.email_propietario = '';
+          this.nombre_propietario = "";
+          this.telefono_propietario = "";
+          this.direccion_propietario = "";
+          this.email_propietario = "";
 
-          this.nombre_residente = '';
-          this.telefono_residente = '';
-          this.direccion_residente = '';
-          this.email_residente = '';
-          this.torre = '';
-          this.apartamento = '';
+          this.nombre_residente = "";
+          this.telefono_residente = "";
+          this.direccion_residente = "";
+          this.email_residente = "";
+          this.torre = "";
+          this.apartamento = "";
 
-          this.cedula = '';
-          this.tarjeta_propiedad = '';
-          this.soat = '';
-          this.autorizacion = '';
+          this.cedula = "";
+          this.tarjeta_propiedad = "";
+          this.soat = "";
+          this.autorizacion = "";
 
-          this.placa1 = '';
-          this.color1 = '';
-          this.clase1 = '';
-          this.marca1 = '';
-          this.modelo1 = '';
+          this.placa1 = "";
+          this.color1 = "";
+          this.clase1 = "";
+          this.marca1 = "";
+          this.modelo1 = "";
 
-          this.placa2 = '';
-          this.color2 = '';
-          this.clase2 = '';
-          this.marca2 = '';
-          this.modelo2 = '';
+          this.placa2 = "";
+          this.color2 = "";
+          this.clase2 = "";
+          this.marca2 = "";
+          this.modelo2 = "";
 
-          this.placa3 = '';
-          this.color3 = '';
-          this.clase3 = '';
-          this.marca3 = '';
-          this.modelo3 = '';
+          this.placa3 = "";
+          this.color3 = "";
+          this.clase3 = "";
+          this.marca3 = "";
+          this.modelo3 = "";
 
-          this.diligenciador = '';
-          this.documento = '';
+          this.diligenciador = "";
+          this.documento = "";
         })
         .catch(error => {
           this.alert("error", "Algo ha salido mal");

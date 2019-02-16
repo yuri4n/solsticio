@@ -59,7 +59,7 @@ class CreateCensusesTable extends Migration
             $table->enum('mascota', ['SI', 'NO'])->default('NO');
             $table->string('mascota_raza')->nullable();
             $table->integer('mascota_cantidad')->nullable();
-            $table->enum('vacunas', ['SI', 'NO'])->default('NO');
+            $table->enum('vacunas', ['SI', 'NO'])->default('NO')->nullable();
 
             $table->mediumText('observaciones')->nullable();
 
