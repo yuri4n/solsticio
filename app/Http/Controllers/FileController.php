@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Solsticio\Http\Controllers;
 
-use App\File;
+use Solsticio\File;
 use Illuminate\Http\Request;
 
 class FileController extends Controller
@@ -60,7 +60,7 @@ class FileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\File  $file
+     * @param  \Solsticio\File  $file
      * @return \Illuminate\Http\Response
      */
     public function show(File $file)
@@ -72,7 +72,7 @@ class FileController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\File  $file
+     * @param  \Solsticio\File  $file
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -113,7 +113,7 @@ class FileController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\File  $file
+     * @param  \Solsticio\File  $file
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

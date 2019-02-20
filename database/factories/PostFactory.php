@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Post::class, function (Faker $faker) {
+$factory->define(Solsticio\Post::class, function (Faker $faker) {
     $title = $faker->sentence(5);
     return [
         'user_id' => rand(1,30),

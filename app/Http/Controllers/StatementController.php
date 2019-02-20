@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Solsticio\Http\Controllers;
 
-use App\Statement;
+use Solsticio\Statement;
 use Illuminate\Http\Request;
 
 class StatementController extends Controller
@@ -41,7 +41,7 @@ class StatementController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Statement  $statement
+     * @param  \Solsticio\Statement  $statement
      * @return \Illuminate\Http\Response
      */
     public function show(Statement $statement)
@@ -52,7 +52,7 @@ class StatementController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Statement  $statement
+     * @param  \Solsticio\Statement  $statement
      * @return \Illuminate\Http\Response
      */
     public function edit(Statement $statement)
@@ -64,7 +64,7 @@ class StatementController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Statement  $statement
+     * @param  \Solsticio\Statement  $statement
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Statement $statement)
@@ -75,7 +75,7 @@ class StatementController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Statement  $statement
+     * @param  \Solsticio\Statement  $statement
      * @return \Illuminate\Http\Response
      */
     public function destroy(Statement $statement)

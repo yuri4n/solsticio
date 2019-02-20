@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Solsticio\Http\Controllers;
 
-use App\Parking;
+use Solsticio\Parking;
 use Illuminate\Http\Request;
 
 class ParkingController extends Controller
@@ -159,7 +159,7 @@ class ParkingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Parking  $parking
+     * @param  \Solsticio\Parking  $parking
      * @return \Illuminate\Http\Response
      */
     public function show(Parking $parking)
@@ -171,7 +171,7 @@ class ParkingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Parking  $parking
+     * @param  \Solsticio\Parking  $parking
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Parking $parking)
@@ -182,7 +182,7 @@ class ParkingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Parking  $parking
+     * @param  \Solsticio\Parking  $parking
      * @return \Illuminate\Http\Response
      */
     public function destroy(Parking $parking)

@@ -1,4 +1,9 @@
-import Vue           from 'vue';
+import Vue from 'vue';
+import VueAuthenticate from 'vue-authenticate';
+import VueAxios from 'vue-axios';
+import axios from 'axios';
+import 'es6-promise/auto';
+
 import Notifications from 'vue-notification';
 import VueEditor from "vue2-editor";
 
@@ -6,8 +11,12 @@ Vue.use(VueEditor)
 Vue.use(Notifications)
 window.Vue = require('vue');
 
-require('./bootstrap');
+Vue.use(VueAxios, axios)
+Vue.use(VueAuthenticate, {
+  baseUrl: 'http://solsticio.local/api/',
+})
 
+require('./bootstrap');
 
 Vue.component('navbar', require('./components/Navbar.vue').default);
 Vue.component('index', require('./components/Index.vue').default);
@@ -44,6 +53,9 @@ Vue.component('adminpeticiones', require('./components/Admin/AdminPeticiones.vue
 Vue.component('admincenso', require('./components/Admin/AdminCenso.vue').default);
 Vue.component('adminusuarios', require('./components/Admin/AdminUsuarios.vue').default);
 
+Vue.component('login', require('./components/Auth/Login.vue').default);
+Vue.component('register', require('./components/Auth/Register.vue').default);
+
 const app = new Vue({
-    el: '#app'
+    el: '#app',
 });

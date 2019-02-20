@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Solsticio;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,7 +12,7 @@ class Reservation extends Model
 
     public function users()
     {
-        return $this.belongsTo('App\User');
+        return $this.belongsTo('Solsticio\User');
     }
 
 }

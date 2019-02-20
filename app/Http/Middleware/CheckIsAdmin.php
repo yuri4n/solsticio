@@ -1,12 +1,14 @@
 <?php
-namespace App\Http\Middleware;
+namespace Solsticio\Http\Middleware;
 use Closure;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 class CheckIsAdmin
 {
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->role === 'ADMIN') {
+        $user = Auth::user();
+        if(Auth::check() && $user->role == 'ADMIN') {
             return $next($request);
         }
         else {

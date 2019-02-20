@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Solsticio;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +10,6 @@ class Statement extends Model
     
     public function user()
     {
-        return $this->belongsTo('App\User', 'user_id');
+        return $this->belongsTo('Solsticio\User', 'user_id');
     }
 }

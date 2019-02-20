@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Solsticio\Http\Controllers;
 
-use App\User;
+use Solsticio\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller

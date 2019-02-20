@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Reservation::class, function (Faker $faker) {
+$factory->define(Solsticio\Reservation::class, function (Faker $faker) {
     return [
         'user_id' => rand(1,30),
         'nombre_responsable' => $faker->name($gender = null),

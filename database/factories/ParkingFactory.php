@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Parking::class, function (Faker $faker) {
+$factory->define(Solsticio\Parking::class, function (Faker $faker) {
     return [
         //
     ];

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Solsticio\Http\Controllers;
 
-use App\Census;
+use Solsticio\Census;
 use Illuminate\Http\Request;
 
 class CensusController extends Controller
@@ -139,7 +139,7 @@ class CensusController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Census  $census
+     * @param  \Solsticio\Census  $census
      * @return \Illuminate\Http\Response
      */
     public function show(Census $census)
@@ -151,7 +151,7 @@ class CensusController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Census  $census
+     * @param  \Solsticio\Census  $census
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Census $census)
@@ -162,7 +162,7 @@ class CensusController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Census  $census
+     * @param  \Solsticio\Census  $census
      * @return \Illuminate\Http\Response
      */
     public function destroy(Census $census)

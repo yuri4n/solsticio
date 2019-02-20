@@ -1,6 +1,6 @@
 <?php
-namespace App\Http\Controllers;
-use App\User;
+namespace Solsticio\Http\Controllers;
+use Solsticio\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -29,13 +29,13 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->save();
-        return response()->json(['status' => 'success'], 200);
+        return response()->json(['status' => 'success', 'redirect' => route('login')], 200);
     }
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
         if ($token = $this->guard()->attempt($credentials)) {
-            return response()->json(['status' => 'success'], 200)->header('Authorization', $token);
+            return response()->json(['status' => 'success', 'redirect' => route('inicio'), 'token' => $token], 200)->header('authorization', $token);
         }
         return response()->json(['error' => 'login_error'], 401);
     }

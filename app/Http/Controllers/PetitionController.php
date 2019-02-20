@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Solsticio\Http\Controllers;
 
-use App\Petition;
+use Solsticio\Petition;
 use Illuminate\Http\Request;
 
 class PetitionController extends Controller
@@ -39,7 +39,7 @@ class PetitionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Petition  $petition
+     * @param  \Solsticio\Petition  $petition
      * @return \Illuminate\Http\Response
      */
     public function show(Petition $petition)
@@ -51,7 +51,7 @@ class PetitionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Petition  $petition
+     * @param  \Solsticio\Petition  $petition
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Petition $petition)
@@ -62,7 +62,7 @@ class PetitionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Petition  $petition
+     * @param  \Solsticio\Petition  $petition
      * @return \Illuminate\Http\Response
      */
     public function destroy(Petition $petition)

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Solsticio\Http\Controllers;
 
-use App\Classified;
+use Solsticio\Classified;
 use Illuminate\Http\Request;
 
 class ClassifiedController extends Controller
@@ -53,7 +53,7 @@ class ClassifiedController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Classified  $classified
+     * @param  \Solsticio\Classified  $classified
      * @return \Illuminate\Http\Response
      */
     public function show(Classified $classified)
@@ -64,7 +64,7 @@ class ClassifiedController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Classified  $classified
+     * @param  \Solsticio\Classified  $classified
      * @return \Illuminate\Http\Response
      */
     public function edit(Classified $classified)
@@ -76,7 +76,7 @@ class ClassifiedController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Classified  $classified
+     * @param  \Solsticio\Classified  $classified
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Classified $classified)
@@ -88,7 +88,7 @@ class ClassifiedController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Classified  $classified
+     * @param  \Solsticio\Classified  $classified
      * @return \Illuminate\Http\Response
      */
     public function updateStatus(Request $request, $id)
@@ -103,7 +103,7 @@ class ClassifiedController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Classified  $classified
+     * @param  \Solsticio\Classified  $classified
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
