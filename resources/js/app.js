@@ -30,6 +30,7 @@ Vue.component('noticias', require('./components/Noticias.vue').default);
 Vue.component('noticia', require('./components/Noticia.vue').default);
 Vue.component('archivos', require('./components/Archivos.vue').default);
 Vue.component('clasificados', require('./components/Clasificados.vue').default);
+Vue.component('clasificado', require('./components/Clasificado.vue').default);
 
 //Servicios
 Vue.component('servicios', require('./components/Servicios/Servicios.vue').default);

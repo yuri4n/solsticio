@@ -15,11 +15,16 @@
         <div class="row">
           <div class="col-sm-6" v-for="classified in classifieds" v-bind:key="classified.id">
             <div class="card sm-4 mb-3" style="width: 20rem;">
-              <img v-if="classified.file" class="card-img-top" :src="classified.file" alt="Card image cap">
+              <img
+                v-if="classified.file"
+                class="card-img-top"
+                :src="classified.file"
+                alt="Card image cap"
+              >
               <div class="card-body">
                 <h2 class="card-title">{{ classified.title }}</h2>
                 <p class="card-text">{{ classified.excerpt }}</p>
-                <a href="#" class="btn btn-primary">Leer Más &rarr;</a>
+                <a :href="classifiedRoute(classified)" class="btn btn-primary">Leer Más &rarr;</a>
               </div>
               <div class="card-footer text-muted">
                 Publicado en January 1, 2017 by
@@ -194,7 +199,7 @@ export default {
       alertMessage: "",
       alertType: "",
       alertTitle: "",
-      categories: [],
+      categories: []
     };
   },
   methods: {
@@ -284,14 +289,17 @@ export default {
         .then(response => {
           $("#create").modal("hide");
           this.alert("success", "La noticia ha sido creada", "¡Bien!");
-          this.newTitle = '';
-          this.newExcerpt = '';
-          this.newBody = '';
-          this.newFile = '';
+          this.newTitle = "";
+          this.newExcerpt = "";
+          this.newBody = "";
+          this.newFile = "";
         })
         .catch(error => {
           this.alert("error", "Algo ha salido mal", "Error :(");
         });
+    },
+    classifiedRoute(post) {
+      return "clasificados/" + post.slug;
     }
   }
 };

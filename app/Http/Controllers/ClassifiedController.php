@@ -79,9 +79,10 @@ class ClassifiedController extends Controller
      * @param  \Solsticio\Classified  $classified
      * @return \Illuminate\Http\Response
      */
-    public function show(Classified $classified)
+    public function show($classified)
     {
-        //
+        $response = Classified::where('slug', $classified)->firstOrFail();
+        return $response;
     }
 
     /**

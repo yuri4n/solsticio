@@ -1,5 +1,5 @@
 <template>
-  <div class="container my-5">
+  <div class="container my-5" v-if="$auth.isAuthenticated() && user.role == 'ADMIN'">
     <notifications group="foo" position="bottom left" :speed="500"/>
     <!-- Tabla -->
     <div class="card text-left mb-3">
@@ -186,6 +186,7 @@ export default {
   },
   created() {
     this.readPosts();
+    if (this.$auth.isAuthenticated()) this.getUser();
   },
   data() {
     return {
@@ -206,7 +207,8 @@ export default {
       },
       status: "",
       alertMessage: "",
-      alertType: ""
+      alertType: "",
+      user: undefined
     };
   },
   methods: {
@@ -326,6 +328,15 @@ export default {
         .catch(error => {
           this.alert("error", "Algo ha salido mal");
         });
+    },
+    getUser() {
+      var url = "http://solsticio.local/api/auth/user";
+      axios
+        .get(url)
+        .then(response => {
+          this.user = response.data.data;
+        })
+        .catch();
     }
   }
 };

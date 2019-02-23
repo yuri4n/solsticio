@@ -1,5 +1,5 @@
 <template>
-<div class="container my-5">
+<div class="container my-5" v-if="$auth.isAuthenticated() && user.role == 'ADMIN'">
     <div class="card text-left mb-3">
         <div class="card-body">
             <h4 class="card-title">Lista de Usuarios</h4>

@@ -4,7 +4,7 @@
       <!-- Post Content Column -->
       <div class="col-lg-8">
         <!-- Title -->
-        <h1 class="mt-4">{{post.title}}</h1>
+        <h1 class="mt-4">{{classified.title}}</h1>
         <!-- Author -->
         <p class="lead">
           por
@@ -13,17 +13,17 @@
 
         <hr>
 
-        <p>{{formatDate(post.created_at)}}</p>
+        <p>{{formatDate(classified.created_at)}}</p>
 
-        <div v-if="post.file">
+        <div v-if="classified.file">
           <hr>
-          <img class="img-fluid rounded" style="height:300;width:900;" :src="post.file" alt>
+          <img class="img-fluid rounded" style="height:300;width:900;" :src="classified.file" alt>
         </div>
 
         <hr>
 
-        <p class="lead">{{post.excerpt}}</p>
-        <p v-html="post.body"></p>
+        <p class="lead">{{classified.excerpt}}</p>
+        <p v-html="classified.body"></p>
       </div>
 
       <!-- Sidebar Widgets Column -->
@@ -95,7 +95,7 @@ export default {
   },
   data() {
     return {
-      post: [],
+      classified: [],
       user: {}
     };
   },
@@ -131,11 +131,11 @@ export default {
     },
     readPost() {
       let path = window.location.pathname.split("/");
-      let url = "http://solsticio.local/api/posts/" + path[2];
+      let url = "http://solsticio.local/api/classifieds/" + path[2];
       axios
         .get(url)
         .then(response => {
-          this.post = response.data;
+          this.classified = response.data;
           this.getUser();
         })
         .catch(error => {
@@ -143,7 +143,7 @@ export default {
         });
     },
     getUser() {
-      let user_url = "http://solsticio.local/api/users/" + this.post.user_id;
+      let user_url = "http://solsticio.local/api/users/" + this.classified.user_id;
       axios
         .get(user_url)
         .then(response => {
@@ -156,4 +156,3 @@ export default {
   }
 };
 </script>
-
