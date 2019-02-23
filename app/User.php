@@ -20,6 +20,7 @@ class User extends Authenticatable implements JWTSubject
         'role', 'name', 'email', 'password', 'torre', 'apartamento', 'profile_img', 'status'
     ];
 
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -37,5 +38,8 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+    public function isAdmin() {
+        return $this->role;
     }
 }

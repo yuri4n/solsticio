@@ -16,11 +16,8 @@ Route::prefix('auth')->group(function () {
     });
 });
 
-Route::group(['middleware' => 'auth:api'], function(){
-    // Users
-    Route::get('users', 'UserController@index')->middleware('isAdmin');
-    Route::get('users/{id}', 'UserController@show')->middleware('isAdminOrSelf');
-});
+Route::get('users', 'UserController@index');
+Route::get('users/{id}', 'UserController@show');
 
 Route::resource('users', 'UserController', array('except' => array('create', 'edit')));
 
@@ -40,3 +37,5 @@ Route::resource('petitions', 'PetitionController', array('except' => array('crea
 Route::resource('parkings', 'ParkingController', array('except' => array('create', 'edit')));
 
 Route::resource('censuses', 'CensusController', array('except' => array('create', 'edit')));
+
+Route::resource('categories', 'CategoryController', array('except' => array('create', 'edit')));

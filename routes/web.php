@@ -25,15 +25,17 @@ Route::view('/censo', 'web.censo');
 
 Route::view('/pagos', 'web.pagos');
 
-//Admin
-Route::view('/admin', 'admin.index')->middleware('isAdmin');
-Route::view('/admin/noticias', 'admin.noticias')->middleware('isAdmin');
-Route::view('/admin/servicios', 'admin.servicios')->middleware('isAdmin');
-Route::view('/admin/archivos', 'admin.archivos')->middleware('isAdmin');
-Route::view('/admin/clasificados', 'admin.clasificados')->middleware('isAdmin');
-Route::view('/admin/peticiones', 'admin.peticiones')->middleware('isAdmin');
-Route::view('/admin/censo', 'admin.censo')->middleware('isAdmin');
-Route::view('/admin/usuarios', 'admin.usuarios')->middleware('isAdmin');
+Route::group(['middleware' => 'isAdmin'], function(){
+    //Admin
+    Route::view('/admin', 'admin.index');
+    Route::view('/admin/noticias', 'admin.noticias');
+    Route::view('/admin/servicios', 'admin.servicios');
+    Route::view('/admin/archivos', 'admin.archivos');
+    Route::view('/admin/clasificados', 'admin.clasificados');
+    Route::view('/admin/peticiones', 'admin.peticiones');
+    Route::view('/admin/censo', 'admin.censo');
+    Route::view('/admin/usuarios', 'admin.usuarios');
+});
 
 Route::view('/login', 'web.auth.login')->name('login');
 Route::view('/register', 'web.auth.register');

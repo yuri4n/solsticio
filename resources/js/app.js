@@ -3,6 +3,9 @@ import VueAuthenticate from 'vue-authenticate';
 import VueAxios from 'vue-axios';
 import axios from 'axios';
 import 'es6-promise/auto';
+import moment from 'moment'
+
+Vue.prototype.moment = moment;
 
 import Notifications from 'vue-notification';
 import VueEditor from "vue2-editor";

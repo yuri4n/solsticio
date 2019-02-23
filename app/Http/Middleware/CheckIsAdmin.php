@@ -3,16 +3,16 @@ namespace Solsticio\Http\Middleware;
 use Closure;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Solsticio\User;
 class CheckIsAdmin
 {
     public function handle($request, Closure $next)
     {
-        $user = Auth::user();
-        if(Auth::check() && $user->role == 'ADMIN') {
+        if(Auth::check() && Auth::user()->isAdmin() == 'ADMIN') {
             return $next($request);
         }
         else {
-            return response()->json(['error' => 'Unauthorized'], 403);
+            return response()->json(['error' => 'Unauthorized', 'request' => $request, 'next' => $next], 403);
         }
     }
 }

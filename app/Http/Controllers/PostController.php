@@ -78,9 +78,10 @@ class PostController extends Controller
      * @param  \Solsticio\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($post)
     {
-        //
+        $response = Post::where('slug', $post)->firstOrFail();
+        return $response;
     }
 
     /**
