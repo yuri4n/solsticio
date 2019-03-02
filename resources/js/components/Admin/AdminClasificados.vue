@@ -63,13 +63,15 @@
 <script>
 export default {
   created() {
+    if (this.$auth.isAuthenticated()) this.getUser();
     this.readClassifieds();
   },
   data() {
     return {
       classifieds: [],
       pagination: {},
-      status: ""
+      status: "",
+      user: {}
     };
   },
   methods: {
@@ -80,6 +82,15 @@ export default {
         title: "BIEN",
         text: alertMessage
       });
+    },
+    getUser() {
+      var url = "http://solsticio.local/api/auth/user";
+      axios
+        .get(url)
+        .then(response => {
+          this.user = response.data.data;
+        })
+        .catch();
     },
     readClassifieds(page_url) {
       let vm = this;

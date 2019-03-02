@@ -35,7 +35,7 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
         if ($token = $this->guard()->attempt($credentials)) {
-            return response()->json(['status' => 'success', 'redirect' => route('inicio'), 'token' => $token], 200)->header('authorization', $token);
+            return response()->json(['status' => 'success', 'redirect' => route('inicio'), 'token' => $token], 200)->header('Authorization', 'Bearer' . $token);
         }
         return response()->json(['error' => 'login_error'], 401);
     }

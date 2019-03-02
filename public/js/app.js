@@ -2213,13 +2213,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
+    if (this.$auth.isAuthenticated()) this.getUser();
     this.readClassifieds();
   },
   data: function data() {
     return {
       classifieds: [],
       pagination: {},
-      status: ""
+      status: "",
+      user: {}
     };
   },
   methods: {
@@ -2231,13 +2233,21 @@ __webpack_require__.r(__webpack_exports__);
         text: alertMessage
       });
     },
-    readClassifieds: function readClassifieds(page_url) {
+    getUser: function getUser() {
       var _this = this;
+
+      var url = "http://solsticio.local/api/auth/user";
+      axios.get(url).then(function (response) {
+        _this.user = response.data.data;
+      }).catch();
+    },
+    readClassifieds: function readClassifieds(page_url) {
+      var _this2 = this;
 
       var vm = this;
       page_url = page_url || "/api/admin/classifieds";
       axios.get(page_url).then(function (response) {
-        _this.classifieds = response.data.data;
+        _this2.classifieds = response.data.data;
         vm.makePagination(response.data);
       }).catch(function (err) {
         return console.log(err);
@@ -2253,33 +2263,33 @@ __webpack_require__.r(__webpack_exports__);
       this.pagination = pagination;
     },
     deleteClassified: function deleteClassified(classified) {
-      var _this2 = this;
+      var _this3 = this;
 
       var url = "http://solsticio.local/api/classifieds/" + classified.id;
       var confirmacion = confirm("\xBFSeguro que deseas borrar el clasificado ".concat(classified.id, "?"));
 
       if (confirmacion) {
         axios.delete(url).then(function (response) {
-          _this2.alert("warn", "El clasificado ".concat(classified.id, " ha sido rechazado"));
+          _this3.alert("warn", "El clasificado ".concat(classified.id, " ha sido rechazado"));
 
-          _this2.readClassifieds();
+          _this3.readClassifieds();
         });
       }
     },
     updateClassified: function updateClassified(id) {
-      var _this3 = this;
+      var _this4 = this;
 
       var url = "http://solsticio.local/api/admin/classifieds/" + id;
       axios.put(url, {
         status: "PUBLISHED"
       }).then(function (response) {
-        _this3.readClassifieds();
+        _this4.readClassifieds();
 
         $("#edit").modal("hide");
 
-        _this3.alert("success", "El clasificado ha sido aprovado y ahora será visible");
+        _this4.alert("success", "El clasificado ha sido aprovado y ahora será visible");
       }).catch(function (error) {
-        _this3.alert("error", "Algo ha salido mal");
+        _this4.alert("error", "Algo ha salido mal");
       });
     }
   }
@@ -3122,6 +3132,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.readUsers();
@@ -3171,7 +3182,22 @@ __webpack_require__.r(__webpack_exports__);
       axios.get(url).then(function (response) {
         _this2.user = response.data.data;
       }).catch();
-    }
+    },
+    updateStatus: function updateStatus(user) {
+      var _this3 = this;
+
+      var url = "http://solsticio.local/api/admin/users/" + user.id;
+      axios.put(url, {
+        status: "PUBLISHED"
+      }).then(function (response) {
+        _this3.readUsers();
+
+        _this3.alert("success", "El clasificado ha sido aprovado y ahora será visible");
+      }).catch(function (error) {
+        _this3.alert("error", "Algo ha salido mal");
+      });
+    },
+    rejectUser: function rejectUser(user) {}
   }
 });
 
@@ -12474,7 +12500,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -12531,7 +12557,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -67314,113 +67340,157 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm.$auth.isAuthenticated() && _vm.user.role == "ADMIN"
-    ? _c("div", { staticClass: "container my-5" }, [
-        _c("div", { staticClass: "card text-left mb-3" }, [
-          _c("div", { staticClass: "card-body" }, [
-            _c("h4", { staticClass: "card-title" }, [
-              _vm._v("Lista de Usuarios")
-            ]),
-            _vm._v(" "),
-            _c("table", { staticClass: "table table-striped" }, [
+    ? _c(
+        "div",
+        { staticClass: "container my-5" },
+        [
+          _c("notifications", {
+            attrs: { group: "foo", position: "bottom left", speed: 500 }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "card text-left mb-3" }, [
+            _c("div", { staticClass: "card-body" }, [
               _vm._m(0),
               _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.users, function(user) {
-                  return _c("tr", { key: user.id }, [
-                    _c("th", { attrs: { scope: "row" } }, [
-                      _vm._v(_vm._s(user.id))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(user.name))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(user.email))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(user.role))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(user.torre))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(user.apartamento))]),
-                    _vm._v(" "),
-                    _vm._m(1, true),
-                    _vm._v(" "),
-                    _vm._m(2, true)
-                  ])
-                }),
-                0
-              )
+              _c("table", { staticClass: "table table-striped" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.users, function(user) {
+                    return _c("tr", { key: user.id }, [
+                      _c("th", { attrs: { scope: "row" } }, [
+                        _vm._v(_vm._s(user.id))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(user.name))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(user.email))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(user.role))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(user.torre))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(user.apartamento))]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success",
+                            on: {
+                              click: function($event) {
+                                _vm.updateStatus(user)
+                              }
+                            }
+                          },
+                          [_vm._v("Aprobar")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger",
+                            on: {
+                              click: function($event) {
+                                _vm.rejectUser(user)
+                              }
+                            }
+                          },
+                          [_vm._v("Rechazar")]
+                        )
+                      ])
+                    ])
+                  }),
+                  0
+                )
+              ])
             ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
-          _c("ul", { staticClass: "pagination" }, [
-            _c(
-              "li",
-              {
-                staticClass: "page-item",
-                class: [{ disabled: !_vm.pagination.prev_page_url }]
-              },
-              [
+          ]),
+          _vm._v(" "),
+          _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+            _c("ul", { staticClass: "pagination" }, [
+              _c(
+                "li",
+                {
+                  staticClass: "page-item",
+                  class: [{ disabled: !_vm.pagination.prev_page_url }]
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          _vm.readUsers(_vm.pagination.prev_page_url)
+                        }
+                      }
+                    },
+                    [_vm._v("Anterior")]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("li", { staticClass: "page-item disabled" }, [
                 _c(
                   "a",
-                  {
-                    staticClass: "page-link",
-                    attrs: { href: "#" },
-                    on: {
-                      click: function($event) {
-                        _vm.readUsers(_vm.pagination.prev_page_url)
-                      }
-                    }
-                  },
-                  [_vm._v("Anterior")]
+                  { staticClass: "page-link text-dark", attrs: { href: "#" } },
+                  [
+                    _vm._v(
+                      "Página " +
+                        _vm._s(_vm.pagination.current_page) +
+                        " de " +
+                        _vm._s(_vm.pagination.last_page)
+                    )
+                  ]
                 )
-              ]
-            ),
-            _vm._v(" "),
-            _c("li", { staticClass: "page-item disabled" }, [
+              ]),
+              _vm._v(" "),
               _c(
-                "a",
-                { staticClass: "page-link text-dark", attrs: { href: "#" } },
+                "li",
+                {
+                  staticClass: "page-item",
+                  class: [{ disabled: !_vm.pagination.next_page_url }]
+                },
                 [
-                  _vm._v(
-                    "Página " +
-                      _vm._s(_vm.pagination.current_page) +
-                      " de " +
-                      _vm._s(_vm.pagination.last_page)
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          _vm.readUsers(_vm.pagination.next_page_url)
+                        }
+                      }
+                    },
+                    [_vm._v("Siguiente")]
                   )
                 ]
               )
-            ]),
-            _vm._v(" "),
-            _c(
-              "li",
-              {
-                staticClass: "page-item",
-                class: [{ disabled: !_vm.pagination.next_page_url }]
-              },
-              [
-                _c(
-                  "a",
-                  {
-                    staticClass: "page-link",
-                    attrs: { href: "#" },
-                    on: {
-                      click: function($event) {
-                        _vm.readUsers(_vm.pagination.next_page_url)
-                      }
-                    }
-                  },
-                  [_vm._v("Siguiente")]
-                )
-              ]
-            )
+            ])
           ])
-        ])
-      ])
+        ],
+        1
+      )
     : _vm._e()
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", { staticClass: "card-title" }, [
+      _vm._v("Lista de Usuarios pendientes por aprobar / "),
+      _c("a", { staticClass: "btn btn-link", attrs: { href: "" } }, [
+        _vm._v("Lista completa")
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -67443,22 +67513,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Rechazar")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn btn-success" }, [_vm._v("Aprobar")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Rechazar")])
     ])
   }
 ]

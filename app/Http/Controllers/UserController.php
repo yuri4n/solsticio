@@ -19,6 +19,17 @@ class UserController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function complete()
+    {
+        $user = User::orderBy('id', 'DESC')->where('status', 'APPROVED')->paginate(25);
+        return $user;
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -76,6 +87,22 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Solsticio\User  $classified
+     * @return \Illuminate\Http\Response
+     */
+    public function updateStatus(Request $request, $id)
+    {
+        $this->validate($request, [
+            'status' => 'required',
+        ]);
+
+        User::find($id)->update($request->all());
     }
 
     /**

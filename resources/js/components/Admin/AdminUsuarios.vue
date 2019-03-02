@@ -1,8 +1,9 @@
 <template>
   <div class="container my-5" v-if="$auth.isAuthenticated() && user.role == 'ADMIN'">
+    <notifications group="foo" position="bottom left" :speed="500"/>
     <div class="card text-left mb-3">
       <div class="card-body">
-        <h4 class="card-title">Lista de Usuarios</h4>
+        <h4 class="card-title">Lista de Usuarios pendientes por aprobar / <a href="" class="btn btn-link">Lista completa</a> </h4>
         <table class="table table-striped">
           <thead>
             <tr>
@@ -25,10 +26,10 @@
               <td>{{user.torre}}</td>
               <td>{{user.apartamento}}</td>
               <td>
-                <button class="btn btn-success">Aprobar</button>
+                <button @click="updateStatus(user)" class="btn btn-success">Aprobar</button>
               </td>
               <td>
-                <button class="btn btn-danger">Rechazar</button>
+                <button @click="rejectUser(user)" class="btn btn-danger">Rechazar</button>
               </td>
             </tr>
           </tbody>
@@ -108,6 +109,35 @@ export default {
           this.user = response.data.data;
         })
         .catch();
+    },
+    sendEmail(receiver) {
+      var url = "http://solsticio.local/api/mails"
+      axios.post(url, {
+        senderMail: this.user.name,
+        name: receiver.name,
+        email: receiver.email
+      });
+    },
+    updateStatus(user) {
+      var url = "http://solsticio.local/api/admin/users/" + user.id;
+      axios
+        .put(url, {
+          status: "APPROVED"
+        })
+        .then(response => {
+          this.sendEmail(user)
+          this.readUsers();
+          this.alert(
+            "success",
+            "El usuario ha sido aprovado"
+          );
+        })
+        .catch(error => {
+          this.alert("error", "Algo ha salido mal");
+        });
+    },
+    rejectUser(user) {
+
     }
   }
 };
