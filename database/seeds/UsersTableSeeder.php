@@ -11,8 +11,8 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\User::class, 29)->create();
-        App\User::create([
+        factory(Solsticio\User::class, 29)->create();
+        Solsticio\User::create([
             'role' => 'ADMIN',
             'name' => 'Julian Garzon',
         	'email'=> 'bryangarzon22@gmail.com',

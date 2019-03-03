@@ -56,6 +56,7 @@ Vue.component('adminclasificados', require('./components/Admin/AdminClasificados
 Vue.component('adminpeticiones', require('./components/Admin/AdminPeticiones.vue').default);
 Vue.component('admincenso', require('./components/Admin/AdminCenso.vue').default);
 Vue.component('adminusuarios', require('./components/Admin/AdminUsuarios.vue').default);
+Vue.component('adminusuarioscompletos', require('./components/Admin/AdminUsuariosCompletos.vue').default);
 
 Vue.component('login', require('./components/Auth/Login.vue').default);
 Vue.component('register', require('./components/Auth/Register.vue').default);

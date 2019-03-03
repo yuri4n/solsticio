@@ -7,10 +7,6 @@
           Noticias
           <small class="text-muted">Lo último de tu conjunto</small>
         </h1>
-        <!-- 
-                750x300
-        -->
-        <!-- Blog Post -->
         <div v-for="post in posts" v-bind:key="post.id" class="card mb-4">
           <img
             v-if="post.file"
@@ -90,7 +86,7 @@ export default {
     };
   },
   methods: {
-      formatDate(date) {
+    formatDate(date) {
       var monthNames = [
         "Enero",
         "Febrero",

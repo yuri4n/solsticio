@@ -3,7 +3,9 @@
     <notifications group="foo" position="bottom left" :speed="500"/>
     <div class="card text-left mb-3">
       <div class="card-body">
-        <h4 class="card-title">Lista de Usuarios pendientes por aprobar / <a href="" class="btn btn-link">Lista completa</a> </h4>
+        <h4 class="card-title">Lista de Usuarios pendientes por aprobar /
+          <a href="http://solsticio.local/admin/usuarios/completos" class="btn btn-link">Lista completa</a>
+        </h4>
         <table class="table table-striped">
           <thead>
             <tr>
@@ -29,7 +31,7 @@
                 <button @click="updateStatus(user)" class="btn btn-success">Aprobar</button>
               </td>
               <td>
-                <button @click="rejectUser(user)" class="btn btn-danger">Rechazar</button>
+                <button @click.prevent="rejectUser(user)" class="btn btn-danger">Rechazar</button>
               </td>
             </tr>
           </tbody>
@@ -111,7 +113,7 @@ export default {
         .catch();
     },
     sendEmail(receiver) {
-      var url = "http://solsticio.local/api/mails"
+      var url = "http://solsticio.local/api/mails";
       axios.post(url, {
         senderMail: this.user.name,
         name: receiver.name,
@@ -125,20 +127,29 @@ export default {
           status: "APPROVED"
         })
         .then(response => {
-          this.sendEmail(user)
+          this.sendEmail(user);
           this.readUsers();
-          this.alert(
-            "success",
-            "El usuario ha sido aprovado"
-          );
+          this.alert("success", "El usuario ha sido aprovado");
         })
         .catch(error => {
           this.alert("error", "Algo ha salido mal");
         });
     },
     rejectUser(user) {
-
-    }
+      var url = "http://solsticio.local/api/users/" + user.id;
+      var confirmacion = confirm(
+        `¿Seguro que desea borrar el usuario y notificarlo ${user.id}?`
+      );
+      if (confirmacion) {
+        axios.delete(url).then(response => {
+          this.alert(
+            "warn",
+            `El usuario ${user.id} ha sido rechazado`
+          );
+          this.readUsers();
+        });
+      }
+    },
   }
 };
 </script>

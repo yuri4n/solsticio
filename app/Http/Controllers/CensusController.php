@@ -165,8 +165,11 @@ class CensusController extends Controller
      * @param  \Solsticio\Census  $census
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Census $census)
+    public function destroy($id)
     {
-        //
+        $census = Census::find($id);
+        if ($census) {
+            $census->delete();
+        }
     }
 }

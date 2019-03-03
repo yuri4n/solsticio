@@ -65,8 +65,11 @@ class PetitionController extends Controller
      * @param  \Solsticio\Petition  $petition
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Petition $petition)
+    public function destroy($id)
     {
-        //
+        $petition = Petition::find($id);
+        if ($petition) {
+            $petition->delete();
+        }
     }
 }

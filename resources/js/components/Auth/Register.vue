@@ -1,7 +1,7 @@
 <template>
   <div class="container my-5">
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-6">
         <div class="card card-default">
           <div class="card-header">Registro</div>
           <div class="card-body">
@@ -20,10 +20,18 @@
                   type="email"
                   id="email"
                   class="form-control"
-                  placeholder="user@example.com"
+                  placeholder="usuario@ejemplo.com"
                   v-model="email"
                 >
                 <span class="help-block" v-if="has_error && errors.email">{{ errors.email }}</span>
+              </div>
+              <div class="form-group" v-bind:class="{ 'has-error': has_error && errors.password }">
+                <label for="role">Es usted:</label>
+                <select v-model="role" class="form-control" id="role">
+                  <option>ARRENDATARIO</option>
+                  <option>PROPIETARIO</option>
+                </select>
+                <span class="help-block" v-if="has_error && errors.role">{{ errors.role }}</span>
               </div>
               <div class="form-group" v-bind:class="{ 'has-error': has_error && errors.password }">
                 <label for="torre">Torre</label>
@@ -57,10 +65,12 @@
           </div>
         </div>
       </div>
-      <div class="col-xl-7">
+      <div class="col-xl-6">
         <div class="jumbotron">
           <h1 class="display-4">Hello, world!</h1>
-          <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+          <p
+            class="lead"
+          >This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
           <hr class="my-4">
           <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
         </div>
@@ -74,12 +84,13 @@ export default {
     return {
       name: "",
       email: "",
+      role: "",
       torre: "",
       apartamento: "",
       password: "",
       password_confirmation: "",
       has_error: false,
-      errors: null,
+      errors: null
     };
   },
   methods: {
@@ -88,6 +99,7 @@ export default {
         .register({
           name: this.name,
           email: this.email,
+          role: this.role,
           password: this.password,
           password_confirmation: this.password_confirmation,
           torre: this.torre,

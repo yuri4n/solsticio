@@ -34,6 +34,7 @@ Route::view('/admin/clasificados', 'admin.clasificados');
 Route::view('/admin/peticiones', 'admin.peticiones');
 Route::view('/admin/censo', 'admin.censo');
 Route::view('/admin/usuarios', 'admin.usuarios');
+Route::view('/admin/usuarios/completos', 'admin.usuarios_completos');
 
 Route::view('/login', 'web.auth.login')->name('login');
 Route::view('/register', 'web.auth.register');

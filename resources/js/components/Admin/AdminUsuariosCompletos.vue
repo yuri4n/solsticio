@@ -3,29 +3,31 @@
     <notifications group="foo" position="bottom left" :speed="500"/>
     <div class="card text-left mb-3">
       <div class="card-body">
-        <h4 class="card-title">Lista de peticiones genéricas</h4>
+        <h4 class="card-title">Lista completa /
+          <a href="http://solsticio.local/admin/usuarios" class="btn btn-link">Lista de Usuarios pendientes por aprobar</a>
+        </h4>
         <table class="table table-striped">
           <thead>
             <tr>
               <th scope="col">ID</th>
               <th scope="col">Nombre</th>
-              <th scope="col">Cédula</th>
-              <th scope="col">Usuario</th>
-              <th scope="col">Aprobar</th>
-              <th scope="col">Rechazar</th>
+              <th scope="col">E-mail</th>
+              <th scope="col">Tipo</th>
+              <th scope="col">Torre</th>
+              <th scope="col">Apartamento</th>
+              <th scope="col">Eliminar</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="petition in petitions" :key="petition.id">
-              <th scope="row">{{petition.id}}</th>
-              <td>{{petition.nombre_responsable}}</td>
-              <td>{{petition.cedula}}</td>
-              <td>{{petition.user_id}}</td>
+            <tr v-for="user in users" :key="user.id">
+              <th scope="row">{{user.id}}</th>
+              <td>{{user.name}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.role}}</td>
+              <td>{{user.torre}}</td>
+              <td>{{user.apartamento}}</td>
               <td>
-                <button class="btn btn-success">Aprobar</button>
-              </td>
-              <td>
-                <button @click.prevent="rejectPetition(petition)" class="btn btn-danger">Rechazar</button>
+                <button @click.prevent="rejectUser(user)" class="btn btn-danger">Eliminar</button>
               </td>
             </tr>
           </tbody>
@@ -37,7 +39,7 @@
     <nav aria-label="Page navigation example">
       <ul class="pagination">
         <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
-          <a class="page-link" href="#" @click="readPetitions(pagination.prev_page_url)">Anterior</a>
+          <a class="page-link" href="#" @click="readUsers(pagination.prev_page_url)">Anterior</a>
         </li>
 
         <li class="page-item disabled">
@@ -48,7 +50,7 @@
         </li>
 
         <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item">
-          <a class="page-link" href="#" @click="readPetitions(pagination.next_page_url)">Siguiente</a>
+          <a class="page-link" href="#" @click="readUsers(pagination.next_page_url)">Siguiente</a>
         </li>
       </ul>
     </nav>
@@ -58,12 +60,12 @@
 <script>
 export default {
   created() {
-    this.readPetitions();
+    this.readUsers();
     if (this.$auth.isAuthenticated()) this.getUser();
   },
   data() {
     return {
-      petitions: [],
+      users: [],
       pagination: {},
       user: undefined
     };
@@ -77,13 +79,13 @@ export default {
         text: alertMessage
       });
     },
-    readPetitions(page_url) {
+    readUsers(page_url) {
       let vm = this;
-      page_url = page_url || "/api/petitions";
+      page_url = page_url || "/api/admin/users";
       axios
         .get(page_url)
         .then(response => {
-          this.petitions = response.data.data;
+          this.users = response.data.data;
           vm.makePagination(response.data);
         })
         .catch(err => console.log(err));
@@ -106,21 +108,29 @@ export default {
         })
         .catch();
     },
-    rejectPetition(petition) {
-      var url = "http://solsticio.local/api/petitions/" + petition.id;
+    sendEmail(receiver) {
+      var url = "http://solsticio.local/api/mails";
+      axios.post(url, {
+        senderMail: this.user.name,
+        name: receiver.name,
+        email: receiver.email
+      });
+    },
+    rejectUser(user) {
+      var url = "http://solsticio.local/api/users/" + user.id;
       var confirmacion = confirm(
-        `¿Seguro que desea rechazar la petición ${petition.id} y notificar al usuario?`
+        `¿Seguro que borrar el usuario y notificarlo ${user.id}?`
       );
       if (confirmacion) {
         axios.delete(url).then(response => {
           this.alert(
             "warn",
-            `La petición ${petition.id} ha sido rechazada`
+            `El usuario ${user.id} ha sido rechazado`
           );
-          this.readPetitions();
+          this.readUsers();
         });
       }
-    }
+    },
   }
 };
 </script>

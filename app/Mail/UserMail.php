@@ -35,7 +35,7 @@ class UserMail extends Mailable
      */
     public function build()
     {
-        return $this->from('crowgameplays22@gmail.com')
+        return $this->from('bryangarzon22@gmail.com')
                     ->view('mails.user')
                     ->text('mails.user_plain');
     }

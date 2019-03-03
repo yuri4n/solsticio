@@ -11,6 +11,6 @@ class ReservationsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Reservation::class, 30)->create();
+        factory(Solsticio\Reservation::class, 30)->create();
     }
 }

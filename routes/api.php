@@ -17,8 +17,8 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::resource('users', 'UserController', array('except' => array('create', 'edit')));
-Route::get('/admin/users', 'ClassifiedController@complete');
-Route::put('/admin/users/{user}', 'ClassifiedController@updateStatus');
+Route::get('/admin/users', 'UserController@complete');
+Route::put('/admin/users/{user}', 'UserController@updateStatus');
 
 Route::resource('posts', 'PostController', array('except' => array('create', 'edit')));
 Route::get('/admin/posts', 'PostController@admin');
@@ -39,4 +39,4 @@ Route::resource('censuses', 'CensusController', array('except' => array('create'
 
 Route::resource('categories', 'CategoryController', array('except' => array('create', 'edit')));
 
-Route::post('/mails', 'MailController@send');
+Route::post('/mails/{mail}', 'MailController@send');

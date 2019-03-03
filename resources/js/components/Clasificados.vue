@@ -27,8 +27,7 @@
                 <a :href="classifiedRoute(classified)" class="btn btn-primary">Leer Más &rarr;</a>
               </div>
               <div class="card-footer text-muted">
-                Publicado en January 1, 2017 by
-                <a href="#">Lady Rincon</a>
+                Publicado el {{formatDate(classified.created_at)}}
               </div>
             </div>
           </div>
@@ -210,6 +209,35 @@ export default {
         title: alertTitle,
         text: alertMessage
       });
+    },
+    formatDate(date) {
+      var monthNames = [
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre"
+      ];
+
+      var ndate = date.split(" ");
+      var fdate = ndate[0].split("-");
+
+      var month = fdate[1];
+
+      while (month.charAt(0) == "0") month = month.substr(1);
+
+      var day = fdate[2];
+      var monthIndex = month;
+      var year = fdate[0];
+
+      return day + " de " + monthNames[monthIndex - 1] + " de " + year;
     },
     getCategories() {
       let url = "http://solsticio.local/api/categories";

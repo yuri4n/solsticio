@@ -11,6 +11,6 @@ class ClassifiedsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Classified::class, 50)->create();
+        factory(Solsticio\Classified::class, 50)->create();
     }
 }

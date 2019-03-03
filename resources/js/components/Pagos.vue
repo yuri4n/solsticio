@@ -23,20 +23,8 @@
             <div class="col-md-4">
                 <div class="card text-left">
                     <div class="card-body">
-                        <h4 class="card-title">Revisa tus estractos</h4>
-                        <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum iusto, temporibus explicabo tempora asperiores eveniet tempore expedita eaque odio. Voluptatem, dicta distinctio aliquam reiciendis quae consequuntur repudiandae velit doloremque natus.</p>
-                        <div class="card text-left">
-                            <div class="card-body">
-                                <h4 class="card-title">Enero 2019</h4>
-                                <a class="btn btn-primary" href="#">Descargar</a>
-                            </div>
-                        </div>
-                        <div class="card text-left mt-3">
-                            <div class="card-body">
-                                <h4 class="card-title">Diciembre 2018</h4>
-                                <a class="btn btn-primary" href="#">Descargar</a>
-                            </div>
-                        </div>
+                        <h4 class="card-title">Recuerda revisar tu correo</h4>
+                        <p class="card-text">En tu correo electronico se encuentran tus estractos para confirmar cuanto debes pagar este mes a la administración</p>
                     </div>
                 </div>
             </div>
