@@ -18,7 +18,8 @@ class UsersTableSeeder extends Seeder
         	'email'=> 'bryangarzon22@gmail.com',
         	'password' => bcrypt('123'),
         	'torre' => '1',
-        	'apartamento' => '404',
+            'apartamento' => '404',
+            'status' => 'APPROVED'
         ]);
     }
 }

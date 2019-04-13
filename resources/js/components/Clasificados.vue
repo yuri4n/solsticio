@@ -73,7 +73,7 @@
         </div>
 
         <!-- Logged -->
-        <div v-if="$auth.isAuthenticated()" class="card my-4">
+        <div v-if="this.$auth.isAuthenticated() && user.status == 'APPROVED'" class="card my-4">
           <h5 class="card-header">Sube tus propios clasificados</h5>
           <div class="card-body">
             <p class="card-text">Te recomendamos registrarte o iniciar sesión para subir contenido</p>
@@ -95,15 +95,18 @@
           </div>
         </div>
 
-        <!-- Search Widget -->
+        <!-- Categories Widget -->
         <div class="card my-4">
-          <h5 class="card-header">Búsqueda</h5>
+          <h5 class="card-header">Categorias</h5>
           <div class="card-body">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Buscar...">
-              <span class="input-group-btn">
-                <button class="btn btn-secondary" type="button">ir</button>
-              </span>
+            <div class="row">
+              <div class="col-lg-6">
+                <ul class="list-unstyled mb-0">
+                  <li v-for="category in categories" :key="category.name">
+                    <a href="#">{{category.name}}</a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

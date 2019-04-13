@@ -1,6 +1,9 @@
 <template>
   <div class="container my-5">
-    <div v-if="$auth.isAuthenticated() && user.role == 'ADMIN'" class="card text-left">
+    <div
+      v-if="$auth.isAuthenticated() && user.role == 'ADMIN' && user.status == 'APPROVED'"
+      class="card text-left"
+    >
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Panel de administración</h5>
@@ -11,7 +14,11 @@
             <small class="text-muted">Made by Julian Garzon</small>
           </p>
         </div>
-        <img class="card-img-bottom" src="http://solsticio.local/images/background.jpg" alt="Card image cap">
+        <img
+          class="card-img-bottom"
+          src="http://solsticio.local/images/background.jpg"
+          alt="Card image cap"
+        >
       </div>
     </div>
     <div v-else class="card text-center">
@@ -23,6 +30,8 @@
         <p
           class="card-text"
         >Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima ad eligendi id sunt in expedita. Fugit accusamus ipsum delectus quo repellendus sit omnis ad, voluptate impedit quisquam adipisci repellat. Consequatur.</p>
+        <a href="http://solsticio.local/login" class="btn btn-primary">Iniciar sesión</a>
+        <a href="http://solsticio.local/register" class="btn btn-primary">Registrarse</a>
       </div>
     </div>
   </div>

@@ -1,67 +1,75 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbar1">
-    <a class="navbar-brand" href="http://solsticio.local/inicio/">
-      <img src="http://solsticio.local/images/icon.png" width="30" height="30" alt>
-      Solsticio Parque Residencial |
-      <small class="text-muted">Etapa 5</small>
-    </a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbar1">
+      <a class="navbar-brand" href="http://solsticio.local/inicio/">
+        <img src="http://solsticio.local/images/icon.png" width="30" height="30" alt>
+        Solsticio Parque Residencial |
+        <small class="text-muted">Etapa 5</small>
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="http://solsticio.local/inicio/">Inicio</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="http://solsticio.local/noticias/">Noticias</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="http://solsticio.local/servicios/">Servicios</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="http://solsticio.local/archivos/">Archivos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="http://solsticio.local/clasificados/">Clasificados</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="http://solsticio.local/peticiones/">Peticiones</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="http://solsticio.local/censo/">Censo</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="http://solsticio.local/pagos/">Pagos</a>
-        </li>
-        <li v-if="!$auth.isAuthenticated()" class="nav-item" id="auth">
-          <a class="nav-link" href="http://solsticio.local/login/">Ingresar</a>
-        </li>
-        <li v-if="!$auth.isAuthenticated()" class="nav-item" id="auth">
-          <a class="nav-link" href="http://solsticio.local/register/">Registrar</a>
-        </li>
-        <li v-if="$auth.isAuthenticated() && user.role == 'ADMIN'" class="nav-item" id="auth">
-          <a class="nav-link" href="http://solsticio.local/admin">Admin</a>
-        </li>
-        <li v-if="$auth.isAuthenticated()" class="nav-item" id="auth">
-          <a
-            class="nav-link"
-            href="http://solsticio.local/inicio"
-            @click="$auth.logout()"
-          >Cerrar Sesión</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="http://solsticio.local/inicio/">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://solsticio.local/noticias/">Noticias</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://solsticio.local/servicios/">Servicios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://solsticio.local/archivos/">Archivos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://solsticio.local/clasificados/">Clasificados</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://solsticio.local/peticiones/">Peticiones</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://solsticio.local/censo/">Censo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://solsticio.local/pagos/">Pagos</a>
+          </li>
+          <li v-if="!$auth.isAuthenticated()" class="nav-item" id="auth">
+            <a class="nav-link" href="http://solsticio.local/login/">Ingresar</a>
+          </li>
+          <li v-if="!$auth.isAuthenticated()" class="nav-item" id="auth">
+            <a class="nav-link" href="http://solsticio.local/register/">Registrar</a>
+          </li>
+          <li v-if="$auth.isAuthenticated() && user.role == 'ADMIN'" class="nav-item" id="auth">
+            <a class="nav-link" href="http://solsticio.local/admin">Admin</a>
+          </li>
+          <li v-if="$auth.isAuthenticated()" class="nav-item" id="auth">
+            <a
+              class="nav-link"
+              href="http://solsticio.local/inicio"
+              @click="$auth.logout()"
+            >Cerrar Sesión</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div
+      v-if="this.$auth.isAuthenticated() && user.status == 'PENDING'"
+      class="alert alert-warning mt-3"
+      role="alert"
+    >Tu cuenta se encuentra en proceso de verificación, cuando sea aprovada podrás disfrutar de todas las funcionalidades</div>
+  </div>
 </template>
 
 <script>

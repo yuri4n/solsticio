@@ -8,7 +8,7 @@
         <!-- Author -->
         <p class="lead">
           por
-          <a href="#">{{user.name}}</a>
+          <span class="font-weight-bold">{{user.name}}</span>
         </p>
 
         <hr>
@@ -36,19 +36,6 @@
           >Aquí podrás estar al tanto de cada evento y noticia acerca de tu conjunto!</div>
         </div>
 
-        <!-- Search Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Búsqueda</h5>
-          <div class="card-body">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Buscar...">
-              <span class="input-group-btn">
-                <button class="btn btn-secondary" type="button">ir</button>
-              </span>
-            </div>
-          </div>
-        </div>
-
         <!-- Categories Widget -->
         <div class="card my-4">
           <h5 class="card-header">Categorias</h5>
@@ -56,27 +43,8 @@
             <div class="row">
               <div class="col-lg-6">
                 <ul class="list-unstyled mb-0">
-                  <li>
-                    <a href="#">Web Design</a>
-                  </li>
-                  <li>
-                    <a href="#">HTML</a>
-                  </li>
-                  <li>
-                    <a href="#">Freebies</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-lg-6">
-                <ul class="list-unstyled mb-0">
-                  <li>
-                    <a href="#">JavaScript</a>
-                  </li>
-                  <li>
-                    <a href="#">CSS</a>
-                  </li>
-                  <li>
-                    <a href="#">Tutorials</a>
+                  <li v-for="category in categories" :key="category.name">
+                    <a href="#">{{category.name}}</a>
                   </li>
                 </ul>
               </div>
@@ -92,11 +60,13 @@
 export default {
   mounted() {
     this.readPost();
+    this.getCategories();
   },
   data() {
     return {
       classified: [],
-      user: {}
+      user: {},
+      categories: []
     };
   },
   methods: {
@@ -143,7 +113,8 @@ export default {
         });
     },
     getUser() {
-      let user_url = "http://solsticio.local/api/users/" + this.classified.user_id;
+      let user_url =
+        "http://solsticio.local/api/users/" + this.classified.user_id;
       axios
         .get(user_url)
         .then(response => {
@@ -152,6 +123,15 @@ export default {
         .catch(error => {
           console.log(error);
         });
+    },
+    getCategories() {
+      let url = "http://solsticio.local/api/categories";
+      axios
+        .get(url)
+        .then(response => {
+          this.categories = response.data;
+        })
+        .catch(err => console.log(err));
     }
   }
 };
