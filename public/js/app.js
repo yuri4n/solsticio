@@ -2249,6 +2249,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (this.$auth.isAuthenticated()) this.getUser();
@@ -2510,6 +2545,87 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue2_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue2-editor */ "./node_modules/vue2-editor/dist/vue2-editor.js");
 /* harmony import */ var vue2_editor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue2_editor__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3068,26 +3184,200 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  created: function created() {
+  mounted: function mounted() {
     this.readReservations();
-    if (this.$auth.isAuthenticated()) this.getUser();
+    if (this.$auth.isAuthenticated()) this.getAuthUser();
   },
   data: function data() {
     return {
       reservations: [],
       pagination: {},
-      user: undefined
+      user: null,
+      currentReservation: {},
+      currentUser: {},
+      available: null
     };
   },
   methods: {
-    readReservations: function readReservations(page_url) {
+    getAuthUser: function getAuthUser() {
       var _this = this;
+
+      var url = "http://solsticio.local/api/auth/user";
+      axios.get(url).then(function (response) {
+        _this.user = response.data.data;
+      }).catch();
+    },
+    readReservations: function readReservations(page_url) {
+      var _this2 = this;
 
       var vm = this;
       page_url = page_url || "/api/reservations";
       axios.get(page_url).then(function (response) {
-        _this.reservations = response.data.data;
+        _this2.reservations = response.data.data;
         vm.makePagination(response.data);
       }).catch(function (err) {
         return console.log(err);
@@ -3123,13 +3413,413 @@ __webpack_require__.r(__webpack_exports__);
           }
       }
     },
-    getUser: function getUser() {
-      var _this2 = this;
+    showDetail: function showDetail(reservation) {
+      this.currentReservation = reservation;
+      this.isAvailable();
+      $("#detail-petition").modal("show");
+    },
+    showUserDetail: function showUserDetail(id) {
+      var _this3 = this;
+
+      var url = "/api/users/".concat(id);
+      axios.get(url).then(function (response) {
+        _this3.currentUser = response.data.user;
+      }).catch(function (err) {
+        return console.log(err);
+      });
+      $("#detail-user").modal("show");
+    },
+    isAvailable: function isAvailable() {
+      var result = false;
+
+      for (var reservation in this.reservations) {
+        if (this.currentReservation.fecha_solicitada == reservation.fecha_solicitada && reservation.status == "APPROVED") {
+          result = true;
+        }
+      }
+
+      return result;
+    },
+    alert: function alert(alertType, alertMessage) {
+      this.$notify({
+        group: "foo",
+        type: alertType,
+        title: "BIEN",
+        text: alertMessage
+      });
+    },
+    approveReservation: function approveReservation(reservation) {
+      var _this4 = this;
+
+      var url = "/api/admin/reservations/".concat(reservation.id);
+      axios.put(url, {
+        status: "APPROVED",
+        reservation: reservation
+      }).then(function (response) {
+        _this4.alert("success", "La reservación ha sido aprovada y ahora se le notificará al usuario");
+
+        _this4.readReservations();
+      }).catch(function (error) {
+        _this4.alert("error", "Algo ha salido mal");
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminReservacionesApproved.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/AdminReservacionesApproved.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    this.readReservations();
+    if (this.$auth.isAuthenticated()) this.getAuthUser();
+  },
+  data: function data() {
+    return {
+      reservations: [],
+      pagination: {},
+      user: null,
+      currentReservation: {},
+      currentUser: {},
+      available: null
+    };
+  },
+  methods: {
+    getAuthUser: function getAuthUser() {
+      var _this = this;
 
       var url = "http://solsticio.local/api/auth/user";
       axios.get(url).then(function (response) {
-        _this2.user = response.data.data;
+        _this.user = response.data.data;
       }).catch();
+    },
+    readReservations: function readReservations(page_url) {
+      var _this2 = this;
+
+      var vm = this;
+      page_url = page_url || "/api/reservations/approved";
+      axios.get(page_url).then(function (response) {
+        _this2.reservations = response.data.data;
+        vm.makePagination(response.data);
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    makePagination: function makePagination(meta) {
+      var pagination = {
+        current_page: meta.current_page,
+        last_page: meta.last_page,
+        next_page_url: meta.next_page_url,
+        prev_page_url: meta.prev_page_url
+      };
+      this.pagination = pagination;
+    },
+    typeToName: function typeToName(type) {
+      switch (type) {
+        case "BBQ":
+          {
+            return "BBQ";
+            break;
+          }
+
+        case "SJ":
+          {
+            return "Salon de Juntas";
+            break;
+          }
+
+        case "SS":
+          {
+            return "Salon Social";
+            break;
+          }
+      }
+    },
+    showDetail: function showDetail(reservation) {
+      this.currentReservation = reservation;
+      this.isAvailable();
+      $("#detail-petition").modal("show");
+    },
+    showUserDetail: function showUserDetail(id) {
+      var _this3 = this;
+
+      var url = "/api/users/".concat(id);
+      axios.get(url).then(function (response) {
+        _this3.currentUser = response.data.user;
+      }).catch(function (err) {
+        return console.log(err);
+      });
+      $("#detail-user").modal("show");
+    },
+    isAvailable: function isAvailable() {
+      var result = false;
+
+      for (var reservation in this.reservations) {
+        if (this.currentReservation.fecha_solicitada == reservation.fecha_solicitada && reservation.status == "APPROVED") {
+          result = true;
+        }
+      }
+
+      return result;
+    },
+    alert: function alert(alertType, alertMessage) {
+      this.$notify({
+        group: "foo",
+        type: alertType,
+        title: "BIEN",
+        text: alertMessage
+      });
+    },
+    approveReservation: function approveReservation(reservation) {
+      var _this4 = this;
+
+      var url = "/api/admin/reservations/".concat(reservation.id);
+      axios.put(url, {
+        status: "APPROVED",
+        reservation: reservation
+      }).then(function (response) {
+        _this4.alert("success", "La reservación ha sido aprovada y ahora se le notificará al usuario");
+
+        _this4.readReservations();
+      }).catch(function (error) {
+        _this4.alert("error", "Algo ha salido mal");
+      });
     }
   }
 });
@@ -3623,6 +4313,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3658,6 +4364,100 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -12741,7 +13541,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66286,7 +67086,11 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Aprobar")]
+                          [
+                            _vm._v(
+                              "\n                                Aprobar\n                            "
+                            )
+                          ]
                         )
                       ]),
                       _vm._v(" "),
@@ -66302,7 +67106,11 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Rechazar")]
+                          [
+                            _vm._v(
+                              "\n                                Rechazar\n                            "
+                            )
+                          ]
                         )
                       ])
                     ])
@@ -66346,7 +67154,7 @@ var render = function() {
                     _vm._v(
                       "Página " +
                         _vm._s(_vm.pagination.current_page) +
-                        " de " +
+                        " de\n                    " +
                         _vm._s(_vm.pagination.last_page)
                     )
                   ]
@@ -66809,7 +67617,11 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Editar")]
+                          [
+                            _vm._v(
+                              "\n                                Editar\n                            "
+                            )
+                          ]
                         )
                       ]),
                       _vm._v(" "),
@@ -66825,7 +67637,11 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Eliminar")]
+                          [
+                            _vm._v(
+                              "\n                                Eliminar\n                            "
+                            )
+                          ]
                         )
                       ])
                     ])
@@ -66972,7 +67788,11 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("Guardar como borrador")]
+                            [
+                              _vm._v(
+                                "\n                                Guardar como borrador\n                            "
+                              )
+                            ]
                           ),
                           _vm._v(" "),
                           _c(
@@ -66986,7 +67806,11 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("Crear")]
+                            [
+                              _vm._v(
+                                "\n                                Crear\n                            "
+                              )
+                            ]
                           )
                         ]
                       )
@@ -67013,7 +67837,11 @@ var render = function() {
                   _c("div", { staticClass: "modal-content" }, [
                     _c("div", { staticClass: "modal-header" }, [
                       _c("h5", { staticClass: "modal-title" }, [
-                        _vm._v("Editar Noticia " + _vm._s(_vm.fillPost.id))
+                        _vm._v(
+                          "\n                            Editar Noticia " +
+                            _vm._s(_vm.fillPost.id) +
+                            "\n                        "
+                        )
                       ]),
                       _vm._v(" "),
                       _vm._m(3)
@@ -67147,7 +67975,11 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("Actualizar")]
+                            [
+                              _vm._v(
+                                "\n                                Actualizar\n                            "
+                              )
+                            ]
                           )
                         ]
                       )
@@ -67191,7 +68023,7 @@ var render = function() {
                     _vm._v(
                       "Página " +
                         _vm._s(_vm.pagination.current_page) +
-                        " de " +
+                        " de\n                    " +
                         _vm._s(_vm.pagination.last_page)
                     )
                   ]
@@ -67248,7 +68080,11 @@ var staticRenderFns = [
               "data-target": ".bd-example-modal-lg"
             }
           },
-          [_vm._v("Crear Noticia")]
+          [
+            _vm._v(
+              "\n                        Crear Noticia\n                    "
+            )
+          ]
         )
       ])
     ])
@@ -67517,19 +68353,29 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "card text-left mb-3" }, [
             _c("div", { staticClass: "card-body" }, [
-              _c("h4", { staticClass: "card-title" }, [
-                _vm._v("Listado de peticiones de salones")
-              ]),
+              _vm._m(0),
               _vm._v(" "),
               _c("table", { staticClass: "table table-striped" }, [
-                _vm._m(0),
+                _vm._m(1),
                 _vm._v(" "),
                 _c(
                   "tbody",
                   _vm._l(_vm.reservations, function(reservation) {
                     return _c("tr", { key: reservation.id }, [
                       _c("th", { attrs: { scope: "row" } }, [
-                        _vm._v(_vm._s(reservation.id))
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-link",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.showDetail(reservation)
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(reservation.id))]
+                        )
                       ]),
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(reservation.fecha_solicitada))]),
@@ -67545,12 +68391,38 @@ var render = function() {
                       _c("td", [
                         _c(
                           "a",
-                          { staticClass: "btn btn-link", attrs: { href: "#" } },
+                          {
+                            staticClass: "btn btn-link",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.showUserDetail(reservation.user_id)
+                              }
+                            }
+                          },
                           [_vm._v(_vm._s(reservation.user_id))]
                         )
                       ]),
                       _vm._v(" "),
-                      _vm._m(1, true),
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.approveReservation(reservation)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                Aprobar\n                            "
+                            )
+                          ]
+                        )
+                      ]),
                       _vm._v(" "),
                       _vm._m(2, true)
                     ])
@@ -67560,6 +68432,202 @@ var render = function() {
               ])
             ])
           ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "detail-petition",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-labelledby": "myLargeModalLabel",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c("div", { staticClass: "modal-dialog modal-lg" }, [
+                _c("div", { staticClass: "modal-content" }, [
+                  _c("div", { staticClass: "modal-header" }, [
+                    _c("h5", { staticClass: "modal-title" }, [
+                      _vm._v(
+                        "\n                        Para:\n                        "
+                      ),
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(
+                              _vm.typeToName(this.currentReservation.type)
+                            ) +
+                            "\n                        "
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(3)
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c(
+                      "div",
+                      { staticClass: "row d-flex align-items-center" },
+                      [
+                        _c("div", { staticClass: "col-md-1" }, [
+                          _c("span", { staticClass: "font-weight-bold" }, [
+                            _vm._v(_vm._s(this.currentReservation.user_id))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-11" }, [
+                          _c("h4", [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(
+                                  this.currentReservation.nombre_responsable
+                                ) +
+                                "\n                            "
+                            )
+                          ])
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "p",
+                      {
+                        staticClass: "my-2",
+                        class: {
+                          available: _vm.isAvailable,
+                          notAvailable: !_vm.isAvailable
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(this.currentReservation.fecha_solicitada) +
+                            "\n                    "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(this.currentReservation.additional_info) +
+                          "\n                    "
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "detail-user",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-labelledby": "myLargeModalLabel",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c("div", { staticClass: "modal-dialog modal-lg" }, [
+                _c("div", { staticClass: "modal-content" }, [
+                  _c("div", { staticClass: "modal-header" }, [
+                    _c("h5", { staticClass: "modal-title" }, [
+                      _vm._v(
+                        "\n                        Para:\n                        "
+                      ),
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(
+                              _vm.typeToName(this.currentReservation.type)
+                            ) +
+                            "\n                        "
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(4)
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c(
+                      "div",
+                      { staticClass: "row d-flex align-items-center" },
+                      [
+                        _c("div", { staticClass: "col-md-1" }, [
+                          _c("span", { staticClass: "font-weight-bold" }, [
+                            _vm._v(_vm._s(this.currentUser.id))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-11" }, [
+                          _c("h4", [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(this.currentUser.name) +
+                                "\n                            "
+                            )
+                          ])
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v("Rol: ")
+                      ]),
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(this.currentUser.role) +
+                          "\n                    "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v("Email: ")
+                      ]),
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(this.currentUser.email) +
+                          "\n                    "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v("Torre: ")
+                      ]),
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(this.currentUser.torre) +
+                          "\n                    "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v("Apartamento: ")
+                      ]),
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(this.currentUser.apartamento) +
+                          "\n                    "
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ]
+          ),
           _vm._v(" "),
           _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
             _c("ul", { staticClass: "pagination" }, [
@@ -67594,7 +68662,7 @@ var render = function() {
                     _vm._v(
                       "Página " +
                         _vm._s(_vm.pagination.current_page) +
-                        " de " +
+                        " de\n                    " +
                         _vm._s(_vm.pagination.last_page)
                     )
                   ]
@@ -67635,6 +68703,24 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("h4", { staticClass: "card-title" }, [
+      _vm._v(
+        "\n                Listado de peticiones de salones /\n                "
+      ),
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-link",
+          attrs: { href: "/admin/servicios/aprovadas" }
+        },
+        [_vm._v("Listado de peticiones aprobadas")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
@@ -67658,7 +68744,457 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("td", [
-      _c("button", { staticClass: "btn btn-success" }, [_vm._v("Aprobar")])
+      _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Rechazar")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminReservacionesApproved.vue?vue&type=template&id=f3ad8704&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/AdminReservacionesApproved.vue?vue&type=template&id=f3ad8704& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.$auth.isAuthenticated() && _vm.user.role == "ADMIN"
+    ? _c(
+        "div",
+        { staticClass: "container my-5" },
+        [
+          _c("notifications", {
+            attrs: { group: "foo", position: "bottom left", speed: 500 }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "card text-left mb-3" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("table", { staticClass: "table table-striped" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.reservations, function(reservation) {
+                    return _c("tr", { key: reservation.id }, [
+                      _c("th", { attrs: { scope: "row" } }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-link",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.showDetail(reservation)
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(reservation.id))]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(reservation.fecha_solicitada))]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(_vm._s(_vm.typeToName(reservation.type)))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(_vm._s(reservation.nombre_responsable))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-link",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.showUserDetail(reservation.user_id)
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(reservation.user_id))]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.approveReservation(reservation)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                Aprobar\n                            "
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(2, true)
+                    ])
+                  }),
+                  0
+                )
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "detail-petition",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-labelledby": "myLargeModalLabel",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c("div", { staticClass: "modal-dialog modal-lg" }, [
+                _c("div", { staticClass: "modal-content" }, [
+                  _c("div", { staticClass: "modal-header" }, [
+                    _c("h5", { staticClass: "modal-title" }, [
+                      _vm._v(
+                        "\n                        Para:\n                        "
+                      ),
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(
+                              _vm.typeToName(this.currentReservation.type)
+                            ) +
+                            "\n                        "
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(3)
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c(
+                      "div",
+                      { staticClass: "row d-flex align-items-center" },
+                      [
+                        _c("div", { staticClass: "col-md-1" }, [
+                          _c("span", { staticClass: "font-weight-bold" }, [
+                            _vm._v(_vm._s(this.currentReservation.user_id))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-11" }, [
+                          _c("h4", [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(
+                                  this.currentReservation.nombre_responsable
+                                ) +
+                                "\n                            "
+                            )
+                          ])
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "p",
+                      {
+                        staticClass: "my-2",
+                        class: {
+                          available: _vm.isAvailable,
+                          notAvailable: !_vm.isAvailable
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(this.currentReservation.fecha_solicitada) +
+                            "\n                    "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(this.currentReservation.additional_info) +
+                          "\n                    "
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "detail-user",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-labelledby": "myLargeModalLabel",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c("div", { staticClass: "modal-dialog modal-lg" }, [
+                _c("div", { staticClass: "modal-content" }, [
+                  _c("div", { staticClass: "modal-header" }, [
+                    _c("h5", { staticClass: "modal-title" }, [
+                      _vm._v(
+                        "\n                        Para:\n                        "
+                      ),
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(
+                              _vm.typeToName(this.currentReservation.type)
+                            ) +
+                            "\n                        "
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(4)
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c(
+                      "div",
+                      { staticClass: "row d-flex align-items-center" },
+                      [
+                        _c("div", { staticClass: "col-md-1" }, [
+                          _c("span", { staticClass: "font-weight-bold" }, [
+                            _vm._v(_vm._s(this.currentUser.id))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-11" }, [
+                          _c("h4", [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(this.currentUser.name) +
+                                "\n                            "
+                            )
+                          ])
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v("Rol: ")
+                      ]),
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(this.currentUser.role) +
+                          "\n                    "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v("Email: ")
+                      ]),
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(this.currentUser.email) +
+                          "\n                    "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v("Torre: ")
+                      ]),
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(this.currentUser.torre) +
+                          "\n                    "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v("Apartamento: ")
+                      ]),
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(this.currentUser.apartamento) +
+                          "\n                    "
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+            _c("ul", { staticClass: "pagination" }, [
+              _c(
+                "li",
+                {
+                  staticClass: "page-item",
+                  class: [{ disabled: !_vm.pagination.prev_page_url }]
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          _vm.readReservations(_vm.pagination.prev_page_url)
+                        }
+                      }
+                    },
+                    [_vm._v("Anterior")]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("li", { staticClass: "page-item disabled" }, [
+                _c(
+                  "a",
+                  { staticClass: "page-link text-dark", attrs: { href: "#" } },
+                  [
+                    _vm._v(
+                      "Página " +
+                        _vm._s(_vm.pagination.current_page) +
+                        " de\n                    " +
+                        _vm._s(_vm.pagination.last_page)
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "li",
+                {
+                  staticClass: "page-item",
+                  class: [{ disabled: !_vm.pagination.next_page_url }]
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          _vm.readReservations(_vm.pagination.next_page_url)
+                        }
+                      }
+                    },
+                    [_vm._v("Siguiente")]
+                  )
+                ]
+              )
+            ])
+          ])
+        ],
+        1
+      )
+    : _vm._e()
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", { staticClass: "card-title" }, [
+      _vm._v(
+        "\n                Listado de peticiones aprobadas /\n                "
+      ),
+      _c(
+        "a",
+        { staticClass: "btn btn-link", attrs: { href: "/admin/servicios" } },
+        [_vm._v("Listado de peticiones de salones")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Fecha")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre Responsable")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Usuario")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Aprobar")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Eliminar")])
+      ])
     ])
   },
   function() {
@@ -67668,6 +69204,40 @@ var staticRenderFns = [
     return _c("td", [
       _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Rechazar")])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   }
 ]
 render._withStripped = true
@@ -68279,7 +69849,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container my-5" }, [
+  return _c("div", { staticClass: "container login-cont my-5" }, [
     _c("div", { staticClass: "row justify-content-between" }, [
       _c("div", { staticClass: "col-md-4" }, [
         _c("div", { staticClass: "card card-default" }, [
@@ -68289,7 +69859,9 @@ var render = function() {
             _vm.has_error
               ? _c("div", { staticClass: "alert alert-danger" }, [
                   _c("p", [
-                    _vm._v("Estos datos no coinciden con nuestra informacion")
+                    _vm._v(
+                      "\n                            Estos datos no coinciden con nuestra informacion\n                        "
+                    )
                   ])
                 ])
               : _vm._e(),
@@ -68368,7 +69940,11 @@ var render = function() {
                 _c(
                   "button",
                   { staticClass: "btn btn-default", attrs: { type: "submit" } },
-                  [_vm._v("Iniciar")]
+                  [
+                    _vm._v(
+                      "\n                            Iniciar\n                        "
+                    )
+                  ]
                 )
               ]
             )
@@ -68388,11 +69964,17 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-md-8" }, [
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-body" }, [
-          _c("h4", { staticClass: "card-title" }, [_vm._v("Title")]),
+          _c("h4", { staticClass: "card-title" }, [_vm._v("Recuerda que:")]),
           _vm._v(" "),
           _c("p", { staticClass: "card-text" }, [
             _vm._v(
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus ab fugit quos nisi. Dignissimos repellendus quaerat ex ea! Sequi adipisci doloremque repudiandae enim tenetur neque voluptates explicabo quos iure omnis?"
+              "\n                        No tendrás acceso a todo el contenido que tenemos\n                        para tí hasta que un administrador del sitio apruebe\n                        tu cuenta.\n                    "
+            )
+          ]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "\n                        Revisa tu correo electronico para estar seguro si tu\n                        cuenta no fue rechazada\n                    "
             )
           ])
         ])
@@ -68450,7 +70032,9 @@ var render = function() {
                   "div",
                   {
                     staticClass: "form-group",
-                    class: { "has-error": _vm.has_error && _vm.errors.name }
+                    class: {
+                      "has-error": _vm.has_error && _vm.errors.name
+                    }
                   },
                   [
                     _c("label", { attrs: { for: "name" } }, [
@@ -68491,7 +70075,9 @@ var render = function() {
                   "div",
                   {
                     staticClass: "form-group",
-                    class: { "has-error": _vm.has_error && _vm.errors.email }
+                    class: {
+                      "has-error": _vm.has_error && _vm.errors.email
+                    }
                   },
                   [
                     _c("label", { attrs: { for: "email" } }, [
@@ -68536,7 +70122,9 @@ var render = function() {
                   "div",
                   {
                     staticClass: "form-group",
-                    class: { "has-error": _vm.has_error && _vm.errors.password }
+                    class: {
+                      "has-error": _vm.has_error && _vm.errors.password
+                    }
                   },
                   [
                     _c("label", { attrs: { for: "role" } }, [
@@ -68591,7 +70179,9 @@ var render = function() {
                   "div",
                   {
                     staticClass: "form-group",
-                    class: { "has-error": _vm.has_error && _vm.errors.password }
+                    class: {
+                      "has-error": _vm.has_error && _vm.errors.password
+                    }
                   },
                   [
                     _c("label", { attrs: { for: "torre" } }, [_vm._v("Torre")]),
@@ -68630,7 +70220,9 @@ var render = function() {
                   "div",
                   {
                     staticClass: "form-group",
-                    class: { "has-error": _vm.has_error && _vm.errors.password }
+                    class: {
+                      "has-error": _vm.has_error && _vm.errors.password
+                    }
                   },
                   [
                     _c("label", { attrs: { for: "apartamento" } }, [
@@ -68671,7 +70263,9 @@ var render = function() {
                   "div",
                   {
                     staticClass: "form-group",
-                    class: { "has-error": _vm.has_error && _vm.errors.password }
+                    class: {
+                      "has-error": _vm.has_error && _vm.errors.password
+                    }
                   },
                   [
                     _c("label", { attrs: { for: "password" } }, [
@@ -68712,7 +70306,9 @@ var render = function() {
                   "div",
                   {
                     staticClass: "form-group",
-                    class: { "has-error": _vm.has_error && _vm.errors.password }
+                    class: {
+                      "has-error": _vm.has_error && _vm.errors.password
+                    }
                   },
                   [
                     _c("label", { attrs: { for: "password_confirmation" } }, [
@@ -68746,7 +70342,11 @@ var render = function() {
                 _c(
                   "button",
                   { staticClass: "btn btn-default", attrs: { type: "submit" } },
-                  [_vm._v("Registrarse")]
+                  [
+                    _vm._v(
+                      "\n                            Registrarse\n                        "
+                    )
+                  ]
                 )
               ]
             )
@@ -68765,11 +70365,15 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-xl-6" }, [
       _c("div", { staticClass: "jumbotron" }, [
-        _c("h1", { staticClass: "display-4" }, [_vm._v("Hello, world!")]),
+        _c("h1", { staticClass: "display-4" }, [
+          _vm._v(
+            "\n                    Recuerda llenar tus datos correctamente\n                "
+          )
+        ]),
         _vm._v(" "),
         _c("p", { staticClass: "lead" }, [
           _vm._v(
-            "This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information."
+            "\n                    Un administrador del sitio dará de alta tu cuenta, serás\n                    notificado a tu correo\n                "
           )
         ]),
         _vm._v(" "),
@@ -68777,7 +70381,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "It uses utility classes for typography and spacing to space content out within the larger container."
+            "\n                    Hasta entonces no podrás llenar formularios ni realizar\n                    peticiones, así que procura ser honesto con tus datos\n                "
           )
         ])
       ])
@@ -88376,6 +89980,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('adminnavbar', __webpack_re
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('adminindex', __webpack_require__(/*! ./components/Admin/AdminIndex.vue */ "./resources/js/components/Admin/AdminIndex.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('adminnoticias', __webpack_require__(/*! ./components/Admin/AdminNoticias.vue */ "./resources/js/components/Admin/AdminNoticias.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('adminreservaciones', __webpack_require__(/*! ./components/Admin/AdminReservaciones.vue */ "./resources/js/components/Admin/AdminReservaciones.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('adminreservacionesapproved', __webpack_require__(/*! ./components/Admin/AdminReservacionesApproved.vue */ "./resources/js/components/Admin/AdminReservacionesApproved.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('adminarchivos', __webpack_require__(/*! ./components/Admin/AdminArchivos.vue */ "./resources/js/components/Admin/AdminArchivos.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('adminclasificados', __webpack_require__(/*! ./components/Admin/AdminClasificados.vue */ "./resources/js/components/Admin/AdminClasificados.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('adminpeticiones', __webpack_require__(/*! ./components/Admin/AdminPeticiones.vue */ "./resources/js/components/Admin/AdminPeticiones.vue").default);
@@ -89067,6 +90672,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminReservaciones_vue_vue_type_template_id_6b1fb427___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminReservaciones_vue_vue_type_template_id_6b1fb427___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Admin/AdminReservacionesApproved.vue":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/Admin/AdminReservacionesApproved.vue ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AdminReservacionesApproved_vue_vue_type_template_id_f3ad8704___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AdminReservacionesApproved.vue?vue&type=template&id=f3ad8704& */ "./resources/js/components/Admin/AdminReservacionesApproved.vue?vue&type=template&id=f3ad8704&");
+/* harmony import */ var _AdminReservacionesApproved_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AdminReservacionesApproved.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/AdminReservacionesApproved.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AdminReservacionesApproved_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AdminReservacionesApproved_vue_vue_type_template_id_f3ad8704___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AdminReservacionesApproved_vue_vue_type_template_id_f3ad8704___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Admin/AdminReservacionesApproved.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Admin/AdminReservacionesApproved.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/Admin/AdminReservacionesApproved.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminReservacionesApproved_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./AdminReservacionesApproved.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminReservacionesApproved.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminReservacionesApproved_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Admin/AdminReservacionesApproved.vue?vue&type=template&id=f3ad8704&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/Admin/AdminReservacionesApproved.vue?vue&type=template&id=f3ad8704& ***!
+  \*****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminReservacionesApproved_vue_vue_type_template_id_f3ad8704___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./AdminReservacionesApproved.vue?vue&type=template&id=f3ad8704& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminReservacionesApproved.vue?vue&type=template&id=f3ad8704&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminReservacionesApproved_vue_vue_type_template_id_f3ad8704___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminReservacionesApproved_vue_vue_type_template_id_f3ad8704___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

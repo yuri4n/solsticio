@@ -8,9 +8,9 @@
         <div class="card text-left mb-3">
             <div class="card-body">
                 <h4 class="card-title">
-                    Listado de peticiones de salones /
-                    <a href="/admin/servicios/aprovadas" class="btn btn-link"
-                        >Listado de peticiones aprobadas</a
+                    Listado de peticiones aprobadas /
+                    <a href="/admin/servicios" class="btn btn-link"
+                        >Listado de peticiones de salones</a
                     >
                 </h4>
                 <table class="table table-striped">
@@ -254,7 +254,7 @@ export default {
         },
         readReservations(page_url) {
             let vm = this;
-            page_url = page_url || "/api/reservations";
+            page_url = page_url || "/api/reservations/approved";
             axios
                 .get(page_url)
                 .then(response => {

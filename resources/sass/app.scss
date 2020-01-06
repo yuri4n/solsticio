@@ -1,16 +1,15 @@
-
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Frank+Ruhl+Libre');
+@import url("https://fonts.googleapis.com/css?family=Frank+Ruhl+Libre");
 
 // Variables
-@import 'variables';
-@import '~pretty-checkbox/src/pretty-checkbox.scss';
+@import "variables";
+@import "~pretty-checkbox/src/pretty-checkbox.scss";
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
 
 body {
-    font-family: 'Frank Ruhl Libre', serif !important;
+    font-family: "Frank Ruhl Libre", serif !important;
 }
 
 .card {
@@ -19,4 +18,16 @@ body {
     .card-img-top {
         border-radius: 0px !important;
     }
+}
+
+.available {
+    color: $green;
+}
+
+.notAvailable {
+    color: $red;
+}
+
+.login-cont {
+    min-height: 69vh;
 }

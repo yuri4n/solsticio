@@ -2,8 +2,11 @@
 
 namespace Solsticio\Http\Controllers;
 
-use Solsticio\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Solsticio\Reservation;
+use Solsticio\User;
+use Solsticio\Mail\ReservationMail;
 
 class ReservationController extends Controller
 {
@@ -14,7 +17,18 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        $reservations = Reservation::orderBy('id', 'DESC')->paginate(25);
+        $reservations = Reservation::orderBy('id', 'DESC')->where('status', 'PENDING')->paginate(25);
+        return $reservations;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function approved()
+    {
+        $reservations = Reservation::orderBy('id', 'DESC')->where('status', 'APPROVED')->paginate(25);
         return $reservations;
     }
 
@@ -43,7 +57,20 @@ class ReservationController extends Controller
      * @param  \Solsticio\Reservation  $reservation
      * @return \Illuminate\Http\Response
      */
-    public function show(Reservation $reservation)
+    public function show($reservation)
+    {
+        $response = Reservation::where('id', $reservation)->firstOrFail();
+        return $response;
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Solsticio\Reservation  $reservation
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
     {
         //
     }
@@ -55,9 +82,25 @@ class ReservationController extends Controller
      * @param  \Solsticio\Reservation  $reservation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Reservation $reservation)
+    public function updateAndNotify(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'status' => 'required',
+            'reservation' => 'required',
+        ]);
+
+        $reservation = $request->reservation;
+        $user = User::find($reservation['user_id'])->first();
+
+        $data = array(
+            'user' => $user,
+            'reservation' => $reservation,
+            'status' => $request->status,
+        );
+
+        Reservation::find($id)->update(['status' => $request->status]);
+
+        Mail::to($user->email)->send(new ReservationMail($data));
     }
 
     /**

@@ -10490,3 +10490,15 @@ body {
   border-radius: 0px !important;
 }
 
+.available {
+  color: #38c172;
+}
+
+.notAvailable {
+  color: #e3342f;
+}
+
+.login-cont {
+  min-height: 69vh;
+}
+

@@ -29,6 +29,7 @@ Route::view('/pagos', 'web.pagos');
 Route::view('/admin', 'admin.index');
 Route::view('/admin/noticias', 'admin.noticias');
 Route::view('/admin/servicios', 'admin.servicios');
+Route::view('/admin/servicios/aprovadas', 'admin.servicios_approved');
 Route::view('/admin/archivos', 'admin.archivos');
 Route::view('/admin/clasificados', 'admin.clasificados');
 Route::view('/admin/peticiones', 'admin.peticiones');
