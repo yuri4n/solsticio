@@ -30,8 +30,9 @@ Route::get('/admin/classifieds', 'ClassifiedController@admin');
 Route::put('/admin/classifieds/{classified}', 'ClassifiedController@updateStatus');
 
 Route::resource('reservations', 'ReservationController', array('except' => array('create', 'edit')));
-Route::get('/reservations/approved', 'ReservationController@approved');
-Route::put('/admin/reservations/{reservation}', 'ReservationController@updateAndNotify');
+Route::get('/approved/reservations', 'ReservationController@approved');
+Route::put('/approved/reservations/{reservation}', 'ReservationController@updateAndNotify');
+Route::put('/reject/reservations/{reservation}', 'ReservationController@rejectNotify');
 
 Route::resource('petitions', 'PetitionController', array('except' => array('create', 'edit')));
 

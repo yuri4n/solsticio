@@ -22,7 +22,7 @@
                             <th scope="col">Nombre Responsable</th>
                             <th scope="col">Usuario</th>
                             <th scope="col">Aprobar</th>
-                            <th scope="col">Eliminar</th>
+                            <th scope="col">Rechazar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,7 +60,14 @@
                                 </button>
                             </td>
                             <td>
-                                <button class="btn btn-danger">Rechazar</button>
+                                <button
+                                    @click.prevent="
+                                        rejectReservation(reservation)
+                                    "
+                                    class="btn btn-danger"
+                                >
+                                    Rechazar
+                                </button>
                             </td>
                         </tr>
                     </tbody>
@@ -114,8 +121,8 @@
                         <p
                             class="my-2"
                             :class="{
-                                available: isAvailable,
-                                notAvailable: !isAvailable
+                                available: this.available,
+                                notAvailable: !this.available
                             }"
                         >
                             {{ this.currentReservation.fecha_solicitada }}
@@ -230,16 +237,18 @@
 export default {
     mounted() {
         this.readReservations();
+        this.readApprovedReservations();
         if (this.$auth.isAuthenticated()) this.getAuthUser();
     },
     data() {
         return {
             reservations: [],
+            approvedReservations: [],
             pagination: {},
             user: null,
             currentReservation: {},
             currentUser: {},
-            available: null
+            available: true
         };
     },
     methods: {
@@ -260,6 +269,15 @@ export default {
                 .then(response => {
                     this.reservations = response.data.data;
                     vm.makePagination(response.data);
+                })
+                .catch(err => console.log(err));
+        },
+        readApprovedReservations() {
+            let url = "/api/approved/reservations";
+            axios
+                .get(url)
+                .then(response => {
+                    this.approvedReservations = response.data.data;
                 })
                 .catch(err => console.log(err));
         },
@@ -304,17 +322,16 @@ export default {
             $("#detail-user").modal("show");
         },
         isAvailable() {
-            let result = false;
-            for (let reservation in this.reservations) {
+            this.available = true;
+            for (let reservation of this.approvedReservations) {
                 if (
                     this.currentReservation.fecha_solicitada ==
-                        reservation.fecha_solicitada &&
-                    reservation.status == "APPROVED"
+                    reservation.fecha_solicitada
                 ) {
-                    result = true;
+                    this.available = false;
                 }
             }
-            return result;
+            this.readApprovedReservations();
         },
         alert(alertType, alertMessage) {
             this.$notify({
@@ -325,7 +342,7 @@ export default {
             });
         },
         approveReservation(reservation) {
-            let url = `/api/admin/reservations/${reservation.id}`;
+            let url = `/api/approved/reservations/${reservation.id}`;
             axios
                 .put(url, {
                     status: "APPROVED",
@@ -338,6 +355,33 @@ export default {
                     );
                     this.readReservations();
                 })
+                .catch(error => {
+                    this.alert("error", "Algo ha salido mal");
+                });
+        },
+        rejectReservation(reservation) {
+            let url = `/api/reject/reservations/${reservation.id}`;
+            axios
+                .put(url, {
+                    reservation
+                })
+                .then(response => {
+                    this.deleteReservation(reservation.id);
+                    this.alert(
+                        "warn",
+                        "La reservación ha sido rechazada y ahora se le notificará al usuario"
+                    );
+                    this.readReservations();
+                })
+                .catch(error => {
+                    this.alert("error", "Algo ha salido mal");
+                });
+        },
+        deleteReservation(id) {
+            let url = `/api/reservations/${id}`;
+            axios
+                .delete(url)
+                .then()
                 .catch(error => {
                     this.alert("error", "Algo ha salido mal");
                 });

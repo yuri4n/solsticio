@@ -104,13 +104,42 @@ class ReservationController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Update the specified resource in storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \Solsticio\Reservation  $reservation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Reservation $reservation)
+    public function rejectNotify(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'reservation' => 'required'
+        ]);
+
+        $reservation = $request->reservation;
+        $user = User::find($reservation['user_id'])->first();
+
+        $data = array(
+            'user' => $user,
+            'reservation' => $reservation,
+            'status' => 'REJECTED',
+        );
+
+        Mail::to($user->email)->send(new ReservationMail($data));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Solsticio\Reservation  $reservation
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $reservation = Reservation::find($id);
+        if ($reservation) {
+            $reservation->delete();
+        }
     }
 }

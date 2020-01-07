@@ -3347,19 +3347,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.readReservations();
+    this.readApprovedReservations();
     if (this.$auth.isAuthenticated()) this.getAuthUser();
   },
   data: function data() {
     return {
       reservations: [],
+      approvedReservations: [],
       pagination: {},
       user: null,
       currentReservation: {},
       currentUser: {},
-      available: null
+      available: true
     };
   },
   methods: {
@@ -3379,6 +3388,16 @@ __webpack_require__.r(__webpack_exports__);
       axios.get(page_url).then(function (response) {
         _this2.reservations = response.data.data;
         vm.makePagination(response.data);
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    readApprovedReservations: function readApprovedReservations() {
+      var _this3 = this;
+
+      var url = "/api/approved/reservations";
+      axios.get(url).then(function (response) {
+        _this3.approvedReservations = response.data.data;
       }).catch(function (err) {
         return console.log(err);
       });
@@ -3419,26 +3438,46 @@ __webpack_require__.r(__webpack_exports__);
       $("#detail-petition").modal("show");
     },
     showUserDetail: function showUserDetail(id) {
-      var _this3 = this;
+      var _this4 = this;
 
       var url = "/api/users/".concat(id);
       axios.get(url).then(function (response) {
-        _this3.currentUser = response.data.user;
+        _this4.currentUser = response.data.user;
       }).catch(function (err) {
         return console.log(err);
       });
       $("#detail-user").modal("show");
     },
     isAvailable: function isAvailable() {
-      var result = false;
+      this.available = true;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
-      for (var reservation in this.reservations) {
-        if (this.currentReservation.fecha_solicitada == reservation.fecha_solicitada && reservation.status == "APPROVED") {
-          result = true;
+      try {
+        for (var _iterator = this.approvedReservations[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var reservation = _step.value;
+
+          if (this.currentReservation.fecha_solicitada == reservation.fecha_solicitada) {
+            this.available = false;
+          }
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
         }
       }
 
-      return result;
+      this.readApprovedReservations();
     },
     alert: function alert(alertType, alertMessage) {
       this.$notify({
@@ -3449,18 +3488,42 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     approveReservation: function approveReservation(reservation) {
-      var _this4 = this;
+      var _this5 = this;
 
-      var url = "/api/admin/reservations/".concat(reservation.id);
+      var url = "/api/approved/reservations/".concat(reservation.id);
       axios.put(url, {
         status: "APPROVED",
         reservation: reservation
       }).then(function (response) {
-        _this4.alert("success", "La reservación ha sido aprovada y ahora se le notificará al usuario");
+        _this5.alert("success", "La reservación ha sido aprovada y ahora se le notificará al usuario");
 
-        _this4.readReservations();
+        _this5.readReservations();
       }).catch(function (error) {
-        _this4.alert("error", "Algo ha salido mal");
+        _this5.alert("error", "Algo ha salido mal");
+      });
+    },
+    rejectReservation: function rejectReservation(reservation) {
+      var _this6 = this;
+
+      var url = "/api/reject/reservations/".concat(reservation.id);
+      axios.put(url, {
+        reservation: reservation
+      }).then(function (response) {
+        _this6.deleteReservation(reservation.id);
+
+        _this6.alert("warn", "La reservación ha sido rechazada y ahora se le notificará al usuario");
+
+        _this6.readReservations();
+      }).catch(function (error) {
+        _this6.alert("error", "Algo ha salido mal");
+      });
+    },
+    deleteReservation: function deleteReservation(id) {
+      var _this7 = this;
+
+      var url = "/api/reservations/".concat(id);
+      axios.delete(url).then().catch(function (error) {
+        _this7.alert("error", "Algo ha salido mal");
       });
     }
   }
@@ -3701,10 +3764,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.readReservations();
@@ -3733,7 +3792,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var vm = this;
-      page_url = page_url || "/api/reservations/approved";
+      page_url = page_url || "/api/approved/reservations";
       axios.get(page_url).then(function (response) {
         _this2.reservations = response.data.data;
         vm.makePagination(response.data);
@@ -3806,15 +3865,12 @@ __webpack_require__.r(__webpack_exports__);
         text: alertMessage
       });
     },
-    approveReservation: function approveReservation(reservation) {
+    deleteReservation: function deleteReservation(id) {
       var _this4 = this;
 
-      var url = "/api/admin/reservations/".concat(reservation.id);
-      axios.put(url, {
-        status: "APPROVED",
-        reservation: reservation
-      }).then(function (response) {
-        _this4.alert("success", "La reservación ha sido aprovada y ahora se le notificará al usuario");
+      var url = "/api/reservations/".concat(id);
+      axios.delete(url).then(function (res) {
+        _this4.alert("warn", "La reservación ha sido eliminada");
 
         _this4.readReservations();
       }).catch(function (error) {
@@ -68424,7 +68480,25 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _vm._m(2, true)
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.rejectReservation(reservation)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                Rechazar\n                            "
+                            )
+                          ]
+                        )
+                      ])
                     ])
                   }),
                   0
@@ -68464,7 +68538,7 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _vm._m(3)
+                    _vm._m(2)
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
@@ -68497,8 +68571,8 @@ var render = function() {
                       {
                         staticClass: "my-2",
                         class: {
-                          available: _vm.isAvailable,
-                          notAvailable: !_vm.isAvailable
+                          available: this.available,
+                          notAvailable: !this.available
                         }
                       },
                       [
@@ -68554,7 +68628,7 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _vm._m(4)
+                    _vm._m(3)
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
@@ -68735,16 +68809,8 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Aprobar")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Eliminar")])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Rechazar")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Rechazar")])
     ])
   },
   function() {
@@ -68869,23 +68935,21 @@ var render = function() {
                         _c(
                           "button",
                           {
-                            staticClass: "btn btn-success",
+                            staticClass: "btn btn-danger",
                             on: {
                               click: function($event) {
                                 $event.preventDefault()
-                                _vm.approveReservation(reservation)
+                                _vm.deleteReservation(reservation.id)
                               }
                             }
                           },
                           [
                             _vm._v(
-                              "\n                                Aprobar\n                            "
+                              "\n                                Eliminar\n                            "
                             )
                           ]
                         )
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(2, true)
+                      ])
                     ])
                   }),
                   0
@@ -68925,7 +68989,7 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _vm._m(3)
+                    _vm._m(2)
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
@@ -69015,7 +69079,7 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _vm._m(4)
+                    _vm._m(3)
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
@@ -69191,18 +69255,8 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Usuario")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Aprobar")]),
-        _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Eliminar")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Rechazar")])
     ])
   },
   function() {

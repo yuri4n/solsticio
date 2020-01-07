@@ -10492,10 +10492,12 @@ body {
 
 .available {
   color: #38c172;
+  font-weight: bold;
 }
 
 .notAvailable {
   color: #e3342f;
+  font-weight: bold;
 }
 
 .login-cont {

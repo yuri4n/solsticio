@@ -21,7 +21,6 @@
                             <th scope="col">Tipo</th>
                             <th scope="col">Nombre Responsable</th>
                             <th scope="col">Usuario</th>
-                            <th scope="col">Aprobar</th>
                             <th scope="col">Eliminar</th>
                         </tr>
                     </thead>
@@ -52,15 +51,12 @@
                             <td>
                                 <button
                                     @click.prevent="
-                                        approveReservation(reservation)
+                                        deleteReservation(reservation.id)
                                     "
-                                    class="btn btn-success"
+                                    class="btn btn-danger"
                                 >
-                                    Aprobar
+                                    Eliminar
                                 </button>
-                            </td>
-                            <td>
-                                <button class="btn btn-danger">Rechazar</button>
                             </td>
                         </tr>
                     </tbody>
@@ -254,7 +250,7 @@ export default {
         },
         readReservations(page_url) {
             let vm = this;
-            page_url = page_url || "/api/reservations/approved";
+            page_url = page_url || "/api/approved/reservations";
             axios
                 .get(page_url)
                 .then(response => {
@@ -324,18 +320,12 @@ export default {
                 text: alertMessage
             });
         },
-        approveReservation(reservation) {
-            let url = `/api/admin/reservations/${reservation.id}`;
+        deleteReservation(id) {
+            let url = `/api/reservations/${id}`;
             axios
-                .put(url, {
-                    status: "APPROVED",
-                    reservation
-                })
-                .then(response => {
-                    this.alert(
-                        "success",
-                        "La reservación ha sido aprovada y ahora se le notificará al usuario"
-                    );
+                .delete(url)
+                .then(res => {
+                    this.alert("warn", "La reservación ha sido eliminada");
                     this.readReservations();
                 })
                 .catch(error => {

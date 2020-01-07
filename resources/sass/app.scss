@@ -22,10 +22,12 @@ body {
 
 .available {
     color: $green;
+    font-weight: bold;
 }
 
 .notAvailable {
     color: $red;
+    font-weight: bold;
 }
 
 .login-cont {
