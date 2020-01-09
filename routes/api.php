@@ -28,6 +28,7 @@ Route::resource('files', 'FileController', array('except' => array('create', 'ed
 Route::resource('classifieds', 'ClassifiedController', array('except' => array('create', 'edit')));
 Route::get('/admin/classifieds', 'ClassifiedController@admin');
 Route::put('/admin/classifieds/{classified}', 'ClassifiedController@updateStatus');
+Route::put('/reject/classifieds/{classified}', 'ClassifiedController@rejectClassified');
 
 Route::resource('reservations', 'ReservationController', array('except' => array('create', 'edit')));
 Route::get('/approved/reservations', 'ReservationController@approved');

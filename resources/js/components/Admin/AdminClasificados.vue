@@ -36,7 +36,7 @@
                             <td>
                                 <button
                                     class="btn btn-success"
-                                    v-on:click="updateClassified(classified.id)"
+                                    v-on:click="updateClassified(classified)"
                                 >
                                     Aprobar
                                 </button>
@@ -45,7 +45,7 @@
                                 <button
                                     class="btn btn-danger"
                                     v-on:click.prevent="
-                                        deleteClassified(classified)
+                                        rejectClassified(classified)
                                     "
                                 >
                                     Rechazar
@@ -119,7 +119,7 @@ export default {
             });
         },
         getUser() {
-            var url = "http://solsticio.local/api/auth/user";
+            let url = "http://solsticio.local/api/auth/user";
             axios
                 .get(url)
                 .then(response => {
@@ -147,30 +147,42 @@ export default {
             };
             this.pagination = pagination;
         },
-        deleteClassified(classified) {
-            var url = "http://solsticio.local/api/classifieds/" + classified.id;
-            var confirmacion = confirm(
-                `¿Seguro que deseas borrar el clasificado ${classified.id}?`
+        rejectClassified(classified) {
+            let url = `/api/reject/classifieds/${classified.id}`;
+            let confirmation = confirm(
+                `¿Seguro que desea rechazar el clasificado ${classified.id}?`
             );
-            if (confirmacion) {
-                axios.delete(url).then(response => {
-                    this.alert(
-                        "warn",
-                        `El clasificado ${classified.id} ha sido rechazado`
-                    );
-                    this.readClassifieds();
-                });
-            }
+
+            if (confirmation)
+                axios
+                    .put(url, {
+                        classified
+                    })
+                    .then(response => {
+                        this.deleteClassified(classified.id);
+                        this.alert(
+                            "warn",
+                            "El clasificado ha sido rechazado y el usuario notificado"
+                        );
+                        this.readClassifieds();
+                    })
+                    .catch(error => {
+                        this.alert("error", "Algo ha salido mal");
+                    });
         },
-        updateClassified(id) {
-            var url = "http://solsticio.local/api/admin/classifieds/" + id;
+        deleteClassified(id) {
+            let url = `/api/classifieds/${id}`;
+            axios.delete(url).catch();
+        },
+        updateClassified(classified) {
+            let url = `http://solsticio.local/api/admin/classifieds/${classified.id}`;
             axios
                 .put(url, {
-                    status: "PUBLISHED"
+                    status: "PUBLISHED",
+                    classified
                 })
                 .then(response => {
                     this.readClassifieds();
-                    $("#edit").modal("hide");
                     this.alert(
                         "success",
                         "El clasificado ha sido aprovado y ahora será visible"

@@ -3,7 +3,10 @@
 namespace Solsticio\Http\Controllers;
 
 use Solsticio\Classified;
+use Solsticio\User;
+use Solsticio\Mail\ClassifiedMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ClassifiedController extends Controller
 {
@@ -108,9 +111,46 @@ class ClassifiedController extends Controller
     {
         $this->validate($request, [
             'status' => 'required',
+            'classified' => 'required'
         ]);
 
-        Classified::find($id)->update($request->all());
+        $classified = $request->classified;
+        $user = User::find($classified['user_id'])->first();
+
+        $data = array(
+            'user' => $user,
+            'classified' => $classified,
+            'status' => $request->status,
+        );
+
+        Classified::find($id)->update(['status' => $request->status]);
+
+        Mail::to($user->email)->send(new ClassifiedMail($data));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Solsticio\Classified  $classified
+     * @return \Illuminate\Http\Response
+     */
+    public function rejectClassified(Request $request, $id)
+    {
+        $this->validate($request, [
+            'classified' => 'required'
+        ]);
+
+        $classified = $request->classified;
+        $user = User::find($classified['user_id'])->first();
+
+        $data = array(
+            'user' => $user,
+            'classified' => $classified,
+            'status' => 'REJECTED',
+        );
+
+        Mail::to($user->email)->send(new ClassifiedMail($data));
     }
 
     /**

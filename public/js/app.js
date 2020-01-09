@@ -2588,30 +2588,36 @@ __webpack_require__.r(__webpack_exports__);
       };
       this.pagination = pagination;
     },
-    deleteClassified: function deleteClassified(classified) {
+    rejectClassified: function rejectClassified(classified) {
       var _this3 = this;
 
-      var url = "http://solsticio.local/api/classifieds/" + classified.id;
-      var confirmacion = confirm("\xBFSeguro que deseas borrar el clasificado ".concat(classified.id, "?"));
+      var url = "/api/reject/classifieds/".concat(classified.id);
+      var confirmation = confirm("\xBFSeguro que desea rechazar el clasificado ".concat(classified.id, "?"));
+      if (confirmation) axios.put(url, {
+        classified: classified
+      }).then(function (response) {
+        _this3.deleteClassified(classified.id);
 
-      if (confirmacion) {
-        axios.delete(url).then(function (response) {
-          _this3.alert("warn", "El clasificado ".concat(classified.id, " ha sido rechazado"));
+        _this3.alert("warn", "El clasificado ha sido rechazado y el usuario notificado");
 
-          _this3.readClassifieds();
-        });
-      }
+        _this3.readClassifieds();
+      }).catch(function (error) {
+        _this3.alert("error", "Algo ha salido mal");
+      });
     },
-    updateClassified: function updateClassified(id) {
+    deleteClassified: function deleteClassified(id) {
+      var url = "/api/classifieds/".concat(id);
+      axios.delete(url).catch();
+    },
+    updateClassified: function updateClassified(classified) {
       var _this4 = this;
 
-      var url = "http://solsticio.local/api/admin/classifieds/" + id;
+      var url = "http://solsticio.local/api/admin/classifieds/".concat(classified.id);
       axios.put(url, {
-        status: "PUBLISHED"
+        status: "PUBLISHED",
+        classified: classified
       }).then(function (response) {
         _this4.readClassifieds();
-
-        $("#edit").modal("hide");
 
         _this4.alert("success", "El clasificado ha sido aprovado y ahora será visible");
       }).catch(function (error) {
@@ -14261,7 +14267,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -68107,7 +68113,7 @@ var render = function() {
                             staticClass: "btn btn-success",
                             on: {
                               click: function($event) {
-                                _vm.updateClassified(classified.id)
+                                _vm.updateClassified(classified)
                               }
                             }
                           },
@@ -68127,7 +68133,7 @@ var render = function() {
                             on: {
                               click: function($event) {
                                 $event.preventDefault()
-                                _vm.deleteClassified(classified)
+                                _vm.rejectClassified(classified)
                               }
                             }
                           },
