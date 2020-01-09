@@ -39,6 +39,9 @@ Route::resource('petitions', 'PetitionController', array('except' => array('crea
 Route::resource('parkings', 'ParkingController', array('except' => array('create', 'edit')));
 
 Route::resource('censuses', 'CensusController', array('except' => array('create', 'edit')));
+Route::get('exported/censuses/', 'CensusController@exported');
+Route::get('export/censuses/', 'CensusController@export');
+Route::get('export_pending/censuses/', 'CensusController@exportPending');
 
 Route::resource('categories', 'CategoryController', array('except' => array('create', 'edit')));
 

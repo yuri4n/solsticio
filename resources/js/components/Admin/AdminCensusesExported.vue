@@ -9,15 +9,13 @@
                 <div class="row justify-content-between mb-4">
                     <div class="col-sm-8">
                         <h4 class="card-title">
-                            Listado de censos sin exportar /
-                            <a
-                                href="/admin/censo/exportados"
-                                class="btn btn-link"
-                                >Listado de censos exportados</a
+                            Listado de censos exportados /
+                            <a href="/admin/censo" class="btn btn-link"
+                                >Listado de censos sin exportar</a
                             >
                         </h4>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-2">
                         <a
                             type="button"
                             href="/api/export/censuses/"
@@ -25,16 +23,6 @@
                         >
                             <button class="btn btn-primary">
                                 Exportar Todos
-                            </button>
-                        </a>
-                        <a
-                            @click="exportPending()"
-                            type="button"
-                            href="/api/export_pending/censuses/"
-                            download="censos.xlsx"
-                        >
-                            <button class="btn btn-primary">
-                                Exportar Pendientes
                             </button>
                         </a>
                     </div>
@@ -127,7 +115,7 @@ export default {
     methods: {
         readCensuses(page_url) {
             let vm = this;
-            page_url = page_url || "/api/censuses";
+            page_url = page_url || "/api/exported/censuses";
             axios
                 .get(page_url)
                 .then(response => {
@@ -176,23 +164,6 @@ export default {
                     this.readCensuses();
                 });
             }
-        },
-        exportAll() {},
-        exportPending() {
-            this.updatePending();
-            this.alert("success", "Los censos han sido exportados");
-            this.readCensuses();
-        },
-        updatePending() {
-            let url = "/api/censuses/";
-            this.censuses.forEach(census => {
-                axios
-                    .put(url + census.id, {
-                        status: "SAVED"
-                    })
-                    .then()
-                    .catch();
-            });
         }
     }
 };

@@ -3,7 +3,10 @@
 namespace Solsticio\Http\Controllers;
 
 use Solsticio\Census;
+use Solsticio\Exports\CensusExport;
+use Solsticio\Exports\CensusPendingExport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CensusController extends Controller
 {
@@ -15,6 +18,17 @@ class CensusController extends Controller
     public function index()
     {
         $censuses = Census::orderBy('id', 'DESC')->where('status', 'PENDING')->paginate(25);
+        return $censuses;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function exported()
+    {
+        $censuses = Census::orderBy('id', 'DESC')->where('status', 'SAVED')->paginate(25);
         return $censuses;
     }
 
@@ -154,9 +168,23 @@ class CensusController extends Controller
      * @param  \Solsticio\Census  $census
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Census $census)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'status' => 'required',
+        ]);
+
+        Census::find($id)->update($request->all());
+    }
+
+    public function export()
+    {
+        return Excel::download(new CensusExport, 'censos.xlsx');
+    }
+
+    public function exportPending()
+    {
+        return Excel::download(new CensusPendingExport('PENDING'), 'censos.xlsx');
     }
 
     /**

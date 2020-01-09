@@ -14,8 +14,8 @@
     <body>
         <div id="app">
             <adminnavbar></adminnavbar>
-            <admincenso></admincenso>
-            <footer-component></footer-component>    
+            <admincensuses_exported></admincensuses_exported>
+            <footer-component></footer-component>
         </div>
 
         <script src="{{asset('js/app.js')}}"></script>

@@ -33,7 +33,8 @@ Route::view('/admin/servicios/aprovadas', 'admin.servicios_approved');
 Route::view('/admin/archivos', 'admin.archivos');
 Route::view('/admin/clasificados', 'admin.clasificados');
 Route::view('/admin/peticiones', 'admin.peticiones');
-Route::view('/admin/censo', 'admin.censo');
+Route::view('/admin/censo', 'admin.censuses');
+Route::view('/admin/censo/exportados', 'admin.censuses_exported');
 Route::view('/admin/usuarios', 'admin.usuarios');
 Route::view('/admin/usuarios/completos', 'admin.usuarios_completos');
 
