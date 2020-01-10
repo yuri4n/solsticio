@@ -6,13 +6,18 @@
         <notifications group="foo" position="bottom left" :speed="500" />
         <div class="card text-left mb-3">
             <div class="card-body">
-                <h4 class="card-title">Clasificados pendientes por aprobar</h4>
+                <h4 class="card-title">
+                    Clasificados pendientes por aprobar /
+                    <a href="/admin/clasificados/aprovados" class="btn btn-link"
+                        >Clasificados Aprovados</a
+                    >
+                </h4>
                 <table class="table table-striped">
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Título</th>
-                            <th scope="col">Categoría</th>
+                            <th scope="col">Usuario</th>
                             <th scope="col">Aprobar</th>
                             <th scope="col">Rechazar</th>
                         </tr>
@@ -24,14 +29,22 @@
                         >
                             <th scope="row">{{ classified.id }}</th>
                             <td>
-                                <a href="#" class="btn btn-link">{{
-                                    classified.title
-                                }}</a>
+                                <button
+                                    @click.prevent="showDetail(classified)"
+                                    class="btn btn-link"
+                                >
+                                    {{ classified.title }}
+                                </button>
                             </td>
                             <td>
-                                <a href="#" class="btn btn-link">{{
-                                    classified.category_id
-                                }}</a>
+                                <button
+                                    @click.prevent="
+                                        showUserDetail(classified.user_id)
+                                    "
+                                    class="btn btn-link"
+                                >
+                                    {{ classified.user_id }}
+                                </button>
                             </td>
                             <td>
                                 <button
@@ -57,7 +70,102 @@
             </div>
         </div>
 
-        <!-- Nav -->
+        <!-- CLASSIFIED DETAIL -->
+        <div
+            class="modal fade"
+            id="detail-classified"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="myLargeModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            Detalle del clasificado
+                        </h5>
+                        <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                        >
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h3 class="mb-4">{{ this.currentClassified.title }}</h3>
+                        <p>
+                            <span class="text-muted">{{
+                                this.currentClassified.excerpt
+                            }}</span>
+                        </p>
+                        <p>{{ this.currentClassified.body }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- USER DETAIL -->
+        <div
+            class="modal fade"
+            id="detail-user"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="myLargeModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            Detalle del usuario
+                        </h5>
+                        <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                        >
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row d-flex align-items-center">
+                            <div class="col-md-1">
+                                <span class="font-weight-bold">{{
+                                    this.currentUser.id
+                                }}</span>
+                            </div>
+                            <div class="col-md-11">
+                                <h4>
+                                    {{ this.currentUser.name }}
+                                </h4>
+                            </div>
+                        </div>
+                        <p>
+                            <span class="font-weight-bold">Rol: </span>
+                            {{ this.currentUser.role }}
+                        </p>
+                        <p>
+                            <span class="font-weight-bold">Email: </span>
+                            {{ this.currentUser.email }}
+                        </p>
+                        <p>
+                            <span class="font-weight-bold">Torre: </span>
+                            {{ this.currentUser.torre }}
+                        </p>
+                        <p>
+                            <span class="font-weight-bold">Apartamento: </span>
+                            {{ this.currentUser.apartamento }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGINATION -->
         <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <li
@@ -106,7 +214,9 @@ export default {
             classifieds: [],
             pagination: {},
             status: "",
-            user: {}
+            user: {},
+            currentUser: {},
+            currentClassified: {}
         };
     },
     methods: {
@@ -191,6 +301,20 @@ export default {
                 .catch(error => {
                     this.alert("error", "Algo ha salido mal");
                 });
+        },
+        showUserDetail(id) {
+            let url = `/api/users/${id}`;
+            axios
+                .get(url)
+                .then(response => {
+                    this.currentUser = response.data.user;
+                })
+                .catch(err => console.log(err));
+            $("#detail-user").modal("show");
+        },
+        showDetail(classified) {
+            this.currentClassified = classified;
+            $("#detail-classified").modal("show");
         }
     }
 };

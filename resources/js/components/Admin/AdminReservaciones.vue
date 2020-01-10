@@ -148,10 +148,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">
-                            Para:
-                            <span class="font-weight-bold">
-                                {{ typeToName(this.currentReservation.type) }}
-                            </span>
+                            Detalle del usuario
                         </h5>
                         <button
                             type="button"
