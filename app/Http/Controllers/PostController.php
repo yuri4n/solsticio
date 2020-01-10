@@ -2,15 +2,16 @@
 
 namespace Solsticio\Http\Controllers;
 
-use Solsticio\Post;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Solsticio\Post;
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -21,7 +22,7 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function admin()
     {
@@ -32,8 +33,8 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -46,25 +47,25 @@ class PostController extends Controller
             'file' => 'nullable',
         ]);
 
-        if($request->file != '') {
+        if ($request->file != '') {
             $exploded = explode(',', $request->file);
             $decoded = base64_decode($exploded[1]);
 
-            if(str_contains($exploded[0], 'jpeg')) {
+            if (str_contains($exploded[0], 'jpeg')) {
                 $extension = 'jpg';
             } else {
                 $extension = 'png';
             }
 
-            $fileName = str_random().'.'.$extension;
+            $fileName = str_random() . '.' . $extension;
 
-            $path = public_path().'/files'.'/'.$fileName;
+            $path = public_path() . '/files' . '/' . $fileName;
 
             file_put_contents($path, $decoded);
 
             Post::create($request->except('file') + [
-                'file' => 'files/'.$fileName,
-            ]);
+                    'file' => 'files/' . $fileName,
+                ]);
         } else {
             Post::create($request->except('file'));
         }
@@ -75,8 +76,8 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Solsticio\Post  $post
-     * @return \Illuminate\Http\Response
+     * @param Post $post
+     * @return Response
      */
     public function show($post)
     {
@@ -87,9 +88,9 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Solsticio\Post  $post
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Post $post
+     * @return Response
      */
     public function update(Request $request, $id)
     {
@@ -102,25 +103,25 @@ class PostController extends Controller
             'file' => 'nullable',
         ]);
 
-        if($request->file != '') {
+        if ($request->file != '') {
             $exploded = explode(',', $request->file);
             $decoded = base64_decode($exploded[1]);
 
-            if(str_contains($exploded[0], 'jpeg')) {
+            if (str_contains($exploded[0], 'jpeg')) {
                 $extension = 'jpg';
             } else {
                 $extension = 'png';
             }
 
-            $fileName = str_random().'.'.$extension;
+            $fileName = str_random() . '.' . $extension;
 
-            $path = public_path().'/files'.'/'.$fileName;
+            $path = public_path() . '/files' . '/' . $fileName;
 
             file_put_contents($path, $decoded);
 
             Post::find($id)->update($request->except('file') + [
-                'file' => 'files/'.$fileName,
-            ]);
+                    'file' => 'files/' . $fileName,
+                ]);
         } else {
             Post::find($id)->update($request->except('file'));
         }
@@ -131,8 +132,8 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Solsticio\Post  $post
-     * @return \Illuminate\Http\Response
+     * @param Post $post
+     * @return Response
      */
     public function destroy($id)
     {

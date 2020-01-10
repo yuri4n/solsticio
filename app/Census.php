@@ -12,5 +12,5 @@ class Census extends Model
     {
         return $this->belongsTo('Solsticio\User', 'user_id');
     }
-    
+
 }

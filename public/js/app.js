@@ -2729,7 +2729,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         _this4.readClassifieds();
 
-        _this4.alert("success", "El clasificado ha sido aprovado y ahora será visible");
+        _this4.alert("success", "El clasificado ha sido aprobado y ahora será visible");
       }).catch(function (error) {
         _this4.alert("error", "Algo ha salido mal");
       });
@@ -3591,7 +3591,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var url = "http://solsticio.local/api/posts";
       axios.post(url, {
-        user_id: 30,
+        user_id: this.user.id,
         title: this.newTitle,
         slug: this.slugify(),
         excerpt: this.newExcerpt,
@@ -3659,6 +3659,470 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+var _methods;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3718,17 +4182,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
-    this.readPetitions();
     if (this.$auth.isAuthenticated()) this.getUser();
+    this.readPetitions();
   },
   data: function data() {
     return {
       petitions: [],
       pagination: {},
-      user: undefined
+      user: {},
+      generic: true,
+      currentUser: {},
+      currentPetition: {}
     };
   },
-  methods: {
+  methods: (_methods = {
     alert: function alert(alertType, alertMessage) {
       this.$notify({
         group: "foo",
@@ -3737,13 +4204,27 @@ __webpack_require__.r(__webpack_exports__);
         text: alertMessage
       });
     },
-    readPetitions: function readPetitions(page_url) {
+    getUser: function getUser() {
       var _this = this;
 
+      var url = "http://solsticio.local/api/auth/user";
+      axios.get(url).then(function (response) {
+        _this.user = response.data.data;
+      }).catch();
+    },
+    readPetitions: function readPetitions(page_url) {
+      var _this2 = this;
+
       var vm = this;
-      page_url = page_url || "/api/petitions";
+
+      if (this.generic) {
+        page_url = page_url || "/api/petitions";
+      } else {
+        page_url = page_url || "/api/parkings";
+      }
+
       axios.get(page_url).then(function (response) {
-        _this.petitions = response.data.data;
+        _this2.petitions = response.data.data;
         vm.makePagination(response.data);
       }).catch(function (err) {
         return console.log(err);
@@ -3757,30 +4238,44 @@ __webpack_require__.r(__webpack_exports__);
         prev_page_url: meta.prev_page_url
       };
       this.pagination = pagination;
-    },
-    getUser: function getUser() {
-      var _this2 = this;
-
-      var url = "http://solsticio.local/api/auth/user";
-      axios.get(url).then(function (response) {
-        _this2.user = response.data.data;
-      }).catch();
-    },
-    rejectPetition: function rejectPetition(petition) {
-      var _this3 = this;
-
-      var url = "http://solsticio.local/api/petitions/" + petition.id;
-      var confirmacion = confirm("\xBFSeguro que desea rechazar la petici\xF3n ".concat(petition.id, " y notificar al usuario?"));
-
-      if (confirmacion) {
-        axios.delete(url).then(function (response) {
-          _this3.alert("warn", "La petici\xF3n ".concat(petition.id, " ha sido rechazada"));
-
-          _this3.readPetitions();
-        });
-      }
     }
-  }
+  }, _defineProperty(_methods, "getUser", function getUser() {
+    var _this3 = this;
+
+    var url = "http://solsticio.local/api/auth/user";
+    axios.get(url).then(function (response) {
+      _this3.user = response.data.data;
+    }).catch();
+  }), _defineProperty(_methods, "showUserDetail", function showUserDetail(id) {
+    var _this4 = this;
+
+    var url = "/api/users/".concat(id);
+    axios.get(url).then(function (response) {
+      _this4.currentUser = response.data.user;
+    }).catch(function (err) {
+      return console.log(err);
+    });
+    $("#detail-user").modal("show");
+  }), _defineProperty(_methods, "showDetail", function showDetail(petition) {
+    this.currentPetition = petition;
+    this.generic ? $("#detail-generic").modal("show") : $("#detail-parking").modal("show");
+  }), _defineProperty(_methods, "toggleParking", function toggleParking() {
+    this.generic = !this.generic;
+    this.readPetitions();
+  }), _defineProperty(_methods, "rejectPetition", function rejectPetition(petition) {
+    var _this5 = this;
+
+    var url = "http://solsticio.local/api/petitions/" + petition.id;
+    var confirmacion = confirm("\xBFSeguro que desea rechazar la petici\xF3n ".concat(petition.id, " y notificar al usuario?"));
+
+    if (confirmacion) {
+      axios.delete(url).then(function (response) {
+        _this5.alert("warn", "La petici\xF3n ".concat(petition.id, " ha sido rechazada"));
+
+        _this5.readPetitions();
+      });
+    }
+  }), _methods)
 });
 
 /***/ }),
@@ -3794,6 +4289,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -4167,7 +4663,7 @@ __webpack_require__.r(__webpack_exports__);
         status: "APPROVED",
         reservation: reservation
       }).then(function (response) {
-        _this5.alert("success", "La reservación ha sido aprovada y ahora se le notificará al usuario");
+        _this5.alert("success", "La reservación ha sido aprobada y ahora se le notificará al usuario");
 
         _this5.readReservations();
       }).catch(function (error) {
@@ -4695,7 +5191,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _this3.readUsers();
 
-        _this3.alert("success", "El usuario ha sido aprovado");
+        _this3.alert("success", "El usuario ha sido aprobado");
       }).catch(function (error) {
         _this3.alert("error", "Algo ha salido mal");
       });
@@ -4947,6 +5443,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.readPosts();
@@ -4962,7 +5495,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var vm = this;
-      page_url = page_url || '/api/files';
+      page_url = page_url || "/api/files";
       axios.get(page_url).then(function (response) {
         _this.files = response.data.data;
         vm.makePagination(response.data);
@@ -6936,6 +7469,90 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -6950,7 +7567,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       classifieds: [],
       pagination: {},
-      user: null,
+      user: {},
       newTitle: "",
       newExcerpt: "",
       newBody: "Escribe aquí el contenido...",
@@ -7605,38 +8222,80 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  created: function created() {
+    if (this.$auth.isAuthenticated()) this.getUser();
+  },
   data: function data() {
     return {
-      newName: '',
-      newCedula: '',
-      newAdditional: ''
+      newName: "",
+      newCedula: "",
+      newAdditional: "",
+      user: {}
     };
   },
   methods: {
-    alert: function alert(alertType, alertMessage) {
+    alert: function alert(alertTitle, alertType, alertMessage) {
       this.$notify({
-        group: 'foo',
+        group: "foo",
         type: alertType,
-        title: 'BIEN',
+        title: alertTitle,
         text: alertMessage
       });
     },
-    sendPetition: function sendPetition() {
+    getUser: function getUser() {
       var _this = this;
 
-      var url = 'http://solsticio.local/api/petitions';
+      var url = "http://solsticio.local/api/auth/user";
+      axios.get(url).then(function (response) {
+        _this.user = response.data.data;
+      }).catch();
+    },
+    sendPetition: function sendPetition() {
+      var _this2 = this;
+
+      var url = "http://solsticio.local/api/petitions";
       axios.post(url, {
-        user_id: Math.random() * (29 - 1) + 1,
+        user_id: this.user.id,
         nombre_responsable: this.newName,
         cedula: this.newCedula,
         additional: this.newAdditional
       }).then(function (response) {
-        _this.alert('success', 'La reservación ha sido solicitada');
+        _this2.alert("success", "La reservación ha sido solicitada");
 
-        _this.newName = '', _this.newCedula = '', _this.newAdditional = '';
+        _this2.newName = "", _this2.newCedula = "", _this2.newAdditional = "";
       }).catch(function (error) {
-        _this.alert('error', 'Algo ha salido mal');
+        _this2.alert("Error", "error", "Completa todos los campos requeridos");
       });
     }
   }
@@ -8060,11 +8719,99 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 Vue.component("v-select", vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
 Vue.use(pretty_checkbox_vue__WEBPACK_IMPORTED_MODULE_1___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
+  created: function created() {
+    if (this.$auth.isAuthenticated()) this.getUser();
+  },
   data: function data() {
     return {
       deudas: null,
@@ -8072,7 +8819,7 @@ Vue.use(pretty_checkbox_vue__WEBPACK_IMPORTED_MODULE_1___default.a);
       moto: null,
       discapacidad: null,
       asignado: null,
-      tipo: null,
+      tipo: "",
       numero: "",
       nombre_propietario: "",
       telefono_propietario: "",
@@ -8104,17 +8851,26 @@ Vue.use(pretty_checkbox_vue__WEBPACK_IMPORTED_MODULE_1___default.a);
       marca3: "",
       modelo3: "",
       diligenciador: "",
-      documento: ""
+      documento: "",
+      user: {}
     };
   },
   methods: {
-    alert: function alert(alertType, alertMessage) {
+    alert: function alert(title, alertType, alertMessage) {
       this.$notify({
         group: "foo",
         type: alertType,
-        title: "BIEN",
+        title: title,
         text: alertMessage
       });
+    },
+    getUser: function getUser() {
+      var _this = this;
+
+      var url = "http://solsticio.local/api/auth/user";
+      axios.get(url).then(function (response) {
+        _this.user = response.data.data;
+      }).catch();
     },
     cedulaNew: function cedulaNew(event) {
       var reader = new FileReader();
@@ -8157,11 +8913,11 @@ Vue.use(pretty_checkbox_vue__WEBPACK_IMPORTED_MODULE_1___default.a);
       reader.readAsDataURL(event.target.files[0]);
     },
     sendPetition: function sendPetition() {
-      var _this = this;
+      var _this2 = this;
 
       var url = "http://solsticio.local/api/parkings";
       axios.post(url, {
-        user_id: 30,
+        user_id: this.user.id,
         fecha: this.getDate(),
         carro: this.carroType(this.carro),
         moto: this.motoType(this.moto),
@@ -8202,47 +8958,48 @@ Vue.use(pretty_checkbox_vue__WEBPACK_IMPORTED_MODULE_1___default.a);
         diligenciador: this.diligenciador,
         documento: this.documento
       }).then(function (response) {
-        _this.alert("success", "La noticia ha sido creada");
+        _this2.alert("Perfecto!", "success", "La noticia ha sido creada");
 
-        _this.carro = false;
-        _this.moto = false;
-        _this.deudas.value = "", _this.discapacidad.value = "";
-        _this.asignado.value = "";
-        _this.tipo.value = "";
-        _this.numero = "";
-        _this.nombre_propietario = "";
-        _this.telefono_propietario = "";
-        _this.direccion_propietario = "";
-        _this.email_propietario = "";
-        _this.nombre_residente = "";
-        _this.telefono_residente = "";
-        _this.direccion_residente = "";
-        _this.email_residente = "";
-        _this.torre = "";
-        _this.apartamento = "";
-        _this.cedula = "";
-        _this.tarjeta_propiedad = "";
-        _this.soat = "";
-        _this.autorizacion = "";
-        _this.placa1 = "";
-        _this.color1 = "";
-        _this.clase1 = "";
-        _this.marca1 = "";
-        _this.modelo1 = "";
-        _this.placa2 = "";
-        _this.color2 = "";
-        _this.clase2 = "";
-        _this.marca2 = "";
-        _this.modelo2 = "";
-        _this.placa3 = "";
-        _this.color3 = "";
-        _this.clase3 = "";
-        _this.marca3 = "";
-        _this.modelo3 = "";
-        _this.diligenciador = "";
-        _this.documento = "";
+        _this2.carro = false;
+        _this2.moto = false;
+        _this2.deudas.value = "";
+        _this2.discapacidad.value = "";
+        _this2.asignado.value = "";
+        _this2.tipo.value = "";
+        _this2.numero = "";
+        _this2.nombre_propietario = "";
+        _this2.telefono_propietario = "";
+        _this2.direccion_propietario = "";
+        _this2.email_propietario = "";
+        _this2.nombre_residente = "";
+        _this2.telefono_residente = "";
+        _this2.direccion_residente = "";
+        _this2.email_residente = "";
+        _this2.torre = "";
+        _this2.apartamento = "";
+        _this2.cedula = "";
+        _this2.tarjeta_propiedad = "";
+        _this2.soat = "";
+        _this2.autorizacion = "";
+        _this2.placa1 = "";
+        _this2.color1 = "";
+        _this2.clase1 = "";
+        _this2.marca1 = "";
+        _this2.modelo1 = "";
+        _this2.placa2 = "";
+        _this2.color2 = "";
+        _this2.clase2 = "";
+        _this2.marca2 = "";
+        _this2.modelo2 = "";
+        _this2.placa3 = "";
+        _this2.color3 = "";
+        _this2.clase3 = "";
+        _this2.marca3 = "";
+        _this2.modelo3 = "";
+        _this2.diligenciador = "";
+        _this2.documento = "";
       }).catch(function (error) {
-        _this.alert("error", "Algo ha salido mal");
+        _this2.alert("Error", "error", "Completa los datos requeridos");
       });
     },
     carroType: function carroType(carro) {
@@ -8335,6 +9092,9 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     'date-picker': vue_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
+  created: function created() {
+    if (this.$auth.isAuthenticated()) this.getUser();
+  },
   data: function data() {
     return {
       newResponsable: '',
@@ -8370,7 +9130,8 @@ __webpack_require__.r(__webpack_exports__);
         },
         overlayOpacity: 0.5,
         dismissible: true
-      }
+      },
+      user: {}
     };
   },
   methods: {
@@ -8382,12 +9143,20 @@ __webpack_require__.r(__webpack_exports__);
         text: alertMessage
       });
     },
-    sendReservation: function sendReservation() {
+    getUser: function getUser() {
       var _this = this;
+
+      var url = "http://solsticio.local/api/auth/user";
+      axios.get(url).then(function (response) {
+        _this.user = response.data.data;
+      }).catch();
+    },
+    sendReservation: function sendReservation() {
+      var _this2 = this;
 
       var url = 'http://solsticio.local/api/reservations';
       axios.post(url, {
-        user_id: Math.random() * (29 - 1) + 1,
+        user_id: this.user.id,
         nombre_responsable: this.newResponsable,
         additional_info: this.newAditional,
         fecha_solicitada: this.date.time,
@@ -8395,11 +9164,11 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         $('#create').modal('hide');
 
-        _this.alert('success', 'La reservación ha sido solicitada');
+        _this2.alert('success', 'La reservación ha sido solicitada');
 
-        _this.newResponsable = '', _this.newAditional = '', _this.date.time = '';
+        _this2.newResponsable = '', _this2.newAditional = '', _this2.date.time = '';
       }).catch(function (error) {
-        _this.alert('error', 'Algo ha salido mal');
+        _this2.alert('error', 'Algo ha salido mal');
       });
     }
   }
@@ -8468,6 +9237,9 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     'date-picker': vue_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
+  created: function created() {
+    if (this.$auth.isAuthenticated()) this.getUser();
+  },
   data: function data() {
     return {
       newResponsable: '',
@@ -8503,7 +9275,8 @@ __webpack_require__.r(__webpack_exports__);
         },
         overlayOpacity: 0.5,
         dismissible: true
-      }
+      },
+      user: {}
     };
   },
   methods: {
@@ -8515,12 +9288,20 @@ __webpack_require__.r(__webpack_exports__);
         text: alertMessage
       });
     },
-    sendReservation: function sendReservation() {
+    getUser: function getUser() {
       var _this = this;
+
+      var url = "http://solsticio.local/api/auth/user";
+      axios.get(url).then(function (response) {
+        _this.user = response.data.data;
+      }).catch();
+    },
+    sendReservation: function sendReservation() {
+      var _this2 = this;
 
       var url = 'http://solsticio.local/api/reservations';
       axios.post(url, {
-        user_id: Math.random() * (29 - 1) + 1,
+        user_id: this.user.id,
         nombre_responsable: this.newResponsable,
         additional_info: this.newAditional,
         fecha_solicitada: this.date.time,
@@ -8528,11 +9309,11 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         $('#create').modal('hide');
 
-        _this.alert('success', 'La reservación ha sido solicitada');
+        _this2.alert('success', 'La reservación ha sido solicitada');
 
-        _this.newResponsable = '', _this.newAditional = '', _this.date.time = '';
+        _this2.newResponsable = '', _this2.newAditional = '', _this2.date.time = '';
       }).catch(function (error) {
-        _this.alert('error', 'Algo ha salido mal');
+        _this2.alert('error', 'Algo ha salido mal');
       });
     }
   }
@@ -8601,6 +9382,9 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     'date-picker': vue_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
+  created: function created() {
+    if (this.$auth.isAuthenticated()) this.getUser();
+  },
   data: function data() {
     return {
       newResponsable: '',
@@ -8648,12 +9432,20 @@ __webpack_require__.r(__webpack_exports__);
         text: alertMessage
       });
     },
-    sendReservation: function sendReservation() {
+    getUser: function getUser() {
       var _this = this;
+
+      var url = "http://solsticio.local/api/auth/user";
+      axios.get(url).then(function (response) {
+        _this.user = response.data.data;
+      }).catch();
+    },
+    sendReservation: function sendReservation() {
+      var _this2 = this;
 
       var url = 'http://solsticio.local/api/reservations';
       axios.post(url, {
-        user_id: Math.random() * (29 - 1) + 1,
+        user_id: this.user.id,
         nombre_responsable: this.newResponsable,
         additional_info: this.newAditional,
         fecha_solicitada: this.date.time,
@@ -8661,11 +9453,11 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         $('#create').modal('hide');
 
-        _this.alert('success', 'La reservación ha sido solicitada');
+        _this2.alert('success', 'La reservación ha sido solicitada');
 
-        _this.newResponsable = '', _this.newAditional = '', _this.date.time = '';
+        _this2.newResponsable = '', _this2.newAditional = '', _this2.date.time = '';
       }).catch(function (error) {
-        _this.alert('error', 'Algo ha salido mal');
+        _this2.alert('error', 'Algo ha salido mal');
       });
     }
   }
@@ -14737,7 +15529,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -68846,9 +69638,9 @@ var staticRenderFns = [
         "a",
         {
           staticClass: "btn btn-link",
-          attrs: { href: "/admin/clasificados/aprovados" }
+          attrs: { href: "/admin/clasificados/aprobados" }
         },
-        [_vm._v("Clasificados Aprovados")]
+        [_vm._v("Clasificados Aprobados")]
       )
     ])
   },
@@ -69236,7 +70028,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h4", { staticClass: "card-title" }, [
-      _vm._v("\n                Clasificados Aprovados /\n                "),
+      _vm._v("\n                Clasificados Aprobados /\n                "),
       _c(
         "a",
         { staticClass: "btn btn-link", attrs: { href: "/admin/clasificados" } },
@@ -70278,51 +71070,759 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "card text-left mb-3" }, [
             _c("div", { staticClass: "card-body" }, [
-              _c("h4", { staticClass: "card-title" }, [
-                _vm._v("Lista de peticiones genéricas")
+              _c("div", { staticClass: "row justify-content-between mb-4" }, [
+                _c("div", { staticClass: "col-sm-8" }, [
+                  _c("h4", { staticClass: "card-title" }, [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(
+                          this.generic
+                            ? "Peticiones Genericas "
+                            : "Peticiones de Parqueadero "
+                        ) +
+                        "\n                        /\n                        "
+                    ),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-link",
+                        attrs: { href: "/admin/peticiones/aprobadas" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(
+                              this.generic
+                                ? "Peticiones Genericas aprobadas"
+                                : "Peticiones de Parqueadero aprobadas"
+                            ) +
+                            "\n                        "
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-3" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.toggleParking()
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(
+                            this.generic
+                              ? "Peticiones de Parqueadero"
+                              : "Peticiones Genericas"
+                          ) +
+                          "\n                    "
+                      )
+                    ]
+                  )
+                ])
               ]),
               _vm._v(" "),
-              _c("table", { staticClass: "table table-striped" }, [
-                _vm._m(0),
-                _vm._v(" "),
-                _c(
-                  "tbody",
-                  _vm._l(_vm.petitions, function(petition) {
-                    return _c("tr", { key: petition.id }, [
-                      _c("th", { attrs: { scope: "row" } }, [
-                        _vm._v(_vm._s(petition.id))
+              _c("h4", { staticClass: "card-title" }, [
+                _vm._v("Lista de peticiones")
+              ]),
+              _vm._v(" "),
+              this.generic
+                ? _c("table", { staticClass: "table table-striped" }, [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.petitions, function(petition) {
+                        return _c("tr", { key: petition.id }, [
+                          _c("th", { attrs: { scope: "row" } }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-link",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.showDetail(petition)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(petition.id) +
+                                    "\n                            "
+                                )
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(_vm._s(petition.nombre_responsable))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(petition.cedula))]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-link",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.showUserDetail(petition.user_id)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(petition.user_id) +
+                                    "\n                            "
+                                )
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(1, true),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.rejectPetition(petition)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                Rechazar\n                            "
+                                )
+                              ]
+                            )
+                          ])
+                        ])
+                      }),
+                      0
+                    )
+                  ])
+                : _c("table", { staticClass: "table table-striped" }, [
+                    _vm._m(2),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.petitions, function(petition) {
+                        return _c("tr", { key: petition.id }, [
+                          _c("th", { attrs: { scope: "row" } }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-link",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.showDetail(petition)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(petition.id) +
+                                    "\n                            "
+                                )
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(_vm._s(petition.nombre_propietario))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(petition.carro))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(petition.moto))]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-link",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.showUserDetail(petition.user_id)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(petition.user_id) +
+                                    "\n                            "
+                                )
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(3, true),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.rejectPetition(petition)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                Rechazar\n                            "
+                                )
+                              ]
+                            )
+                          ])
+                        ])
+                      }),
+                      0
+                    )
+                  ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "detail-generic",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-labelledby": "myLargeModalLabel",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c("div", { staticClass: "modal-dialog modal-lg" }, [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(4),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("h4", { staticClass: "mt-2 mb-3" }, [
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v(
+                          "Nombre del responsable:\n                        "
+                        )
+                      ]),
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(this.currentPetition.nombre_responsable) +
+                          "\n                    "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("h5", [
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v("Cédula: ")
+                      ]),
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(this.currentPetition.cedula) +
+                          "\n                    "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("h5", { staticClass: "font-weight-bold mt-4" }, [
+                      _vm._v("Petición:")
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(this.currentPetition.additional) +
+                          "\n                    "
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "detail-parking",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-labelledby": "myLargeModalLabel",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c("div", { staticClass: "modal-dialog modal-lg" }, [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(5),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Tiene deudas:\n                            ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [_vm._v(_vm._s(this.currentPetition.deudas))])
                       ]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(petition.nombre_responsable))]),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Carro: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [_vm._v(_vm._s(this.currentPetition.carro))])
+                      ]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(petition.cedula))]),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Moto: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [_vm._v(_vm._s(this.currentPetition.moto))])
+                      ]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(petition.user_id))]),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Discapacidad:\n                            ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(_vm._s(this.currentPetition.discapacidad))
+                        ])
+                      ]),
                       _vm._v(" "),
-                      _vm._m(1, true),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v(
+                            "Posee parqueadero:\n                            "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [_vm._v(_vm._s(this.currentPetition.asignado))])
+                      ]),
                       _vm._v(" "),
-                      _c("td", [
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Numero: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.asignado == "SI"
+                                  ? this.currentPetition.numero
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row mx-1" }, [
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v("ROL: ")
+                      ]),
+                      _vm._v(" "),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(this.currentPetition.tipo) +
+                            "\n                        "
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Nombre: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(this.currentPetition.nombre_propietario) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Telefono: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.telefono_propietario
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Direccion:\n                            ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.direccion_propietario
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Correo: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(this.currentPetition.email_propietario) +
+                              "\n                            "
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(7),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Nombre: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(this.currentPetition.nombre_residente) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Telefono: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(this.currentPetition.telefono_residente) +
+                              "\n                            "
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Direccion:\n                            ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(this.currentPetition.direccion_residente) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Correo: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(this.currentPetition.email_residente) +
+                              "\n                            "
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Torre: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [_vm._v(_vm._s(this.currentPetition.torre))])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Apartamento:\n                            ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(_vm._s(this.currentPetition.apartamento))
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("h3", [_vm._v("Documentos requeridos:")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-3" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Cedula: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
                         _c(
-                          "button",
+                          "a",
                           {
-                            staticClass: "btn btn-danger",
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                _vm.rejectPetition(petition)
-                              }
+                            staticClass: "btn btn-primary",
+                            attrs: {
+                              href: "/files/" + this.currentPetition.cedula,
+                              download: ""
                             }
                           },
-                          [_vm._v("Rechazar")]
+                          [_vm._v("Descargar")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-3" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Tarjeta: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-primary",
+                            attrs: {
+                              href:
+                                "/files/" +
+                                this.currentPetition.tarjeta_propiedad,
+                              download: ""
+                            }
+                          },
+                          [_vm._v("Descargar")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-3" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Soat: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-primary",
+                            attrs: {
+                              href: "/files/" + this.currentPetition.soat,
+                              download: ""
+                            }
+                          },
+                          [_vm._v("Descargar")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-3" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Autorización\n                            ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-primary",
+                            attrs: {
+                              href:
+                                "/files/" + this.currentPetition.autorizacion,
+                              download: ""
+                            }
+                          },
+                          [_vm._v("Descargar")]
                         )
                       ])
                     ])
-                  }),
-                  0
-                )
+                  ])
+                ])
               ])
-            ])
-          ]),
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "detail-user",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-labelledby": "myLargeModalLabel",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c("div", { staticClass: "modal-dialog modal-lg" }, [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(8),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c(
+                      "div",
+                      { staticClass: "row d-flex align-items-center" },
+                      [
+                        _c("div", { staticClass: "col-md-1" }, [
+                          _c("span", { staticClass: "font-weight-bold" }, [
+                            _vm._v(_vm._s(this.currentUser.id))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-11" }, [
+                          _c("h4", [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(this.currentUser.name) +
+                                "\n                            "
+                            )
+                          ])
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v("Rol: ")
+                      ]),
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(this.currentUser.role) +
+                          "\n                    "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v("Email: ")
+                      ]),
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(this.currentUser.email) +
+                          "\n                    "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v("Torre: ")
+                      ]),
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(this.currentUser.torre) +
+                          "\n                    "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v("Apartamento: ")
+                      ]),
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(this.currentUser.apartamento) +
+                          "\n                    "
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ]
+          ),
           _vm._v(" "),
           _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
             _c("ul", { staticClass: "pagination" }, [
@@ -70357,7 +71857,7 @@ var render = function() {
                     _vm._v(
                       "Página " +
                         _vm._s(_vm.pagination.current_page) +
-                        " de " +
+                        " de\n                    " +
                         _vm._s(_vm.pagination.last_page)
                     )
                   ]
@@ -70420,6 +71920,127 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("td", [
       _c("button", { staticClass: "btn btn-success" }, [_vm._v("Aprobar")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Carro")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Moto")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Usuario")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Aprobar")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Rechazar")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("button", { staticClass: "btn btn-success" }, [_vm._v("Aprobar")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [
+        _vm._v(
+          "\n                        Detalle de la petición\n                    "
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [
+        _vm._v(
+          "\n                        Detalle de la petición\n                    "
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mx-1 mt-2" }, [
+      _c("h3", [_vm._v("Datos del Propietario")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mx-1 mt-2" }, [
+      _c("h3", [_vm._v("Datos del Solicitante")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [
+        _vm._v(
+          "\n                        Detalle del usuario\n                    "
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
     ])
   }
 ]
@@ -70492,7 +72113,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [
                         _c(
-                          "a",
+                          "button",
                           {
                             staticClass: "btn btn-link",
                             on: {
@@ -70502,7 +72123,13 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v(_vm._s(reservation.user_id))]
+                          [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(reservation.user_id) +
+                                "\n                            "
+                            )
+                          ]
                         )
                       ]),
                       _vm._v(" "),
@@ -70814,7 +72441,7 @@ var staticRenderFns = [
         "a",
         {
           staticClass: "btn btn-link",
-          attrs: { href: "/admin/servicios/aprovadas" }
+          attrs: { href: "/admin/servicios/aprobadas" }
         },
         [_vm._v("Listado de peticiones aprobadas")]
       )
@@ -71771,19 +73398,12 @@ var render = function() {
                       _c(
                         "a",
                         {
-                          attrs: {
-                            href: "files/" + file.file,
-                            download: file.file
-                          }
+                          staticClass: "btn btn-primary",
+                          attrs: { href: "files/" + file.file, download: "" }
                         },
                         [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-primary",
-                              attrs: { type: "button" }
-                            },
-                            [_vm._v("Descargar")]
+                          _vm._v(
+                            "\n                                        Descargar\n                                    "
                           )
                         ]
                       )
@@ -71829,7 +73449,7 @@ var render = function() {
                   _vm._v(
                     "Página " +
                       _vm._s(_vm.pagination.current_page) +
-                      " de " +
+                      " de\n                            " +
                       _vm._s(_vm.pagination.last_page)
                   )
                 ]
@@ -71891,7 +73511,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _vm._v(
-            "\n            Aquí podrás estar al tanto de cada evento y noticia acerca de tu conjunto!\n            "
+            "\n                    Aquí podrás estar al tanto de cada evento y noticia\n                    acerca de tu conjunto!\n                "
           )
         ])
       ]),
@@ -71910,7 +73530,11 @@ var staticRenderFns = [
               _c(
                 "button",
                 { staticClass: "btn btn-secondary", attrs: { type: "button" } },
-                [_vm._v("ir")]
+                [
+                  _vm._v(
+                    "\n                                ir\n                            "
+                  )
+                ]
               )
             ])
           ])
@@ -75797,11 +77421,19 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "card-body" }, [
                         _c("h2", { staticClass: "card-title" }, [
-                          _vm._v(_vm._s(classified.title))
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(classified.title) +
+                              "\n                            "
+                          )
                         ]),
                         _vm._v(" "),
                         _c("p", { staticClass: "card-text" }, [
-                          _vm._v(_vm._s(classified.excerpt))
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(classified.excerpt) +
+                              "\n                            "
+                          )
                         ]),
                         _vm._v(" "),
                         _c(
@@ -75816,9 +77448,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "card-footer text-muted" }, [
                         _vm._v(
-                          "\n              Publicado el " +
+                          "\n                            Publicado el\n                            " +
                             _vm._s(_vm.formatDate(classified.created_at)) +
-                            "\n            "
+                            "\n                        "
                         )
                       ])
                     ]
@@ -75862,7 +77494,7 @@ var render = function() {
                     _vm._v(
                       "Página " +
                         _vm._s(_vm.pagination.current_page) +
-                        " de " +
+                        " de\n                            " +
                         _vm._s(_vm.pagination.last_page)
                     )
                   ]
@@ -76118,7 +77750,11 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("Crear")]
+                        [
+                          _vm._v(
+                            "\n                                Crear\n                            "
+                          )
+                        ]
                       )
                     ]
                   )
@@ -76138,7 +77774,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h1", { staticClass: "my-4" }, [
-      _vm._v("\n        Clasificados\n        "),
+      _vm._v("\n                Clasificados\n                "),
       _c("small", { staticClass: "text-muted" }, [
         _vm._v("Pública en tu conjunto")
       ])
@@ -76153,7 +77789,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _vm._v(
-          "Aquí podrás estar al tanto de cada evento y noticia acerca de tu conjunto!"
+          "\n                    Aquí podrás estar al tanto de cada evento y noticia\n                    acerca de tu conjunto!\n                "
         )
       ])
     ])
@@ -76165,7 +77801,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-body" }, [
       _c("p", { staticClass: "card-text" }, [
         _vm._v(
-          "Te recomendamos registrarte o iniciar sesión para subir contenido"
+          "\n                        Te recomendamos registrarte o iniciar sesión para\n                        subir contenido\n                    "
         )
       ]),
       _vm._v(" "),
@@ -76178,7 +77814,7 @@ var staticRenderFns = [
             "data-target": ".bd-example-modal-lg"
           }
         },
-        [_vm._v("Crear")]
+        [_vm._v("\n                        Crear\n                    ")]
       )
     ])
   },
@@ -76189,7 +77825,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-body" }, [
       _c("p", { staticClass: "card-text" }, [
         _vm._v(
-          "Te recomendamos registrarte o iniciar sesión para subir contenido"
+          "\n                        Te recomendamos registrarte o iniciar sesión para\n                        subir contenido\n                    "
         )
       ]),
       _vm._v(" "),
@@ -76537,7 +78173,7 @@ var render = function() {
           { staticClass: "alert alert-warning mt-3", attrs: { role: "alert" } },
           [
             _vm._v(
-              "Tu cuenta se encuentra en proceso de verificación, cuando sea aprovada podrás disfrutar de todas las funcionalidades"
+              "Tu cuenta se encuentra en proceso de verificación, cuando sea aprobada podrás disfrutar de todas las funcionalidades"
             )
           ]
         )
@@ -77125,7 +78761,7 @@ var render = function() {
               _vm._v(" "),
               _c("p", { staticClass: "card-text" }, [
                 _vm._v(
-                  "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae aperiam voluptates mollitia nulla ipsa iusto accusantium eius corrupti blanditiis eum, deleniti ipsum? Vitae odio debitis sapiente saepe tempore consequatur aperiam?"
+                  "\n                        Lorem ipsum dolor, sit amet consectetur adipisicing\n                        elit. Beatae aperiam voluptates mollitia nulla ipsa\n                        iusto accusantium eius corrupti blanditiis eum,\n                        deleniti ipsum? Vitae odio debitis sapiente saepe\n                        tempore consequatur aperiam?\n                    "
                 )
               ]),
               _vm._v(" "),
@@ -77256,7 +78892,11 @@ var render = function() {
                       staticClass: "btn btn-primary mb-2",
                       attrs: { type: "submit" }
                     },
-                    [_vm._v("Enviar")]
+                    [
+                      _vm._v(
+                        "\n                            Enviar\n                        "
+                      )
+                    ]
                   )
                 ]
               )
@@ -77282,7 +78922,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("p", { staticClass: "card-text" }, [
             _vm._v(
-              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto, in numquam quibusdam quisquam."
+              "\n                        Lorem ipsum dolor sit, amet consectetur adipisicing\n                        elit. Iusto, in numquam quibusdam quisquam.\n                    "
             )
           ])
         ])
@@ -77324,12 +78964,14 @@ var render = function() {
           _c("div", { staticClass: "card text-left" }, [
             _c("div", { staticClass: "card-body" }, [
               _c("h3", { staticClass: "card-title" }, [
-                _vm._v("Formulario de peticion de parqueadero")
+                _vm._v(
+                  "\n                        Formulario de peticion de parqueadero\n                    "
+                )
               ]),
               _vm._v(" "),
               _c("p", { staticClass: "card-text" }, [
                 _vm._v(
-                  "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae aperiam voluptates mollitia nulla ipsa iusto accusantium eius corrupti blanditiis eum, deleniti ipsum? Vitae odio debitis sapiente saepe tempore consequatur aperiam?"
+                  "\n                        Lorem ipsum dolor, sit amet consectetur adipisicing\n                        elit. Beatae aperiam voluptates mollitia nulla ipsa\n                        iusto accusantium eius corrupti blanditiis eum,\n                        deleniti ipsum? Vitae odio debitis sapiente saepe\n                        tempore consequatur aperiam?\n                    "
                 )
               ]),
               _vm._v(" "),
@@ -77353,7 +78995,9 @@ var render = function() {
                       { staticClass: "form-group col-md-4" },
                       [
                         _c("label", { attrs: { for: "deudas" } }, [
-                          _vm._v("¿Tiene deudas con la administración?")
+                          _vm._v(
+                            "¿Tiene deudas con la\n                                    administración?"
+                          )
                         ]),
                         _vm._v(" "),
                         _c("v-select", {
@@ -77421,7 +79065,9 @@ var render = function() {
                       { staticClass: "form-group col-md-4" },
                       [
                         _c("label", { attrs: { for: "discapacidad" } }, [
-                          _vm._v("¿Su vehículo posee placas de discapacidad?")
+                          _vm._v(
+                            "¿Su vehículo posee placas de\n                                    discapacidad?"
+                          )
                         ]),
                         _vm._v(" "),
                         _c("v-select", {
@@ -77450,7 +79096,9 @@ var render = function() {
                       { staticClass: "form-group col-md-6" },
                       [
                         _c("label", { attrs: { for: "asignado" } }, [
-                          _vm._v("¿Posee actualmente parqueadero asignado?")
+                          _vm._v(
+                            "¿Posee actualmente parqueadero\n                                    asignado?"
+                          )
                         ]),
                         _vm._v(" "),
                         _c("v-select", {
@@ -77519,8 +79167,14 @@ var render = function() {
                         _c("v-select", {
                           attrs: {
                             options: [
-                              { label: "Propietario", value: "PROPIETARIO" },
-                              { label: "Arrendatario", value: "ARRENDATARIO" }
+                              {
+                                label: "Propietario",
+                                value: "PROPIETARIO"
+                              },
+                              {
+                                label: "Arrendatario",
+                                value: "ARRENDATARIO"
+                              }
                             ]
                           },
                           model: {
@@ -77923,7 +79577,9 @@ var render = function() {
                   _c("h4", [_vm._v("Datos del Vehiculo")]),
                   _vm._v(" "),
                   _c("h5", [
-                    _vm._v("Asegúrese de tomarlos de la targeta de propiedad*")
+                    _vm._v(
+                      "\n                            Asegúrese de tomarlos de la targeta de\n                            propiedad*\n                        "
+                    )
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-row" }, [
@@ -78425,7 +80081,9 @@ var render = function() {
                   _c("div", { staticClass: "form-row" }, [
                     _c("div", { staticClass: "form-group col-md-6" }, [
                       _c("label", { attrs: { for: "diligenciador" } }, [
-                        _vm._v("Nombre completo del diligenciador")
+                        _vm._v(
+                          "Nombre completo del\n                                    diligenciador"
+                        )
                       ]),
                       _vm._v(" "),
                       _c("input", {
@@ -78496,7 +80154,11 @@ var render = function() {
                       staticClass: "btn btn-primary",
                       attrs: { type: "submit" }
                     },
-                    [_vm._v("Enviar")]
+                    [
+                      _vm._v(
+                        "\n                            Enviar\n                        "
+                      )
+                    ]
                   )
                 ]
               )
@@ -78522,7 +80184,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("p", { staticClass: "card-text" }, [
             _vm._v(
-              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto, in numquam quibusdam."
+              "\n                        Lorem ipsum dolor sit, amet consectetur adipisicing\n                        elit. Iusto, in numquam quibusdam.\n                    "
             )
           ])
         ])
@@ -78569,7 +80231,7 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("p", { staticClass: "card-text" }, [
                 _vm._v(
-                  "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae aperiam voluptates mollitia nulla ipsa iusto accusantium eius corrupti blanditiis eum, deleniti ipsum? Vitae odio debitis sapiente saepe tempore consequatur aperiam?"
+                  "\n                        Lorem ipsum dolor, sit amet consectetur adipisicing\n                        elit. Beatae aperiam voluptates mollitia nulla ipsa\n                        iusto accusantium eius corrupti blanditiis eum,\n                        deleniti ipsum? Vitae odio debitis sapiente saepe\n                        tempore consequatur aperiam?\n                    "
                 )
               ]),
               _vm._v(" "),
@@ -78580,25 +80242,27 @@ var staticRenderFns = [
                   ]),
                   _vm._v(" "),
                   _c("p", { staticClass: "card-text" }, [
-                    _vm._v("En esta petición podrás requerir:")
+                    _vm._v(
+                      "\n                                En esta petición podrás requerir:\n                            "
+                    )
                   ]),
                   _vm._v(" "),
                   _c("ul", [
                     _c("li", [
                       _vm._v(
-                        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor iste obcaecati"
+                        "\n                                    Lorem ipsum dolor sit amet consectetur\n                                    adipisicing elit. Dolor iste obcaecati\n                                "
                       )
                     ]),
                     _vm._v(" "),
                     _c("li", [
                       _vm._v(
-                        "maxime est assumenda error officia, fuga deleniti repellendus libero, soluta consequatur."
+                        "\n                                    maxime est assumenda error officia, fuga\n                                    deleniti repellendus libero, soluta\n                                    consequatur.\n                                "
                       )
                     ]),
                     _vm._v(" "),
                     _c("li", [
                       _vm._v(
-                        "Libero, nemo iusto assumenda sequi necessitatibus blanditiis ex?"
+                        "\n                                    Libero, nemo iusto assumenda sequi\n                                    necessitatibus blanditiis ex?\n                                "
                       )
                     ])
                   ]),
@@ -78619,12 +80283,14 @@ var staticRenderFns = [
               _c("div", { staticClass: "card text-left" }, [
                 _c("div", { staticClass: "card-body" }, [
                   _c("h4", { staticClass: "card-title" }, [
-                    _vm._v("Petición de Parqueadero")
+                    _vm._v(
+                      "\n                                Petición de Parqueadero\n                            "
+                    )
                   ]),
                   _vm._v(" "),
                   _c("p", { staticClass: "card-text" }, [
                     _vm._v(
-                      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Est minima nemo perferendis officiis itaque repudiandae fuga suscipit quibusdam, explicabo rem! Soluta quam aspernatur explicabo, distinctio deserunt ad sequi id iusto."
+                      "\n                                Lorem ipsum dolor sit amet consectetur\n                                adipisicing elit. Est minima nemo\n                                perferendis officiis itaque repudiandae fuga\n                                suscipit quibusdam, explicabo rem! Soluta\n                                quam aspernatur explicabo, distinctio\n                                deserunt ad sequi id iusto.\n                            "
                     )
                   ]),
                   _vm._v(" "),
@@ -78651,7 +80317,7 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("p", { staticClass: "card-text" }, [
                 _vm._v(
-                  "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto, in numquam quibusdam quisquam ad dolorum itaque deleniti impedit? Ea ad blanditiis possimus aliquid! Rerum blanditiis, culpa pariatur esse quibusdam odit."
+                  "\n                        Lorem ipsum dolor sit, amet consectetur adipisicing\n                        elit. Iusto, in numquam quibusdam quisquam ad\n                        dolorum itaque deleniti impedit? Ea ad blanditiis\n                        possimus aliquid! Rerum blanditiis, culpa pariatur\n                        esse quibusdam odit.\n                    "
                 )
               ])
             ])
@@ -92090,6 +93756,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('adminarchivos', __webpack_
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('adminclassifieds', __webpack_require__(/*! ./components/Admin/AdminClassifieds.vue */ "./resources/js/components/Admin/AdminClassifieds.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('adminclassifieds_approved', __webpack_require__(/*! ./components/Admin/AdminClassifiedsApproved.vue */ "./resources/js/components/Admin/AdminClassifiedsApproved.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('adminpeticiones', __webpack_require__(/*! ./components/Admin/AdminPeticiones.vue */ "./resources/js/components/Admin/AdminPeticiones.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('adminpetitions_approved', __webpack_require__(/*! ./components/Admin/AdminPetitionsApproved.vue */ "./resources/js/components/Admin/AdminPetitionsApproved.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('admincenso', __webpack_require__(/*! ./components/Admin/AdminCenso.vue */ "./resources/js/components/Admin/AdminCenso.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('admincensuses_exported', __webpack_require__(/*! ./components/Admin/AdminCensusesExported.vue */ "./resources/js/components/Admin/AdminCensusesExported.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('adminusuarios', __webpack_require__(/*! ./components/Admin/AdminUsuarios.vue */ "./resources/js/components/Admin/AdminUsuarios.vue").default);
@@ -92886,6 +94553,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPeticiones_vue_vue_type_template_id_52d4be51_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/components/Admin/AdminPetitionsApproved.vue":
+/*!******************************************************************!*\
+  !*** ./resources/js/components/Admin/AdminPetitionsApproved.vue ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+var render, staticRenderFns
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(
+  script,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+component.options.__file = "resources/js/components/Admin/AdminPetitionsApproved.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 

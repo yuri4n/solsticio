@@ -68,7 +68,7 @@
       v-if="this.$auth.isAuthenticated() && user.status == 'PENDING'"
       class="alert alert-warning mt-3"
       role="alert"
-    >Tu cuenta se encuentra en proceso de verificación, cuando sea aprovada podrás disfrutar de todas las funcionalidades</div>
+    >Tu cuenta se encuentra en proceso de verificación, cuando sea aprobada podrás disfrutar de todas las funcionalidades</div>
   </div>
 </template>
 

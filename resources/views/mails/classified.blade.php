@@ -1,7 +1,7 @@
 <h3>Hola {{ $data['user']->name }}</h3>
 
 @if ($data['status'] == "PUBLISHED")
-    <p>Nos complace informarte que tu clasificado fue aprovado</p>
+    <p>Nos complace informarte que tu clasificado fue aprobado</p>
 @else
     <p>Lastimosamente tu clasificado fue rechazado.</p>
     <p>Incumpliste con uno de los requerimentos o tu contenido es inapropiado</p>

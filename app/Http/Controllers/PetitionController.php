@@ -2,15 +2,16 @@
 
 namespace Solsticio\Http\Controllers;
 
-use Solsticio\Petition;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Solsticio\Petition;
 
 class PetitionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -21,8 +22,8 @@ class PetitionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -39,8 +40,8 @@ class PetitionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Solsticio\Petition  $petition
-     * @return \Illuminate\Http\Response
+     * @param Petition $petition
+     * @return Response
      */
     public function show(Petition $petition)
     {
@@ -50,9 +51,9 @@ class PetitionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Solsticio\Petition  $petition
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Petition $petition
+     * @return Response
      */
     public function update(Request $request, Petition $petition)
     {
@@ -62,8 +63,8 @@ class PetitionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Solsticio\Petition  $petition
-     * @return \Illuminate\Http\Response
+     * @param Petition $petition
+     * @return Response
      */
     public function destroy($id)
     {

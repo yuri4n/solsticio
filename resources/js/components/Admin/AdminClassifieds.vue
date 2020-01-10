@@ -8,8 +8,8 @@
             <div class="card-body">
                 <h4 class="card-title">
                     Clasificados pendientes por aprobar /
-                    <a href="/admin/clasificados/aprovados" class="btn btn-link"
-                        >Clasificados Aprovados</a
+                    <a href="/admin/clasificados/aprobados" class="btn btn-link"
+                        >Clasificados Aprobados</a
                     >
                 </h4>
                 <table class="table table-striped">
@@ -295,7 +295,7 @@ export default {
                     this.readClassifieds();
                     this.alert(
                         "success",
-                        "El clasificado ha sido aprovado y ahora será visible"
+                        "El clasificado ha sido aprobado y ahora será visible"
                     );
                 })
                 .catch(error => {

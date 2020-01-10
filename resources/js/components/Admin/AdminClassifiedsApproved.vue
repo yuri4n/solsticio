@@ -7,7 +7,7 @@
         <div class="card text-left mb-3">
             <div class="card-body">
                 <h4 class="card-title">
-                    Clasificados Aprovados /
+                    Clasificados Aprobados /
                     <a href="/admin/clasificados" class="btn btn-link"
                         >Clasificados pendientes por aprobar</a
                     >

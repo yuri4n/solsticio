@@ -10,7 +10,8 @@ class Post extends Model
         'user_id', 'title', 'slug', 'excerpt', 'body', 'file', 'status'
     ];
 
-    public function users() {
-        return $this.belongsTo('Solsticio\User');
+    public function users()
+    {
+        return $this . belongsTo('Solsticio\User');
     }
 }

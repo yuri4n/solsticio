@@ -1,9 +1,12 @@
 <?php
+
 namespace Solsticio\Http\Controllers;
-use Solsticio\User;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Solsticio\User;
+
 class AuthController extends Controller
 {
     public function register(Request $request)
@@ -14,10 +17,9 @@ class AuthController extends Controller
             'role' => 'required',
             'torre' => 'required',
             'apartamento' => 'required',
-            'password'  => 'required|min:3|confirmed',
+            'password' => 'required|min:3|confirmed',
         ]);
-        if ($v->fails())
-        {
+        if ($v->fails()) {
             return response()->json([
                 'status' => 'error',
                 'errors' => $v->errors()
@@ -33,6 +35,7 @@ class AuthController extends Controller
         $user->save();
         return response()->json(['status' => 'success', 'redirect' => route('login')], 200);
     }
+
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -41,6 +44,12 @@ class AuthController extends Controller
         }
         return response()->json(['error' => 'login_error'], 401);
     }
+
+    private function guard()
+    {
+        return Auth::guard();
+    }
+
     public function logout()
     {
         $this->guard()->logout();
@@ -49,6 +58,7 @@ class AuthController extends Controller
             'msg' => 'Logged out Successfully.'
         ], 200);
     }
+
     public function user(Request $request)
     {
         $user = User::find(Auth::user()->id);
@@ -57,6 +67,7 @@ class AuthController extends Controller
             'data' => $user
         ]);
     }
+
     public function refresh()
     {
         if ($token = $this->guard()->refresh()) {
@@ -65,9 +76,5 @@ class AuthController extends Controller
                 ->header('Authorization', $token);
         }
         return response()->json(['error' => 'refresh_token_error'], 401);
-    }
-    private function guard()
-    {
-        return Auth::guard();
     }
 }

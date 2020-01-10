@@ -51,6 +51,9 @@ export default {
     components: {
         'date-picker': myDatepicker
     },
+    created() {
+        if (this.$auth.isAuthenticated()) this.getUser();
+    },
     data() {
         return {
             newResponsable: '',
@@ -98,10 +101,19 @@ export default {
                 text: alertMessage,
             })
         },
+        getUser() {
+            var url = "http://solsticio.local/api/auth/user";
+            axios
+                .get(url)
+                .then(response => {
+                    this.user = response.data.data;
+                })
+                .catch();
+        },
         sendReservation() {
             var url = 'http://solsticio.local/api/reservations';
             axios.post(url, {
-                user_id: Math.random() * (29 - 1) + 1,
+                user_id: this.user.id,
                 nombre_responsable: this.newResponsable,
                 additional_info: this.newAditional,
                 fecha_solicitada: this.date.time,

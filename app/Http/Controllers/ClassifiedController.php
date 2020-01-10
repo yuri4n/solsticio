@@ -2,18 +2,19 @@
 
 namespace Solsticio\Http\Controllers;
 
-use Solsticio\Classified;
-use Solsticio\User;
-use Solsticio\Mail\ClassifiedMail;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
+use Solsticio\Classified;
+use Solsticio\Mail\ClassifiedMail;
+use Solsticio\User;
 
 class ClassifiedController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -24,7 +25,7 @@ class ClassifiedController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function admin()
     {
@@ -35,8 +36,8 @@ class ClassifiedController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -50,25 +51,25 @@ class ClassifiedController extends Controller
             'file' => 'nullable',
         ]);
 
-        if($request->file != '') {
+        if ($request->file != '') {
             $exploded = explode(',', $request->file);
             $decoded = base64_decode($exploded[1]);
 
-            if(str_contains($exploded[0], 'jpeg')) {
+            if (str_contains($exploded[0], 'jpeg')) {
                 $extension = 'jpg';
             } else {
                 $extension = 'png';
             }
 
-            $fileName = str_random().'.'.$extension;
+            $fileName = str_random() . '.' . $extension;
 
-            $path = public_path().'/files'.'/'.$fileName;
+            $path = public_path() . '/files' . '/' . $fileName;
 
             file_put_contents($path, $decoded);
 
             Classified::create($request->except('file') + [
-                'file' => 'files/'.$fileName,
-            ]);
+                    'file' => 'files/' . $fileName,
+                ]);
         } else {
             Classified::create($request->except('file'));
         }
@@ -79,8 +80,8 @@ class ClassifiedController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Solsticio\Classified  $classified
-     * @return \Illuminate\Http\Response
+     * @param Classified $classified
+     * @return Response
      */
     public function show($classified)
     {
@@ -91,9 +92,9 @@ class ClassifiedController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Solsticio\Classified  $classified
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Classified $classified
+     * @return Response
      */
     public function update(Request $request, Classified $classified)
     {
@@ -103,9 +104,9 @@ class ClassifiedController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Solsticio\Classified  $classified
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Classified $classified
+     * @return Response
      */
     public function updateStatus(Request $request, $id)
     {
@@ -131,9 +132,9 @@ class ClassifiedController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Solsticio\Classified  $classified
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Classified $classified
+     * @return Response
      */
     public function rejectClassified(Request $request, $id)
     {
@@ -156,8 +157,8 @@ class ClassifiedController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Solsticio\Classified  $classified
-     * @return \Illuminate\Http\Response
+     * @param Classified $classified
+     * @return Response
      */
     public function destroy($id)
     {

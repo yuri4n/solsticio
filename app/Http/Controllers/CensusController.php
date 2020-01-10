@@ -2,18 +2,19 @@
 
 namespace Solsticio\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Maatwebsite\Excel\Facades\Excel;
 use Solsticio\Census;
 use Solsticio\Exports\CensusExport;
 use Solsticio\Exports\CensusPendingExport;
-use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
 
 class CensusController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -24,7 +25,7 @@ class CensusController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function exported()
     {
@@ -35,8 +36,8 @@ class CensusController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -153,8 +154,8 @@ class CensusController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Solsticio\Census  $census
-     * @return \Illuminate\Http\Response
+     * @param Census $census
+     * @return Response
      */
     public function show(Census $census)
     {
@@ -164,9 +165,9 @@ class CensusController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Solsticio\Census  $census
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Census $census
+     * @return Response
      */
     public function update(Request $request, $id)
     {
@@ -190,8 +191,8 @@ class CensusController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Solsticio\Census  $census
-     * @return \Illuminate\Http\Response
+     * @param Census $census
+     * @return Response
      */
     public function destroy($id)
     {

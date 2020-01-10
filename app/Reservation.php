@@ -12,7 +12,7 @@ class Reservation extends Model
 
     public function users()
     {
-        return $this.belongsTo('Solsticio\User');
+        return $this . belongsTo('Solsticio\User');
     }
 
 }

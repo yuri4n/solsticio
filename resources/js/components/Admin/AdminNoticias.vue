@@ -367,7 +367,7 @@ export default {
             var url = "http://solsticio.local/api/posts";
             axios
                 .post(url, {
-                    user_id: 30,
+                    user_id: this.user.id,
                     title: this.newTitle,
                     slug: this.slugify(),
                     excerpt: this.newExcerpt,

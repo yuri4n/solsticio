@@ -129,7 +129,7 @@ export default {
         .then(response => {
           this.sendEmail(user);
           this.readUsers();
-          this.alert("success", "El usuario ha sido aprovado");
+          this.alert("success", "El usuario ha sido aprobado");
         })
         .catch(error => {
           this.alert("error", "Algo ha salido mal");

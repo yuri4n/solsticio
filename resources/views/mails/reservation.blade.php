@@ -1,7 +1,7 @@
 <h3>Hola {{ $data['user']->name }}</h3>
 
 @if ($data['status'] == "APPROVED")
-    <p>Nos complace informarte que tu reserva fue aprovada</p>
+    <p>Nos complace informarte que tu reserva fue aprobada</p>
 @else
     <p>Lastimosamente tu reserva fue rechazada.</p>
     <p>El salón que solicitaste está reservado para ese día o alguno de tus datos era erroneo o poco confiable</p>

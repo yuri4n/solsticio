@@ -3,17 +3,18 @@
 namespace Solsticio\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
+use Solsticio\Mail\ReservationMail;
 use Solsticio\Reservation;
 use Solsticio\User;
-use Solsticio\Mail\ReservationMail;
 
 class ReservationController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -24,7 +25,7 @@ class ReservationController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function approved()
     {
@@ -35,8 +36,8 @@ class ReservationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -54,8 +55,8 @@ class ReservationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Solsticio\Reservation  $reservation
-     * @return \Illuminate\Http\Response
+     * @param Reservation $reservation
+     * @return Response
      */
     public function show($reservation)
     {
@@ -66,9 +67,9 @@ class ReservationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Solsticio\Reservation  $reservation
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Reservation $reservation
+     * @return Response
      */
     public function update(Request $request, $id)
     {
@@ -78,9 +79,9 @@ class ReservationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Solsticio\Reservation  $reservation
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Reservation $reservation
+     * @return Response
      */
     public function updateAndNotify(Request $request, $id)
     {
@@ -106,9 +107,9 @@ class ReservationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Solsticio\Reservation  $reservation
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Reservation $reservation
+     * @return Response
      */
     public function rejectNotify(Request $request, $id)
     {
@@ -131,9 +132,9 @@ class ReservationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Solsticio\Reservation  $reservation
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Reservation $reservation
+     * @return Response
      */
     public function destroy($id)
     {

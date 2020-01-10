@@ -2,15 +2,16 @@
 
 namespace Solsticio\Http\Controllers;
 
-use Solsticio\File;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Solsticio\File;
 
 class FileController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -21,8 +22,8 @@ class FileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -34,25 +35,25 @@ class FileController extends Controller
         $exploded = explode(',', $request->file);
         $decoded = base64_decode($exploded[1]);
 
-        if(str_contains($exploded[0], 'pdf')) {
+        if (str_contains($exploded[0], 'pdf')) {
             $extension = 'pdf';
-        } elseif(str_contains($exploded[0], 'docx')) {
+        } elseif (str_contains($exploded[0], 'docx')) {
             $extension = 'docx';
-        } elseif(str_contains($exploded[0], 'xls')) {
+        } elseif (str_contains($exploded[0], 'xls')) {
             $extension = 'xls';
         } else {
-            $extension = 'cvs';
+            $extension = 'csv';
         }
 
-        $fileName = str_random().'.'.$extension;
+        $fileName = str_random() . '.' . $extension;
 
-        $path = public_path().'/files'.'/'.$fileName;
+        $path = public_path() . '/files' . '/' . $fileName;
 
         file_put_contents($path, $decoded);
 
         File::create($request->except('file') + [
-            'file' => $fileName,
-        ]);
+                'file' => $fileName,
+            ]);
 
         return;
     }
@@ -60,8 +61,8 @@ class FileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Solsticio\File  $file
-     * @return \Illuminate\Http\Response
+     * @param File $file
+     * @return Response
      */
     public function show(File $file)
     {
@@ -71,9 +72,9 @@ class FileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Solsticio\File  $file
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param File $file
+     * @return Response
      */
     public function update(Request $request, $id)
     {
@@ -82,27 +83,27 @@ class FileController extends Controller
             'file' => 'nullable',
         ]);
 
-        if($request->file != '') {
+        if ($request->file != '') {
             $exploded = explode(',', $request->file);
             $decoded = base64_decode($exploded[1]);
 
-            if(str_contains($exploded[0], 'pdf')) {
+            if (str_contains($exploded[0], 'pdf')) {
                 $extension = 'pdf';
-            } else if(str_contains($exploded[0], 'docx')) {
+            } else if (str_contains($exploded[0], 'docx')) {
                 $extension = 'docx';
-            } else if(str_contains($exploded[0], 'xls')) {
+            } else if (str_contains($exploded[0], 'xls')) {
                 $extension = 'xls';
             }
 
-            $fileName = str_random().'.'.$extension;
+            $fileName = str_random() . '.' . $extension;
 
-            $path = public_path().'/files'.'/'.$fileName;
+            $path = public_path() . '/files' . '/' . $fileName;
 
             file_put_contents($path, $decoded);
 
             File::find($id)->update($request->except('file') + [
-                'file' => $fileName,
-            ]);
+                    'file' => $fileName,
+                ]);
         } else {
             File::find($id)->update($request->except('file'));
         }
@@ -113,8 +114,8 @@ class FileController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Solsticio\File  $file
-     * @return \Illuminate\Http\Response
+     * @param File $file
+     * @return Response
      */
     public function destroy($id)
     {

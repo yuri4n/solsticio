@@ -2,15 +2,16 @@
 
 namespace Solsticio\Http\Controllers;
 
-use Solsticio\Parking;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Solsticio\Parking;
 
 class ParkingController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -21,135 +22,144 @@ class ParkingController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
         $this->validate($request, [
             'user_id' => 'required',
-            'fecha'=> 'required',
-            'deudas'=> 'required',
-            'discapacidad'=> 'required',
-            'asignado'=> 'required',
-            'tipo'=> 'required',
-            'numero'=> 'nullable',
+            'fecha' => 'required',
+            'deudas' => 'required',
+            'discapacidad' => 'required',
+            'asignado' => 'nullable',
+            'tipo' => 'required',
+            'numero' => 'nullable',
 
-            'nombre_propietario'=> 'required',
-            'telefono_propietario'=> 'required',
-            'direccion_propietario'=> 'required',
-            'email_propietario'=> 'required',
+            'nombre_propietario' => 'required',
+            'telefono_propietario' => 'required',
+            'direccion_propietario' => 'required',
+            'email_propietario' => 'required',
 
-            'nombre_residente'=> 'required',
-            'telefono_residente'=> 'required',
-            'direccion_residente'=> 'required',
-            'email_residente'=> 'required',
-            'torre'=> 'required',
-            'apartamento'=> 'required',
+            'nombre_residente' => 'required',
+            'telefono_residente' => 'required',
+            'direccion_residente' => 'required',
+            'email_residente' => 'required',
+            'torre' => 'required',
+            'apartamento' => 'required',
 
-            'cedula'=> 'required',
-            'tarjeta_propiedad'=> 'required',
-            'soat'=> 'required',
-            'autorizacion'=> 'nullable',
+            'cedula' => 'required',
+            'tarjeta_propiedad' => 'required',
+            'soat' => 'required',
+            'autorizacion' => 'nullable',
 
-            'placa1'=> 'required',
-            'color1'=> 'required',
-            'clase1'=> 'required',
-            'marca1'=> 'required',
-            'modelo1'=> 'required',
+            'placa1' => 'required',
+            'color1' => 'required',
+            'clase1' => 'required',
+            'marca1' => 'required',
+            'modelo1' => 'required',
 
-            'placa2'=> 'nullable',
-            'color2'=> 'nullable',
-            'clase2'=> 'nullable',
-            'marca2'=> 'nullable',
-            'modelo2'=> 'nullable',
+            'placa2' => 'nullable',
+            'color2' => 'nullable',
+            'clase2' => 'nullable',
+            'marca2' => 'nullable',
+            'modelo2' => 'nullable',
 
-            'placa3'=> 'nullable',
-            'color3'=> 'nullable',
-            'clase3'=> 'nullable',
-            'marca3'=> 'nullable',
-            'modelo3'=> 'nullable',
+            'placa3' => 'nullable',
+            'color3' => 'nullable',
+            'clase3' => 'nullable',
+            'marca3' => 'nullable',
+            'modelo3' => 'nullable',
 
-            'diligenciador'=> 'required',
-            'documento'=> 'required'
+            'diligenciador' => 'required',
+            'documento' => 'required'
         ]);
 
-        //Cedula
+        // CEDULA
         $exploded_cedula = explode(',', $request->cedula);
         $decoded_cedula = base64_decode($exploded_cedula[1]);
 
-        if(str_contains($exploded_cedula[0], 'pdf')) {
+        if (str_contains($exploded_cedula[0], 'pdf')) {
             $extension_cedula = 'pdf';
-        } else {
+        } elseif (str_contains($exploded_cedula[0], 'png')) {
             $extension_cedula = 'png';
+        } elseif (str_contains($exploded_cedula[0], 'jpg')) {
+            $extension_cedula = 'jpg';
         }
 
-        $fileName_cedula = str_random().'.'.$extension_cedula;
+        $fileName_cedula = str_random() . '.' . $extension_cedula;
 
-        $path_cedula = public_path().'/files'.'/'.$fileName_cedula;
+        $path_cedula = public_path() . '/files' . '/' . $fileName_cedula;
 
-        file_put_contents($path_cedula, $decoded_cedula);
+        file_put_contents($path_cedula, $fileName_cedula);
 
-        //tarjeta_propiedad
+        // TARJETA DE PROPIEDAD
         $exploded_tarjeta = explode(',', $request->tarjeta_propiedad);
         $decoded_tarjeta = base64_decode($exploded_tarjeta[1]);
 
-        if(str_contains($exploded_tarjeta[0], 'pdf')) {
+        if (str_contains($exploded_tarjeta[0], 'pdf')) {
             $extension_tarjeta = 'pdf';
-        } else {
+        } elseif (str_contains($exploded_tarjeta[0], 'png')) {
             $extension_tarjeta = 'png';
+        } elseif (str_contains($exploded_tarjeta[0], 'jpg')) {
+            $extension_tarjeta = 'jpg';
         }
 
-        $fileName_tarjeta = str_random().'.'.$extension_tarjeta;
+        $fileName_tarjeta = str_random() . '.' . $extension_tarjeta;
 
-        $path_tarjeta = public_path().'/files'.'/'.$fileName_tarjeta;
+        $path_tarjeta = public_path() . '/files' . '/' . $fileName_tarjeta;
 
-        file_put_contents($path_tarjeta, $decoded_tarjeta);
+        file_put_contents($path_tarjeta, $fileName_tarjeta);
 
-        //soat
+        // SOAT
         $exploded_soat = explode(',', $request->soat);
         $decoded_soat = base64_decode($exploded_soat[1]);
 
-        if(str_contains($exploded_soat[0], 'pdf')) {
+        if (str_contains($exploded_soat[0], 'pdf')) {
             $extension_soat = 'pdf';
-        } else {
+        } elseif (str_contains($exploded_soat[0], 'png')) {
             $extension_soat = 'png';
+        } elseif (str_contains($exploded_soat[0], 'jpg')) {
+            $extension_soat = 'jpg';
         }
 
-        $fileName_soat = str_random().'.'.$extension_soat;
+        $fileName_soat = str_random() . '.' . $extension_soat;
 
-        $path_soat = public_path().'/files'.'/'.$fileName_soat;
+        $path_soat = public_path() . '/files' . '/' . $fileName_soat;
 
-        file_put_contents($path_soat, $decoded_soat);
+        file_put_contents($path_soat, $fileName_soat);
 
-        if($request->autorizacion != '') {
+        // AUTORIZACION
+        if ($request->autorizacion != '') {
             $exploded_autorizacion = explode(',', $request->autorizacion);
             $decoded_autorizacion = base64_decode($exploded_autorizacion[1]);
 
-            if(str_contains($exploded_autorizacion[0], 'pdf')) {
+            if (str_contains($exploded_autorizacion[0], 'pdf')) {
                 $extension_autorizacion = 'pdf';
-            } else {
+            } elseif (str_contains($exploded_autorizacion[0], 'png')) {
                 $extension_autorizacion = 'png';
+            } elseif (str_contains($exploded_autorizacion[0], 'jpg')) {
+                $extension_autorizacion = 'jpg';
             }
 
-            $fileName_autorizacion = str_random().'.'.$extension_autorizacion;
+            $fileName_autorizacion = str_random() . '.' . $extension_autorizacion;
 
-            $path_autorizacion = public_path().'/files'.'/'.$fileName_autorizacion;
+            $path_autorizacion = public_path() . '/files' . '/' . $fileName_autorizacion;
 
-            file_put_contents($path_autorizacion, $decoded_autorizacion);
-            
-            Parking::create($request->except(['cedula','tarjeta_propiedad','soat', 'autorizacion']) + [
-                'cedula' => 'files/'.$fileName_cedula,
-                'tarjeta_propiedad' => 'files/'.$fileName_tarjeta,
-                'soat' => 'files/'.$fileName_soat,
-                'autorizacion' => 'files/'.$fileName_autorizacion,
-            ]);
+            file_put_contents($path_autorizacion, $fileName_autorizacion);
+
+            Parking::create($request->except(['cedula', 'tarjeta_propiedad', 'soat', 'autorizacion']) + [
+                    'cedula' => $fileName_cedula,
+                    'tarjeta_propiedad' => $fileName_tarjeta,
+                    'soat' => $fileName_soat,
+                    'autorizacion' => $fileName_autorizacion,
+                ]);
         } else {
-            Parking::create($request->except(['cedula','tarjeta_propiedad','soat']) + [
-                'cedula' => 'files/'.$fileName_cedula,
-                'tarjeta_propiedad' => 'files/'.$fileName_tarjeta,
-                'soat' => 'files/'.$fileName_soat,
-            ]);
+            Parking::create($request->except(['cedula', 'tarjeta_propiedad', 'soat']) + [
+                    'cedula' => $fileName_cedula,
+                    'tarjeta_propiedad' => $fileName_tarjeta,
+                    'soat' => $fileName_soat,
+                ]);
         }
 
 
@@ -159,8 +169,8 @@ class ParkingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Solsticio\Parking  $parking
-     * @return \Illuminate\Http\Response
+     * @param Parking $parking
+     * @return Response
      */
     public function show(Parking $parking)
     {
@@ -170,9 +180,9 @@ class ParkingController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Solsticio\Parking  $parking
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Parking $parking
+     * @return Response
      */
     public function update(Request $request, Parking $parking)
     {
@@ -182,8 +192,8 @@ class ParkingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Solsticio\Parking  $parking
-     * @return \Illuminate\Http\Response
+     * @param Parking $parking
+     * @return Response
      */
     public function destroy(Parking $parking)
     {

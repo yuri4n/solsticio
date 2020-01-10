@@ -12,12 +12,12 @@ class Classified extends Model
 
     public function users()
     {
-        return $this.belongsTo('Solsticio\User');
+        return $this . belongsTo('Solsticio\User');
     }
-    
+
     public function categories()
     {
-        return $this.belongsTo('Solsticio\Category');
+        return $this . belongsTo('Solsticio\Category');
     }
-   
+
 }

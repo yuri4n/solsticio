@@ -9,7 +9,7 @@
             <div class="card-body">
                 <h4 class="card-title">
                     Listado de peticiones de salones /
-                    <a href="/admin/servicios/aprovadas" class="btn btn-link"
+                    <a href="/admin/servicios/aprobadas" class="btn btn-link"
                         >Listado de peticiones aprobadas</a
                     >
                 </h4>
@@ -41,13 +41,14 @@
                             <td>{{ typeToName(reservation.type) }}</td>
                             <td>{{ reservation.nombre_responsable }}</td>
                             <td>
-                                <a
+                                <button
                                     @click.prevent="
                                         showUserDetail(reservation.user_id)
                                     "
                                     class="btn btn-link"
-                                    >{{ reservation.user_id }}</a
                                 >
+                                    {{ reservation.user_id }}
+                                </button>
                             </td>
                             <td>
                                 <button
@@ -75,7 +76,7 @@
             </div>
         </div>
 
-        <!-- MODAL -->
+        <!-- RESERVATION DETAIL -->
         <div
             class="modal fade"
             id="detail-petition"
@@ -348,7 +349,7 @@ export default {
                 .then(response => {
                     this.alert(
                         "success",
-                        "La reservación ha sido aprovada y ahora se le notificará al usuario"
+                        "La reservación ha sido aprobada y ahora se le notificará al usuario"
                     );
                     this.readReservations();
                 })
