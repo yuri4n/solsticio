@@ -22,7 +22,7 @@
                         >
                             <div class="form-row">
                                 <div class="form-group col-md-4">
-                                    <label for="deudas"
+                                    <label
                                         >¿Tiene deudas con la
                                         administración?</label
                                     >
@@ -35,7 +35,7 @@
                                     ></v-select>
                                 </div>
                                 <div class="form-group col-md-4 text-center">
-                                    <label for="vehiculo"
+                                    <label
                                         >¿Qué tipo de vehículos tiene?</label
                                     >
                                     <p-check
@@ -50,7 +50,7 @@
                                     >
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label for="discapacidad"
+                                    <label
                                         >¿Su vehículo posee placas de
                                         discapacidad?</label
                                     >
@@ -65,7 +65,7 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="asignado"
+                                    <label
                                         >¿Posee actualmente parqueadero
                                         asignado?</label
                                     >
@@ -91,7 +91,7 @@
                             <hr />
                             <div class="form-row">
                                 <div class="form-group col-md-4">
-                                    <label for="tipo">Es usted:</label>
+                                    <label >Es usted:</label>
                                     <v-select
                                         v-model="tipo"
                                         :options="[

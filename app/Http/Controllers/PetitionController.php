@@ -4,7 +4,10 @@ namespace Solsticio\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
+use Solsticio\Mail\PetitionMail;
 use Solsticio\Petition;
+use Solsticio\User;
 
 class PetitionController extends Controller
 {
@@ -16,6 +19,17 @@ class PetitionController extends Controller
     public function index()
     {
         $petitions = Petition::orderBy('id', 'DESC')->where('status', 'PENDING')->paginate(25);
+        return $petitions;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function approved()
+    {
+        $petitions = Petition::orderBy('id', 'DESC')->where('status', 'APPROVED')->paginate(25);
         return $petitions;
     }
 
@@ -55,9 +69,25 @@ class PetitionController extends Controller
      * @param Petition $petition
      * @return Response
      */
-    public function update(Request $request, Petition $petition)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'status' => 'required',
+            'petition' => 'required',
+        ]);
+
+        $petition = $request->petition;
+        $user = User::find($petition['user_id'])->first();
+
+        $data = array(
+            'user' => $user,
+            'petition' => $petition,
+            'status' => $request->status,
+        );
+
+        Petition::find($id)->update(['status' => $request->status]);
+
+        Mail::to($user->email)->send(new PetitionMail($data));
     }
 
     /**
@@ -72,5 +102,30 @@ class PetitionController extends Controller
         if ($petition) {
             $petition->delete();
         }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @param Petition $petition
+     * @return Response
+     */
+    public function rejectNotify(Request $request, $id)
+    {
+        $this->validate($request, [
+            'petition' => 'required'
+        ]);
+
+        $petition = $request->petition;
+        $user = User::find($petition['user_id'])->first();
+
+        $data = array(
+            'user' => $user,
+            'petition' => $petition,
+            'status' => 'REJECTED',
+        );
+
+        Mail::to($user->email)->send(new PetitionMail($data));
     }
 }

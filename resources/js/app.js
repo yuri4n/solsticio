@@ -55,7 +55,7 @@ Vue.component('adminreservacionesapproved', require('./components/Admin/AdminRes
 Vue.component('adminarchivos', require('./components/Admin/AdminArchivos.vue').default);
 Vue.component('adminclassifieds', require('./components/Admin/AdminClassifieds.vue').default);
 Vue.component('adminclassifieds_approved', require('./components/Admin/AdminClassifiedsApproved.vue').default);
-Vue.component('adminpeticiones', require('./components/Admin/AdminPeticiones.vue').default);
+Vue.component('adminpetitions', require('./components/Admin/AdminPetitions.vue').default);
 Vue.component('adminpetitions_approved', require('./components/Admin/AdminPetitionsApproved.vue').default);
 Vue.component('admincenso', require('./components/Admin/AdminCenso.vue').default);
 Vue.component('admincensuses_exported', require('./components/Admin/AdminCensusesExported.vue').default);

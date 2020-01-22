@@ -36,8 +36,12 @@ Route::put('/approved/reservations/{reservation}', 'ReservationController@update
 Route::put('/reject/reservations/{reservation}', 'ReservationController@rejectNotify');
 
 Route::resource('petitions', 'PetitionController', array('except' => array('create', 'edit')));
+Route::put('/reject/petitions/{petition}', 'PetitionController@rejectNotify');
+Route::get('/approved/petitions', 'PetitionController@approved');
 
 Route::resource('parkings', 'ParkingController', array('except' => array('create', 'edit')));
+Route::put('/reject/parkings/{parking}', 'ParkingController@rejectNotify');
+Route::get('/approved/parkings', 'ParkingController@approved');
 
 Route::resource('censuses', 'CensusController', array('except' => array('create', 'edit')));
 Route::get('exported/censuses/', 'CensusController@exported');

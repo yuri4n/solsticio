@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class UserMail extends Mailable
+class PetitionMail extends Mailable
 {
     use Queueable, SerializesModels;
     public $data;
@@ -28,6 +28,6 @@ class UserMail extends Mailable
      */
     public function build()
     {
-        return $this->from('juliangarzondeveloper@gmail.com')->subject('Estado de tu usuario Solsticio Etapa 5')->view('mails/user')->with('data', $this->data);
+        return $this->from('juliangarzondeveloper@gmail.com')->subject('Estado de petición Solsticio Etapa 5')->view('mails/petition')->with('data', $this->data);
     }
 }

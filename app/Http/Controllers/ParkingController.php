@@ -4,7 +4,10 @@ namespace Solsticio\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
+use Solsticio\Mail\ParkingMail;
 use Solsticio\Parking;
+use Solsticio\User;
 
 class ParkingController extends Controller
 {
@@ -16,6 +19,17 @@ class ParkingController extends Controller
     public function index()
     {
         $parkings = Parking::orderBy('id', 'DESC')->where('status', 'PENDING')->paginate(25);
+        return $parkings;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function approved()
+    {
+        $parkings = Parking::orderBy('id', 'DESC')->where('status', 'APPROVED')->paginate(25);
         return $parkings;
     }
 
@@ -184,9 +198,25 @@ class ParkingController extends Controller
      * @param Parking $parking
      * @return Response
      */
-    public function update(Request $request, Parking $parking)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'status' => 'required',
+            'petition' => 'required',
+        ]);
+
+        $parking = $request->petition;
+        $user = User::find($parking['user_id'])->first();
+
+        $data = array(
+            'user' => $user,
+            'parking' => $parking,
+            'status' => $request->status,
+        );
+
+        Parking::find($id)->update(['status' => $request->status]);
+
+        Mail::to($user->email)->send(new ParkingMail($data));
     }
 
     /**
@@ -195,8 +225,36 @@ class ParkingController extends Controller
      * @param Parking $parking
      * @return Response
      */
-    public function destroy(Parking $parking)
+    public function destroy($id)
     {
-        //
+        $parking = Parking::find($id);
+        if ($parking) {
+            $parking->delete();
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @param Parking $parking
+     * @return Response
+     */
+    public function rejectNotify(Request $request, $id)
+    {
+        $this->validate($request, [
+            'petition' => 'required'
+        ]);
+
+        $parking = $request->petition;
+        $user = User::find($parking['user_id'])->first();
+
+        $data = array(
+            'user' => $user,
+            'parking' => $parking,
+            'status' => 'REJECTED',
+        );
+
+        Mail::to($user->email)->send(new ParkingMail($data));
     }
 }

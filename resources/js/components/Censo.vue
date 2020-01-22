@@ -77,7 +77,7 @@
                                     v-model="nombre_propietario"
                                     type="text"
                                     class="form-control"
-                                    id="nombre"
+                                    id="nombre_propietario"
                                     autocomplete="off"
                                 />
                             </div>
@@ -89,7 +89,7 @@
                                     v-model="email_propietario"
                                     type="email"
                                     class="form-control"
-                                    id="email"
+                                    id="email_propietario"
                                     placeholder="Email"
                                 />
                             </div>
@@ -288,7 +288,7 @@
                         </p>
                         <h5>Residente 1</h5>
                         <div class="form-group">
-                            <label for="name">Nombre Completo</label>
+                            <label for="name1">Nombre Completo</label>
                             <input
                                 v-model="residente1"
                                 type="text"

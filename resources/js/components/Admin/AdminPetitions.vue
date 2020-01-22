@@ -1,7 +1,7 @@
 <template>
     <div
         class="container my-5"
-        v-if="$auth.isAuthenticated() && user.role == 'ADMIN'"
+        v-if="$auth.isAuthenticated() && user.role === 'ADMIN'"
     >
         <notifications group="foo" position="bottom left" :speed="500" />
         <div class="card text-left mb-3">
@@ -75,7 +75,12 @@
                                 </button>
                             </td>
                             <td>
-                                <button class="btn btn-success">Aprobar</button>
+                                <button
+                                    @click.prevent="approvePetition(petition)"
+                                    class="btn btn-success"
+                                >
+                                    Aprobar
+                                </button>
                             </td>
                             <td>
                                 <button
@@ -124,7 +129,12 @@
                                 </button>
                             </td>
                             <td>
-                                <button class="btn btn-success">Aprobar</button>
+                                <button
+                                    @click.prevent="approvePetition(petition)"
+                                    class="btn btn-success"
+                                >
+                                    Aprobar
+                                </button>
                             </td>
                             <td>
                                 <button
@@ -393,7 +403,9 @@
                                 <br />
                                 <a
                                     class="btn btn-primary"
-                                    :href="'/files/' + this.currentPetition.soat"
+                                    :href="
+                                        '/files/' + this.currentPetition.soat
+                                    "
                                     download
                                     >Descargar</a
                                 >
@@ -412,6 +424,196 @@
                                     download
                                     >Descargar</a
                                 >
+                            </div>
+                        </div>
+                        <h3>Datos vehículo 1:</h3>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="font-weight-bold">Placa: </span>
+                                <br />
+                                <p>
+                                    {{
+                                        this.currentPetition.placa1
+                                            ? this.currentPetition.placa1
+                                            : "N/a"
+                                    }}
+                                </p>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="font-weight-bold">Color: </span>
+                                <br />
+                                <p>
+                                    {{
+                                        this.currentPetition.color1
+                                            ? this.currentPetition.color1
+                                            : "N/a"
+                                    }}
+                                </p>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="font-weight-bold">Clase: </span>
+                                <br />
+                                <p>
+                                    {{
+                                        this.currentPetition.clase1
+                                            ? this.currentPetition.clase1
+                                            : "N/a"
+                                    }}
+                                </p>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="font-weight-bold">Marca: </span>
+                                <br />
+                                <p>
+                                    {{
+                                        this.currentPetition.marca1
+                                            ? this.currentPetition.marca1
+                                            : "N/a"
+                                    }}
+                                </p>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="font-weight-bold">Modelo: </span>
+                                <br />
+                                <p>
+                                    {{
+                                        this.currentPetition.modelo1
+                                            ? this.currentPetition.modelo1
+                                            : "N/a"
+                                    }}
+                                </p>
+                            </div>
+                        </div>
+                        <h3>Datos vehículo 2:</h3>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="font-weight-bold">Placa: </span>
+                                <br />
+                                <p>
+                                    {{
+                                        this.currentPetition.placa2
+                                            ? this.currentPetition.placa2
+                                            : "N/a"
+                                    }}
+                                </p>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="font-weight-bold">Color: </span>
+                                <br />
+                                <p>
+                                    {{
+                                        this.currentPetition.color2
+                                            ? this.currentPetition.color2
+                                            : "N/a"
+                                    }}
+                                </p>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="font-weight-bold">Clase: </span>
+                                <br />
+                                <p>
+                                    {{
+                                        this.currentPetition.clase2
+                                            ? this.currentPetition.clase2
+                                            : "N/a"
+                                    }}
+                                </p>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="font-weight-bold">Marca: </span>
+                                <br />
+                                <p>
+                                    {{
+                                        this.currentPetition.marca2
+                                            ? this.currentPetition.marca2
+                                            : "N/a"
+                                    }}
+                                </p>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="font-weight-bold">Modelo: </span>
+                                <br />
+                                <p>
+                                    {{
+                                        this.currentPetition.modelo2
+                                            ? this.currentPetition.modelo2
+                                            : "N/a"
+                                    }}
+                                </p>
+                            </div>
+                        </div>
+                        <h3>Datos vehículo 3:</h3>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="font-weight-bold">Placa: </span>
+                                <br />
+                                <p>
+                                    {{
+                                        this.currentPetition.placa3
+                                            ? this.currentPetition.placa3
+                                            : "N/a"
+                                    }}
+                                </p>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="font-weight-bold">Color: </span>
+                                <br />
+                                <p>
+                                    {{
+                                        this.currentPetition.color3
+                                            ? this.currentPetition.color3
+                                            : "N/a"
+                                    }}
+                                </p>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="font-weight-bold">Clase: </span>
+                                <br />
+                                <p>
+                                    {{
+                                        this.currentPetition.clase3
+                                            ? this.currentPetition.clase3
+                                            : "N/a"
+                                    }}
+                                </p>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="font-weight-bold">Marca: </span>
+                                <br />
+                                <p>
+                                    {{
+                                        this.currentPetition.marca3
+                                            ? this.currentPetition.marca3
+                                            : "N/a"
+                                    }}
+                                </p>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="font-weight-bold">Modelo: </span>
+                                <br />
+                                <p>
+                                    {{
+                                        this.currentPetition.modelo3
+                                            ? this.currentPetition.modelo3
+                                            : "N/a"
+                                    }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span class="font-weight-bold"
+                                    >Diligenciador:
+                                </span>
+                                <br />
+                                <p>{{ this.currentPetition.diligenciador }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <span class="font-weight-bold"
+                                    >Documento:
+                                </span>
+                                <br />
+                                <p>{{ this.currentPetition.documento }}</p>
                             </div>
                         </div>
                     </div>
@@ -541,7 +743,7 @@ export default {
             });
         },
         getUser() {
-            var url = "http://solsticio.local/api/auth/user";
+            const url = "http://solsticio.local/api/auth/user";
             axios
                 .get(url)
                 .then(response => {
@@ -565,22 +767,12 @@ export default {
                 .catch(err => console.log(err));
         },
         makePagination(meta) {
-            let pagination = {
+            this.pagination = {
                 current_page: meta.current_page,
                 last_page: meta.last_page,
                 next_page_url: meta.next_page_url,
                 prev_page_url: meta.prev_page_url
             };
-            this.pagination = pagination;
-        },
-        getUser() {
-            var url = "http://solsticio.local/api/auth/user";
-            axios
-                .get(url)
-                .then(response => {
-                    this.user = response.data.data;
-                })
-                .catch();
         },
         showUserDetail(id) {
             let url = `/api/users/${id}`;
@@ -602,23 +794,67 @@ export default {
             this.generic = !this.generic;
             this.readPetitions();
         },
+        approvePetition(petition) {
+            let url;
+            if (this.generic) {
+                url = `/api/petitions/${petition.id}`;
+            } else {
+                url = `/api/parkings/${petition.id}`;
+            }
+
+            axios
+                .put(url, {
+                    status: "APPROVED",
+                    petition
+                })
+                .then(response => {
+                    this.alert(
+                        "success",
+                        "La petición ha sido aprovada y el usuario notificado"
+                    );
+                    this.readPetitions();
+                })
+                .catch(error => {
+                    this.alert("error", "Algo ha salido mal");
+                });
+        },
         rejectPetition(petition) {
-            var url = "http://solsticio.local/api/petitions/" + petition.id;
-            var confirmacion = confirm(
+            let url;
+            if (this.generic) {
+                url = `/api/reject/petitions/${petition.id}`;
+            } else {
+                url = `/api/reject/parkings/${petition.id}`;
+            }
+            const confirmacion = confirm(
                 `¿Seguro que desea rechazar la petición ${petition.id} y notificar al usuario?`
             );
             if (confirmacion) {
-                axios.delete(url).then(response => {
-                    this.alert(
-                        "warn",
-                        `La petición ${petition.id} ha sido rechazada`
-                    );
-                    this.readPetitions();
-                });
+                axios
+                    .put(url, {
+                        petition
+                    })
+                    .then(response => {
+                        this.deletePetition(petition);
+                        this.alert(
+                            "warn",
+                            `La petición ${petition.id} ha sido rechazada y el usuario notificado`
+                        );
+                        this.readPetitions();
+                    });
             }
+        },
+        deletePetition(petition) {
+            let url;
+            if (this.generic) {
+                url = `/api/petitions/${petition.id}`;
+            } else {
+                url = `/api/parkings/${petition.id}`;
+            }
+            axios
+                .delete(url)
+                .then()
+                .catch();
         }
     }
 };
 </script>
-
-<style scoped></style>

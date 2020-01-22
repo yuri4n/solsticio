@@ -3650,19 +3650,217 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminPeticiones.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/AdminPeticiones.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminPetitions.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/AdminPetitions.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var _methods;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4195,7 +4393,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       currentPetition: {}
     };
   },
-  methods: (_methods = {
+  methods: {
     alert: function alert(alertType, alertMessage) {
       this.$notify({
         group: "foo",
@@ -4231,51 +4429,900 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     makePagination: function makePagination(meta) {
-      var pagination = {
+      this.pagination = {
         current_page: meta.current_page,
         last_page: meta.last_page,
         next_page_url: meta.next_page_url,
         prev_page_url: meta.prev_page_url
       };
-      this.pagination = pagination;
-    }
-  }, _defineProperty(_methods, "getUser", function getUser() {
-    var _this3 = this;
+    },
+    showUserDetail: function showUserDetail(id) {
+      var _this3 = this;
 
-    var url = "http://solsticio.local/api/auth/user";
-    axios.get(url).then(function (response) {
-      _this3.user = response.data.data;
-    }).catch();
-  }), _defineProperty(_methods, "showUserDetail", function showUserDetail(id) {
-    var _this4 = this;
-
-    var url = "/api/users/".concat(id);
-    axios.get(url).then(function (response) {
-      _this4.currentUser = response.data.user;
-    }).catch(function (err) {
-      return console.log(err);
-    });
-    $("#detail-user").modal("show");
-  }), _defineProperty(_methods, "showDetail", function showDetail(petition) {
-    this.currentPetition = petition;
-    this.generic ? $("#detail-generic").modal("show") : $("#detail-parking").modal("show");
-  }), _defineProperty(_methods, "toggleParking", function toggleParking() {
-    this.generic = !this.generic;
-    this.readPetitions();
-  }), _defineProperty(_methods, "rejectPetition", function rejectPetition(petition) {
-    var _this5 = this;
-
-    var url = "http://solsticio.local/api/petitions/" + petition.id;
-    var confirmacion = confirm("\xBFSeguro que desea rechazar la petici\xF3n ".concat(petition.id, " y notificar al usuario?"));
-
-    if (confirmacion) {
-      axios.delete(url).then(function (response) {
-        _this5.alert("warn", "La petici\xF3n ".concat(petition.id, " ha sido rechazada"));
-
-        _this5.readPetitions();
+      var url = "/api/users/".concat(id);
+      axios.get(url).then(function (response) {
+        _this3.currentUser = response.data.user;
+      }).catch(function (err) {
+        return console.log(err);
       });
+      $("#detail-user").modal("show");
+    },
+    showDetail: function showDetail(petition) {
+      this.currentPetition = petition;
+      this.generic ? $("#detail-generic").modal("show") : $("#detail-parking").modal("show");
+    },
+    toggleParking: function toggleParking() {
+      this.generic = !this.generic;
+      this.readPetitions();
+    },
+    approvePetition: function approvePetition(petition) {
+      var _this4 = this;
+
+      var url;
+
+      if (this.generic) {
+        url = "/api/petitions/".concat(petition.id);
+      } else {
+        url = "/api/parkings/".concat(petition.id);
+      }
+
+      axios.put(url, {
+        status: "APPROVED",
+        petition: petition
+      }).then(function (response) {
+        _this4.alert("success", "La petición ha sido aprovada y el usuario notificado");
+
+        _this4.readPetitions();
+      }).catch(function (error) {
+        _this4.alert("error", "Algo ha salido mal");
+      });
+    },
+    rejectPetition: function rejectPetition(petition) {
+      var _this5 = this;
+
+      var url;
+
+      if (this.generic) {
+        url = "/api/reject/petitions/".concat(petition.id);
+      } else {
+        url = "/api/reject/parkings/".concat(petition.id);
+      }
+
+      var confirmacion = confirm("\xBFSeguro que desea rechazar la petici\xF3n ".concat(petition.id, " y notificar al usuario?"));
+
+      if (confirmacion) {
+        axios.put(url, {
+          petition: petition
+        }).then(function (response) {
+          _this5.deletePetition(petition);
+
+          _this5.alert("warn", "La petici\xF3n ".concat(petition.id, " ha sido rechazada y el usuario notificado"));
+
+          _this5.readPetitions();
+        });
+      }
+    },
+    deletePetition: function deletePetition(petition) {
+      var url;
+
+      if (this.generic) {
+        url = "/api/petitions/".concat(petition.id);
+      } else {
+        url = "/api/parkings/".concat(petition.id);
+      }
+
+      axios.delete(url).then().catch();
     }
-  }), _methods)
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminPetitionsApproved.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/AdminPetitionsApproved.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  created: function created() {
+    if (this.$auth.isAuthenticated()) this.getUser();
+    this.readPetitions();
+  },
+  data: function data() {
+    return {
+      petitions: [],
+      pagination: {},
+      user: {},
+      generic: true,
+      currentUser: {},
+      currentPetition: {}
+    };
+  },
+  methods: {
+    alert: function alert(alertType, alertMessage) {
+      this.$notify({
+        group: "foo",
+        type: alertType,
+        title: "BIEN",
+        text: alertMessage
+      });
+    },
+    getUser: function getUser() {
+      var _this = this;
+
+      var url = "http://solsticio.local/api/auth/user";
+      axios.get(url).then(function (response) {
+        _this.user = response.data.data;
+      }).catch();
+    },
+    readPetitions: function readPetitions(page_url) {
+      var _this2 = this;
+
+      var vm = this;
+
+      if (this.generic) {
+        page_url = page_url || "/api/approved/petitions";
+      } else {
+        page_url = page_url || "/api/approved/parkings";
+      }
+
+      axios.get(page_url).then(function (response) {
+        _this2.petitions = response.data.data;
+        vm.makePagination(response.data);
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    makePagination: function makePagination(meta) {
+      this.pagination = {
+        current_page: meta.current_page,
+        last_page: meta.last_page,
+        next_page_url: meta.next_page_url,
+        prev_page_url: meta.prev_page_url
+      };
+    },
+    showUserDetail: function showUserDetail(id) {
+      var _this3 = this;
+
+      var url = "/api/users/".concat(id);
+      axios.get(url).then(function (response) {
+        _this3.currentUser = response.data.user;
+      }).catch(function (err) {
+        return console.log(err);
+      });
+      $("#detail-user").modal("show");
+    },
+    showDetail: function showDetail(petition) {
+      this.currentPetition = petition;
+      this.generic ? $("#detail-generic").modal("show") : $("#detail-parking").modal("show");
+    },
+    toggleParking: function toggleParking() {
+      this.generic = !this.generic;
+      this.readPetitions();
+    },
+    rejectPetition: function rejectPetition(petition) {
+      var _this4 = this;
+
+      var url;
+
+      if (this.generic) {
+        url = "/api/petitions/" + petition.id;
+      } else {
+        url = "/api/parkings/" + petition.id;
+      }
+
+      var confirmacion = confirm("\xBFSeguro que desea eliminar la petici\xF3n ".concat(petition.id, "?"));
+
+      if (confirmacion) {
+        axios.delete(url).then(function (response) {
+          _this4.alert("warn", "La petici\xF3n ".concat(petition.id, " ha sido eliminada"));
+
+          _this4.readPetitions();
+        });
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -15511,25 +16558,6 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 // module
 exports.push([module.i, "\n#logout[data-v-e366b9f8] {\r\n  color: #fff !important;\r\n  font-weight: bold !important;\n}\r\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminPeticiones.vue?vue&type=style&index=0&id=52d4be51&scoped=true&lang=css&":
-/*!***************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/AdminPeticiones.vue?vue&type=style&index=0&id=52d4be51&scoped=true&lang=css& ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -64992,36 +66020,6 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminPeticiones.vue?vue&type=style&index=0&id=52d4be51&scoped=true&lang=css&":
-/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/AdminPeticiones.vue?vue&type=style&index=0&id=52d4be51&scoped=true&lang=css& ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./AdminPeticiones.vue?vue&type=style&index=0&id=52d4be51&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminPeticiones.vue?vue&type=style&index=0&id=52d4be51&scoped=true&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminUsuarios.vue?vue&type=style&index=0&id=68e25f0e&scoped=true&lang=css&":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/AdminUsuarios.vue?vue&type=style&index=0&id=68e25f0e&scoped=true&lang=css& ***!
@@ -71044,10 +72042,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminPeticiones.vue?vue&type=template&id=52d4be51&scoped=true&":
-/*!************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/AdminPeticiones.vue?vue&type=template&id=52d4be51&scoped=true& ***!
-  \************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminPetitions.vue?vue&type=template&id=79cfa59e&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/AdminPetitions.vue?vue&type=template&id=79cfa59e& ***!
+  \***********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -71059,7 +72057,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.$auth.isAuthenticated() && _vm.user.role == "ADMIN"
+  return _vm.$auth.isAuthenticated() && _vm.user.role === "ADMIN"
     ? _c(
         "div",
         { staticClass: "container my-5" },
@@ -71192,7 +72190,25 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _vm._m(1, true),
+                          _c("td", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-success",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.approvePetition(petition)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                Aprobar\n                            "
+                                )
+                              ]
+                            )
+                          ]),
                           _vm._v(" "),
                           _c("td", [
                             _c(
@@ -71219,7 +72235,7 @@ var render = function() {
                     )
                   ])
                 : _c("table", { staticClass: "table table-striped" }, [
-                    _vm._m(2),
+                    _vm._m(1),
                     _vm._v(" "),
                     _c(
                       "tbody",
@@ -71277,7 +72293,25 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _vm._m(3, true),
+                          _c("td", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-success",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.approvePetition(petition)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                Aprobar\n                            "
+                                )
+                              ]
+                            )
+                          ]),
                           _vm._v(" "),
                           _c("td", [
                             _c(
@@ -71321,7 +72355,7 @@ var render = function() {
             [
               _c("div", { staticClass: "modal-dialog modal-lg" }, [
                 _c("div", { staticClass: "modal-content" }, [
-                  _vm._m(4),
+                  _vm._m(2),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
                     _c("h4", { staticClass: "mt-2 mb-3" }, [
@@ -71380,7 +72414,7 @@ var render = function() {
             [
               _c("div", { staticClass: "modal-dialog modal-lg" }, [
                 _c("div", { staticClass: "modal-content" }, [
-                  _vm._m(5),
+                  _vm._m(3),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
                     _c("div", { staticClass: "row" }, [
@@ -71475,7 +72509,7 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _vm._m(6),
+                    _vm._m(4),
                     _vm._v(" "),
                     _c("div", { staticClass: "row" }, [
                       _c("div", { staticClass: "col-md-6" }, [
@@ -71549,7 +72583,7 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _vm._m(7),
+                    _vm._m(5),
                     _vm._v(" "),
                     _c("div", { staticClass: "row" }, [
                       _c("div", { staticClass: "col-md-6" }, [
@@ -71728,6 +72762,344 @@ var render = function() {
                           [_vm._v("Descargar")]
                         )
                       ])
+                    ]),
+                    _vm._v(" "),
+                    _c("h3", [_vm._v("Datos vehículo 1:")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-3" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Placa: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.placa1
+                                  ? this.currentPetition.placa1
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Color: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.color1
+                                  ? this.currentPetition.color1
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Clase: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.clase1
+                                  ? this.currentPetition.clase1
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Marca: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.marca1
+                                  ? this.currentPetition.marca1
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Modelo: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.modelo1
+                                  ? this.currentPetition.modelo1
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("h3", [_vm._v("Datos vehículo 2:")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-3" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Placa: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.placa2
+                                  ? this.currentPetition.placa2
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Color: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.color2
+                                  ? this.currentPetition.color2
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Clase: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.clase2
+                                  ? this.currentPetition.clase2
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Marca: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.marca2
+                                  ? this.currentPetition.marca2
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Modelo: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.modelo2
+                                  ? this.currentPetition.modelo2
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("h3", [_vm._v("Datos vehículo 3:")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-3" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Placa: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.placa3
+                                  ? this.currentPetition.placa3
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Color: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.color3
+                                  ? this.currentPetition.color3
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Clase: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.clase3
+                                  ? this.currentPetition.clase3
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Marca: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.marca3
+                                  ? this.currentPetition.marca3
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Modelo: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.modelo3
+                                  ? this.currentPetition.modelo3
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Diligenciador:\n                            ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(_vm._s(this.currentPetition.diligenciador))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Documento:\n                            ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(_vm._s(this.currentPetition.documento))
+                        ])
+                      ])
                     ])
                   ])
                 ])
@@ -71750,7 +73122,7 @@ var render = function() {
             [
               _c("div", { staticClass: "modal-dialog modal-lg" }, [
                 _c("div", { staticClass: "modal-content" }, [
-                  _vm._m(8),
+                  _vm._m(6),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
                     _c(
@@ -71918,14 +73290,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn btn-success" }, [_vm._v("Aprobar")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
@@ -71948,8 +73312,1320 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn btn-success" }, [_vm._v("Aprobar")])
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [
+        _vm._v(
+          "\n                        Detalle de la petición\n                    "
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [
+        _vm._v(
+          "\n                        Detalle de la petición\n                    "
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mx-1 mt-2" }, [
+      _c("h3", [_vm._v("Datos del Propietario")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mx-1 mt-2" }, [
+      _c("h3", [_vm._v("Datos del Solicitante")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [
+        _vm._v(
+          "\n                        Detalle del usuario\n                    "
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminPetitionsApproved.vue?vue&type=template&id=ed75e8f0&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/AdminPetitionsApproved.vue?vue&type=template&id=ed75e8f0& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.$auth.isAuthenticated() && _vm.user.role == "ADMIN"
+    ? _c(
+        "div",
+        { staticClass: "container my-5" },
+        [
+          _c("notifications", {
+            attrs: { group: "foo", position: "bottom left", speed: 500 }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "card text-left mb-3" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "row justify-content-between mb-4" }, [
+                _c("div", { staticClass: "col-sm-8" }, [
+                  _c("h4", { staticClass: "card-title" }, [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(
+                          this.generic
+                            ? "Peticiones Genericas aprobadas"
+                            : "Peticiones de Parqueadero aprobadas"
+                        ) +
+                        "\n                        /\n                        "
+                    ),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-link",
+                        attrs: { href: "/admin/peticiones" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(
+                              this.generic
+                                ? "Peticiones Genericas sin aprobar"
+                                : "Peticiones de Parqueadero sin aprobar"
+                            ) +
+                            "\n                        "
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-3" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.toggleParking()
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(
+                            this.generic
+                              ? "Peticiones de Parqueadero"
+                              : "Peticiones Genericas"
+                          ) +
+                          "\n                    "
+                      )
+                    ]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("h4", { staticClass: "card-title" }, [
+                _vm._v("Lista de peticiones")
+              ]),
+              _vm._v(" "),
+              this.generic
+                ? _c("table", { staticClass: "table table-striped" }, [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.petitions, function(petition) {
+                        return _c("tr", { key: petition.id }, [
+                          _c("th", { attrs: { scope: "row" } }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-link",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.showDetail(petition)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(petition.id) +
+                                    "\n                            "
+                                )
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(_vm._s(petition.nombre_responsable))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(petition.cedula))]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-link",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.showUserDetail(petition.user_id)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(petition.user_id) +
+                                    "\n                            "
+                                )
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.rejectPetition(petition)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                Eliminar\n                            "
+                                )
+                              ]
+                            )
+                          ])
+                        ])
+                      }),
+                      0
+                    )
+                  ])
+                : _c("table", { staticClass: "table table-striped" }, [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.petitions, function(petition) {
+                        return _c("tr", { key: petition.id }, [
+                          _c("th", { attrs: { scope: "row" } }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-link",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.showDetail(petition)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(petition.id) +
+                                    "\n                            "
+                                )
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(_vm._s(petition.nombre_propietario))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(petition.carro))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(petition.moto))]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-link",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.showUserDetail(petition.user_id)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(petition.user_id) +
+                                    "\n                            "
+                                )
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.rejectPetition(petition)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                Eliminar\n                            "
+                                )
+                              ]
+                            )
+                          ])
+                        ])
+                      }),
+                      0
+                    )
+                  ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "detail-generic",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-labelledby": "myLargeModalLabel",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c("div", { staticClass: "modal-dialog modal-lg" }, [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("h4", { staticClass: "mt-2 mb-3" }, [
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v(
+                          "Nombre del responsable:\n                        "
+                        )
+                      ]),
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(this.currentPetition.nombre_responsable) +
+                          "\n                    "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("h5", [
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v("Cédula: ")
+                      ]),
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(this.currentPetition.cedula) +
+                          "\n                    "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("h5", { staticClass: "font-weight-bold mt-4" }, [
+                      _vm._v("Petición:")
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(this.currentPetition.additional) +
+                          "\n                    "
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "detail-parking",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-labelledby": "myLargeModalLabel",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c("div", { staticClass: "modal-dialog modal-lg" }, [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Tiene deudas:\n                            ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [_vm._v(_vm._s(this.currentPetition.deudas))])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Carro: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [_vm._v(_vm._s(this.currentPetition.carro))])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Moto: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [_vm._v(_vm._s(this.currentPetition.moto))])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Discapacidad:\n                            ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(_vm._s(this.currentPetition.discapacidad))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v(
+                            "Posee parqueadero:\n                            "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [_vm._v(_vm._s(this.currentPetition.asignado))])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Numero: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.asignado == "SI"
+                                  ? this.currentPetition.numero
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row mx-1" }, [
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v("ROL: ")
+                      ]),
+                      _vm._v(" "),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(this.currentPetition.tipo) +
+                            "\n                        "
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Nombre: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(this.currentPetition.nombre_propietario) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Telefono: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.telefono_propietario
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Direccion:\n                            ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.direccion_propietario
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Correo: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(this.currentPetition.email_propietario) +
+                              "\n                            "
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Nombre: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(this.currentPetition.nombre_residente) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Telefono: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(this.currentPetition.telefono_residente) +
+                              "\n                            "
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Direccion:\n                            ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(this.currentPetition.direccion_residente) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Correo: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(this.currentPetition.email_residente) +
+                              "\n                            "
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Torre: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [_vm._v(_vm._s(this.currentPetition.torre))])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Apartamento:\n                            ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(_vm._s(this.currentPetition.apartamento))
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("h3", [_vm._v("Documentos requeridos:")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-3" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Cedula: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-primary",
+                            attrs: {
+                              href: "/files/" + this.currentPetition.cedula,
+                              download: ""
+                            }
+                          },
+                          [_vm._v("Descargar")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-3" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Tarjeta: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-primary",
+                            attrs: {
+                              href:
+                                "/files/" +
+                                this.currentPetition.tarjeta_propiedad,
+                              download: ""
+                            }
+                          },
+                          [_vm._v("Descargar")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-3" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Soat: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-primary",
+                            attrs: {
+                              href: "/files/" + this.currentPetition.soat,
+                              download: ""
+                            }
+                          },
+                          [_vm._v("Descargar")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-3" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Autorización\n                            ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-primary",
+                            attrs: {
+                              href:
+                                "/files/" + this.currentPetition.autorizacion,
+                              download: ""
+                            }
+                          },
+                          [_vm._v("Descargar")]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("h3", [_vm._v("Datos vehículo 1:")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-3" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Placa: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.placa1
+                                  ? this.currentPetition.placa1
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Color: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.color1
+                                  ? this.currentPetition.color1
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Clase: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.clase1
+                                  ? this.currentPetition.clase1
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Marca: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.marca1
+                                  ? this.currentPetition.marca1
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Modelo: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.modelo1
+                                  ? this.currentPetition.modelo1
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("h3", [_vm._v("Datos vehículo 2:")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-3" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Placa: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.placa2
+                                  ? this.currentPetition.placa2
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Color: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.color2
+                                  ? this.currentPetition.color2
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Clase: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.clase2
+                                  ? this.currentPetition.clase2
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Marca: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.marca2
+                                  ? this.currentPetition.marca2
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Modelo: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.modelo2
+                                  ? this.currentPetition.modelo2
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("h3", [_vm._v("Datos vehículo 3:")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-3" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Placa: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.placa3
+                                  ? this.currentPetition.placa3
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Color: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.color3
+                                  ? this.currentPetition.color3
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Clase: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.clase3
+                                  ? this.currentPetition.clase3
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Marca: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.marca3
+                                  ? this.currentPetition.marca3
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Modelo: ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                this.currentPetition.modelo3
+                                  ? this.currentPetition.modelo3
+                                  : "N/a"
+                              ) +
+                              "\n                            "
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Diligenciador:\n                            ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(_vm._s(this.currentPetition.diligenciador))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("span", { staticClass: "font-weight-bold" }, [
+                          _vm._v("Documento:\n                            ")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(_vm._s(this.currentPetition.documento))
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "detail-user",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-labelledby": "myLargeModalLabel",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c("div", { staticClass: "modal-dialog modal-lg" }, [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(6),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c(
+                      "div",
+                      { staticClass: "row d-flex align-items-center" },
+                      [
+                        _c("div", { staticClass: "col-md-1" }, [
+                          _c("span", { staticClass: "font-weight-bold" }, [
+                            _vm._v(_vm._s(this.currentUser.id))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-11" }, [
+                          _c("h4", [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(this.currentUser.name) +
+                                "\n                            "
+                            )
+                          ])
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v("Rol: ")
+                      ]),
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(this.currentUser.role) +
+                          "\n                    "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v("Email: ")
+                      ]),
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(this.currentUser.email) +
+                          "\n                    "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v("Torre: ")
+                      ]),
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(this.currentUser.torre) +
+                          "\n                    "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v("Apartamento: ")
+                      ]),
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(this.currentUser.apartamento) +
+                          "\n                    "
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+            _c("ul", { staticClass: "pagination" }, [
+              _c(
+                "li",
+                {
+                  staticClass: "page-item",
+                  class: [{ disabled: !_vm.pagination.prev_page_url }]
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          _vm.readPetitions(_vm.pagination.prev_page_url)
+                        }
+                      }
+                    },
+                    [_vm._v("Anterior")]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("li", { staticClass: "page-item disabled" }, [
+                _c(
+                  "a",
+                  { staticClass: "page-link text-dark", attrs: { href: "#" } },
+                  [
+                    _vm._v(
+                      "Página " +
+                        _vm._s(_vm.pagination.current_page) +
+                        " de\n                    " +
+                        _vm._s(_vm.pagination.last_page)
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "li",
+                {
+                  staticClass: "page-item",
+                  class: [{ disabled: !_vm.pagination.next_page_url }]
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          _vm.readPetitions(_vm.pagination.next_page_url)
+                        }
+                      }
+                    },
+                    [_vm._v("Siguiente")]
+                  )
+                ]
+              )
+            ])
+          ])
+        ],
+        1
+      )
+    : _vm._e()
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Cédula")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Usuario")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Eliminar")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Carro")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Moto")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Usuario")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Eliminar")])
+      ])
     ])
   },
   function() {
@@ -74318,7 +76994,7 @@ var render = function() {
                           staticClass: "form-control",
                           attrs: {
                             type: "text",
-                            id: "nombre",
+                            id: "nombre_propietario",
                             autocomplete: "off"
                           },
                           domProps: { value: _vm.nombre_propietario },
@@ -74350,7 +77026,7 @@ var render = function() {
                           staticClass: "form-control",
                           attrs: {
                             type: "email",
-                            id: "email",
+                            id: "email_propietario",
                             placeholder: "Email"
                           },
                           domProps: { value: _vm.email_propietario },
@@ -74929,7 +77605,7 @@ var render = function() {
                     _c("h5", [_vm._v("Residente 1")]),
                     _vm._v(" "),
                     _c("div", { staticClass: "form-group" }, [
-                      _c("label", { attrs: { for: "name" } }, [
+                      _c("label", { attrs: { for: "name1" } }, [
                         _vm._v("Nombre Completo")
                       ]),
                       _vm._v(" "),
@@ -78994,7 +81670,7 @@ var render = function() {
                       "div",
                       { staticClass: "form-group col-md-4" },
                       [
-                        _c("label", { attrs: { for: "deudas" } }, [
+                        _c("label", [
                           _vm._v(
                             "¿Tiene deudas con la\n                                    administración?"
                           )
@@ -79023,9 +81699,7 @@ var render = function() {
                       "div",
                       { staticClass: "form-group col-md-4 text-center" },
                       [
-                        _c("label", { attrs: { for: "vehiculo" } }, [
-                          _vm._v("¿Qué tipo de vehículos tiene?")
-                        ]),
+                        _c("label", [_vm._v("¿Qué tipo de vehículos tiene?")]),
                         _vm._v(" "),
                         _c(
                           "p-check",
@@ -79064,7 +81738,7 @@ var render = function() {
                       "div",
                       { staticClass: "form-group col-md-4" },
                       [
-                        _c("label", { attrs: { for: "discapacidad" } }, [
+                        _c("label", [
                           _vm._v(
                             "¿Su vehículo posee placas de\n                                    discapacidad?"
                           )
@@ -79095,7 +81769,7 @@ var render = function() {
                       "div",
                       { staticClass: "form-group col-md-6" },
                       [
-                        _c("label", { attrs: { for: "asignado" } }, [
+                        _c("label", [
                           _vm._v(
                             "¿Posee actualmente parqueadero\n                                    asignado?"
                           )
@@ -79160,9 +81834,7 @@ var render = function() {
                       "div",
                       { staticClass: "form-group col-md-4" },
                       [
-                        _c("label", { attrs: { for: "tipo" } }, [
-                          _vm._v("Es usted:")
-                        ]),
+                        _c("label", [_vm._v("Es usted:")]),
                         _vm._v(" "),
                         _c("v-select", {
                           attrs: {
@@ -93755,7 +96427,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('adminreservacionesapproved
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('adminarchivos', __webpack_require__(/*! ./components/Admin/AdminArchivos.vue */ "./resources/js/components/Admin/AdminArchivos.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('adminclassifieds', __webpack_require__(/*! ./components/Admin/AdminClassifieds.vue */ "./resources/js/components/Admin/AdminClassifieds.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('adminclassifieds_approved', __webpack_require__(/*! ./components/Admin/AdminClassifiedsApproved.vue */ "./resources/js/components/Admin/AdminClassifiedsApproved.vue").default);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('adminpeticiones', __webpack_require__(/*! ./components/Admin/AdminPeticiones.vue */ "./resources/js/components/Admin/AdminPeticiones.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('adminpetitions', __webpack_require__(/*! ./components/Admin/AdminPetitions.vue */ "./resources/js/components/Admin/AdminPetitions.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('adminpetitions_approved', __webpack_require__(/*! ./components/Admin/AdminPetitionsApproved.vue */ "./resources/js/components/Admin/AdminPetitionsApproved.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('admincenso', __webpack_require__(/*! ./components/Admin/AdminCenso.vue */ "./resources/js/components/Admin/AdminCenso.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('admincensuses_exported', __webpack_require__(/*! ./components/Admin/AdminCensusesExported.vue */ "./resources/js/components/Admin/AdminCensusesExported.vue").default);
@@ -94469,20 +97141,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/AdminPeticiones.vue":
-/*!***********************************************************!*\
-  !*** ./resources/js/components/Admin/AdminPeticiones.vue ***!
-  \***********************************************************/
+/***/ "./resources/js/components/Admin/AdminPetitions.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/Admin/AdminPetitions.vue ***!
+  \**********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AdminPeticiones_vue_vue_type_template_id_52d4be51_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AdminPeticiones.vue?vue&type=template&id=52d4be51&scoped=true& */ "./resources/js/components/Admin/AdminPeticiones.vue?vue&type=template&id=52d4be51&scoped=true&");
-/* harmony import */ var _AdminPeticiones_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AdminPeticiones.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/AdminPeticiones.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _AdminPeticiones_vue_vue_type_style_index_0_id_52d4be51_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AdminPeticiones.vue?vue&type=style&index=0&id=52d4be51&scoped=true&lang=css& */ "./resources/js/components/Admin/AdminPeticiones.vue?vue&type=style&index=0&id=52d4be51&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
+/* harmony import */ var _AdminPetitions_vue_vue_type_template_id_79cfa59e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AdminPetitions.vue?vue&type=template&id=79cfa59e& */ "./resources/js/components/Admin/AdminPetitions.vue?vue&type=template&id=79cfa59e&");
+/* harmony import */ var _AdminPetitions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AdminPetitions.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/AdminPetitions.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -94490,67 +97160,51 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _AdminPeticiones_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _AdminPeticiones_vue_vue_type_template_id_52d4be51_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _AdminPeticiones_vue_vue_type_template_id_52d4be51_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AdminPetitions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AdminPetitions_vue_vue_type_template_id_79cfa59e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AdminPetitions_vue_vue_type_template_id_79cfa59e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "52d4be51",
+  null,
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Admin/AdminPeticiones.vue"
+component.options.__file = "resources/js/components/Admin/AdminPetitions.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/AdminPeticiones.vue?vue&type=script&lang=js&":
-/*!************************************************************************************!*\
-  !*** ./resources/js/components/Admin/AdminPeticiones.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************/
+/***/ "./resources/js/components/Admin/AdminPetitions.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/Admin/AdminPetitions.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPeticiones_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./AdminPeticiones.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminPeticiones.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPeticiones_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPetitions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./AdminPetitions.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminPetitions.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPetitions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/AdminPeticiones.vue?vue&type=style&index=0&id=52d4be51&scoped=true&lang=css&":
-/*!********************************************************************************************************************!*\
-  !*** ./resources/js/components/Admin/AdminPeticiones.vue?vue&type=style&index=0&id=52d4be51&scoped=true&lang=css& ***!
-  \********************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPeticiones_vue_vue_type_style_index_0_id_52d4be51_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./AdminPeticiones.vue?vue&type=style&index=0&id=52d4be51&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminPeticiones.vue?vue&type=style&index=0&id=52d4be51&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPeticiones_vue_vue_type_style_index_0_id_52d4be51_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPeticiones_vue_vue_type_style_index_0_id_52d4be51_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPeticiones_vue_vue_type_style_index_0_id_52d4be51_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPeticiones_vue_vue_type_style_index_0_id_52d4be51_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPeticiones_vue_vue_type_style_index_0_id_52d4be51_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "./resources/js/components/Admin/AdminPeticiones.vue?vue&type=template&id=52d4be51&scoped=true&":
-/*!******************************************************************************************************!*\
-  !*** ./resources/js/components/Admin/AdminPeticiones.vue?vue&type=template&id=52d4be51&scoped=true& ***!
-  \******************************************************************************************************/
+/***/ "./resources/js/components/Admin/AdminPetitions.vue?vue&type=template&id=79cfa59e&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/Admin/AdminPetitions.vue?vue&type=template&id=79cfa59e& ***!
+  \*****************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPeticiones_vue_vue_type_template_id_52d4be51_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./AdminPeticiones.vue?vue&type=template&id=52d4be51&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminPeticiones.vue?vue&type=template&id=52d4be51&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPeticiones_vue_vue_type_template_id_52d4be51_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPetitions_vue_vue_type_template_id_79cfa59e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./AdminPetitions.vue?vue&type=template&id=79cfa59e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminPetitions.vue?vue&type=template&id=79cfa59e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPetitions_vue_vue_type_template_id_79cfa59e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPeticiones_vue_vue_type_template_id_52d4be51_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPetitions_vue_vue_type_template_id_79cfa59e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -94565,17 +97219,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-var render, staticRenderFns
-var script = {}
+/* harmony import */ var _AdminPetitionsApproved_vue_vue_type_template_id_ed75e8f0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AdminPetitionsApproved.vue?vue&type=template&id=ed75e8f0& */ "./resources/js/components/Admin/AdminPetitionsApproved.vue?vue&type=template&id=ed75e8f0&");
+/* harmony import */ var _AdminPetitionsApproved_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AdminPetitionsApproved.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/AdminPetitionsApproved.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(
-  script,
-  render,
-  staticRenderFns,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AdminPetitionsApproved_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AdminPetitionsApproved_vue_vue_type_template_id_ed75e8f0___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AdminPetitionsApproved_vue_vue_type_template_id_ed75e8f0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -94583,8 +97240,42 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   
 )
 
+/* hot reload */
+if (false) { var api; }
 component.options.__file = "resources/js/components/Admin/AdminPetitionsApproved.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Admin/AdminPetitionsApproved.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/Admin/AdminPetitionsApproved.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPetitionsApproved_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./AdminPetitionsApproved.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminPetitionsApproved.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPetitionsApproved_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Admin/AdminPetitionsApproved.vue?vue&type=template&id=ed75e8f0&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/Admin/AdminPetitionsApproved.vue?vue&type=template&id=ed75e8f0& ***!
+  \*************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPetitionsApproved_vue_vue_type_template_id_ed75e8f0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./AdminPetitionsApproved.vue?vue&type=template&id=ed75e8f0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminPetitionsApproved.vue?vue&type=template&id=ed75e8f0&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPetitionsApproved_vue_vue_type_template_id_ed75e8f0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPetitionsApproved_vue_vue_type_template_id_ed75e8f0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 

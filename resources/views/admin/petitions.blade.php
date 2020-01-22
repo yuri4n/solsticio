@@ -14,8 +14,8 @@
     <body>
         <div id="app">
             <adminnavbar></adminnavbar>
-            <adminpeticiones></adminpeticiones>
-            <footer-component></footer-component>    
+            <adminpetitions></adminpetitions>
+            <footer-component></footer-component>
         </div>
 
         <script src="{{asset('js/app.js')}}"></script>
