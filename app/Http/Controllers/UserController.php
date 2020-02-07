@@ -2,8 +2,12 @@
 
 namespace Solsticio\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\ValidationException;
+use Solsticio\Mail\UserMail;
 use Solsticio\User;
 
 class UserController extends Controller
@@ -55,7 +59,7 @@ class UserController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return Response
+     * @return JsonResponse
      */
     public function show($id)
     {
@@ -94,23 +98,58 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param User $classified
-     * @return Response
+     * @param $id
+     * @return void
+     * @throws ValidationException
      */
-    public function updateStatus(Request $request, $id)
+    public function updateAndNotify(Request $request, $id)
     {
         $this->validate($request, [
             'status' => 'required',
+            'user' => 'required',
         ]);
 
-        User::find($id)->update($request->all());
+        $user = $request->user;
+
+        $data = array(
+            'user' => $user,
+            'status' => $request->status,
+        );
+
+        User::find($id)->update(['status' => $request->status]);
+
+        Mail::to($user['email'])->send(new UserMail($data));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @param $id
+     * @return void
+     * @throws ValidationException
+     */
+    public function rejectAndNotify(Request $request, $id)
+    {
+        $this->validate($request, [
+            'user' => 'required'
+        ]);
+
+        $user = $request->user;
+
+        $data = array(
+            'user' => $user,
+            'status' => 'REJECTED',
+        );
+
+        Mail::to($user['email'])->send(new UserMail($data));
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return Response
+     * @return void
      */
     public function destroy($id)
     {

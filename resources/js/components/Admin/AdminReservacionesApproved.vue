@@ -3,62 +3,62 @@
         class="container my-5"
         v-if="$auth.isAuthenticated() && user.role == 'ADMIN'"
     >
-        <notifications group="foo" position="bottom left" :speed="500" />
+        <notifications :speed="500" group="foo" position="bottom left"/>
         <!-- Tabla -->
         <div class="card text-left mb-3">
             <div class="card-body">
                 <h4 class="card-title">
                     Listado de peticiones aprobadas /
-                    <a href="/admin/servicios" class="btn btn-link"
-                        >Listado de peticiones de salones</a
+                    <a class="btn btn-link" href="/admin/servicios"
+                    >Listado de peticiones de salones</a
                     >
                 </h4>
                 <table class="table table-striped">
                     <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Tipo</th>
-                            <th scope="col">Nombre Responsable</th>
-                            <th scope="col">Usuario</th>
-                            <th scope="col">Eliminar</th>
-                        </tr>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Nombre Responsable</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Eliminar</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <tr
-                            v-for="reservation in reservations"
-                            :key="reservation.id"
-                        >
-                            <th scope="row">
-                                <a
-                                    @click.prevent="showDetail(reservation)"
-                                    class="btn btn-link"
-                                    >{{ reservation.id }}</a
-                                >
-                            </th>
-                            <td>{{ reservation.fecha_solicitada }}</td>
-                            <td>{{ typeToName(reservation.type) }}</td>
-                            <td>{{ reservation.nombre_responsable }}</td>
-                            <td>
-                                <a
-                                    @click.prevent="
+                    <tr
+                        :key="reservation.id"
+                        v-for="reservation in reservations"
+                    >
+                        <th scope="row">
+                            <a
+                                @click.prevent="showDetail(reservation)"
+                                class="btn btn-link"
+                            >{{ reservation.id }}</a
+                            >
+                        </th>
+                        <td>{{ reservation.fecha_solicitada }}</td>
+                        <td>{{ typeToName(reservation.type) }}</td>
+                        <td>{{ reservation.nombre_responsable }}</td>
+                        <td>
+                            <a
+                                @click.prevent="
                                         showUserDetail(reservation.user_id)
                                     "
-                                    class="btn btn-link"
-                                    >{{ reservation.user_id }}</a
-                                >
-                            </td>
-                            <td>
-                                <button
-                                    @click.prevent="
+                                class="btn btn-link"
+                            >{{ reservation.user_id }}</a
+                            >
+                        </td>
+                        <td>
+                            <button
+                                @click.prevent="
                                         deleteReservation(reservation.id)
                                     "
-                                    class="btn btn-danger"
-                                >
-                                    Eliminar
-                                </button>
-                            </td>
-                        </tr>
+                                class="btn btn-danger"
+                            >
+                                Eliminar
+                            </button>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -66,12 +66,12 @@
 
         <!-- MODAL -->
         <div
+            aria-hidden="true"
+            aria-labelledby="myLargeModalLabel"
             class="modal fade"
             id="detail-petition"
-            tabindex="-1"
             role="dialog"
-            aria-labelledby="myLargeModalLabel"
-            aria-hidden="true"
+            tabindex="-1"
         >
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -83,10 +83,10 @@
                             </span>
                         </h5>
                         <button
-                            type="button"
+                            aria-label="Close"
                             class="close"
                             data-dismiss="modal"
-                            aria-label="Close"
+                            type="button"
                         >
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -101,18 +101,18 @@
                             <div class="col-md-11">
                                 <h4>
                                     {{
-                                        this.currentReservation
-                                            .nombre_responsable
+                                    this.currentReservation
+                                    .nombre_responsable
                                     }}
                                 </h4>
                             </div>
                         </div>
                         <p
-                            class="my-2"
                             :class="{
                                 available: isAvailable,
                                 notAvailable: !isAvailable
                             }"
+                            class="my-2"
                         >
                             {{ this.currentReservation.fecha_solicitada }}
                         </p>
@@ -126,12 +126,12 @@
 
         <!-- USER DETAIL -->
         <div
+            aria-hidden="true"
+            aria-labelledby="myLargeModalLabel"
             class="modal fade"
             id="detail-user"
-            tabindex="-1"
             role="dialog"
-            aria-labelledby="myLargeModalLabel"
-            aria-hidden="true"
+            tabindex="-1"
         >
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -143,10 +143,10 @@
                             </span>
                         </h5>
                         <button
-                            type="button"
+                            aria-label="Close"
                             class="close"
                             data-dismiss="modal"
-                            aria-label="Close"
+                            type="button"
                         >
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -189,33 +189,33 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <li
-                    v-bind:class="[{ disabled: !pagination.prev_page_url }]"
                     class="page-item"
+                    v-bind:class="[{ disabled: !pagination.prev_page_url }]"
                 >
                     <a
+                        @click="readReservations(pagination.prev_page_url)"
                         class="page-link"
                         href="#"
-                        @click="readReservations(pagination.prev_page_url)"
-                        >Anterior</a
+                    >Anterior</a
                     >
                 </li>
 
                 <li class="page-item disabled">
                     <a class="page-link text-dark" href="#"
-                        >Página {{ pagination.current_page }} de
+                    >Página {{ pagination.current_page }} de
                         {{ pagination.last_page }}</a
                     >
                 </li>
 
                 <li
-                    v-bind:class="[{ disabled: !pagination.next_page_url }]"
                     class="page-item"
+                    v-bind:class="[{ disabled: !pagination.next_page_url }]"
                 >
                     <a
+                        @click="readReservations(pagination.next_page_url)"
                         class="page-link"
                         href="#"
-                        @click="readReservations(pagination.next_page_url)"
-                        >Siguiente</a
+                    >Siguiente</a
                     >
                 </li>
             </ul>
@@ -223,115 +223,115 @@
     </div>
 </template>
 <script>
-export default {
-    mounted() {
-        this.readReservations();
-        if (this.$auth.isAuthenticated()) this.getAuthUser();
-    },
-    data() {
-        return {
-            reservations: [],
-            pagination: {},
-            user: null,
-            currentReservation: {},
-            currentUser: {},
-            available: null
-        };
-    },
-    methods: {
-        getAuthUser() {
-            let url = "http://solsticio.local/api/auth/user";
-            axios
-                .get(url)
-                .then(response => {
-                    this.user = response.data.data;
-                })
-                .catch();
+    export default {
+        mounted() {
+            this.readReservations();
+            if (this.$auth.isAuthenticated()) this.getAuthUser();
         },
-        readReservations(page_url) {
-            let vm = this;
-            page_url = page_url || "/api/approved/reservations";
-            axios
-                .get(page_url)
-                .then(response => {
-                    this.reservations = response.data.data;
-                    vm.makePagination(response.data);
-                })
-                .catch(err => console.log(err));
-        },
-        makePagination(meta) {
-            let pagination = {
-                current_page: meta.current_page,
-                last_page: meta.last_page,
-                next_page_url: meta.next_page_url,
-                prev_page_url: meta.prev_page_url
+        data() {
+            return {
+                reservations: [],
+                pagination: {},
+                user: null,
+                currentReservation: {},
+                currentUser: {},
+                available: null
             };
-            this.pagination = pagination;
         },
-        typeToName(type) {
-            switch (type) {
-                case "BBQ": {
-                    return "BBQ";
-                    break;
+        methods: {
+            getAuthUser() {
+                let url = "http://solsticio.local/api/auth/user";
+                axios
+                    .get(url)
+                    .then(response => {
+                        this.user = response.data.data;
+                    })
+                    .catch();
+            },
+            readReservations(page_url) {
+                let vm = this;
+                page_url = page_url || "/api/approved/reservations";
+                axios
+                    .get(page_url)
+                    .then(response => {
+                        this.reservations = response.data.data;
+                        vm.makePagination(response.data);
+                    })
+                    .catch(err => console.log(err));
+            },
+            makePagination(meta) {
+                let pagination = {
+                    current_page: meta.current_page,
+                    last_page: meta.last_page,
+                    next_page_url: meta.next_page_url,
+                    prev_page_url: meta.prev_page_url
+                };
+                this.pagination = pagination;
+            },
+            typeToName(type) {
+                switch (type) {
+                    case "BBQ": {
+                        return "BBQ";
+                        break;
+                    }
+                    case "SJ": {
+                        return "Salon de Juntas";
+                        break;
+                    }
+                    case "SS": {
+                        return "Salon Social";
+                        break;
+                    }
                 }
-                case "SJ": {
-                    return "Salon de Juntas";
-                    break;
-                }
-                case "SS": {
-                    return "Salon Social";
-                    break;
-                }
-            }
-        },
-        showDetail(reservation) {
-            this.currentReservation = reservation;
-            this.isAvailable();
-            $("#detail-petition").modal("show");
-        },
-        showUserDetail(id) {
-            let url = `/api/users/${id}`;
-            axios
-                .get(url)
-                .then(response => {
-                    this.currentUser = response.data.user;
-                })
-                .catch(err => console.log(err));
-            $("#detail-user").modal("show");
-        },
-        isAvailable() {
-            let result = false;
-            for (let reservation in this.reservations) {
-                if (
-                    this.currentReservation.fecha_solicitada ==
+            },
+            showDetail(reservation) {
+                this.currentReservation = reservation;
+                this.isAvailable();
+                $("#detail-petition").modal("show");
+            },
+            showUserDetail(id) {
+                let url = `/api/users/${id}`;
+                axios
+                    .get(url)
+                    .then(response => {
+                        this.currentUser = response.data.user;
+                    })
+                    .catch(err => console.log(err));
+                $("#detail-user").modal("show");
+            },
+            isAvailable() {
+                let result = false;
+                for (let reservation in this.reservations) {
+                    if (
+                        this.currentReservation.fecha_solicitada ==
                         reservation.fecha_solicitada &&
-                    reservation.status == "APPROVED"
-                ) {
-                    result = true;
+                        reservation.status == "APPROVED"
+                    ) {
+                        result = true;
+                    }
                 }
-            }
-            return result;
-        },
-        alert(alertType, alertMessage) {
-            this.$notify({
-                group: "foo",
-                type: alertType,
-                title: "BIEN",
-                text: alertMessage
-            });
-        },
-        deleteReservation(id) {
-            let url = `/api/reservations/${id}`;
-            axios
-                .delete(url)
-                .then(res => {
-                    this.alert("warn", "La reservación ha sido eliminada");
-                    this.readReservations();
-                })
-                .catch(error => {
-                    this.alert("error", "Algo ha salido mal");
+                return result;
+            },
+            alert(alertType, alertMessage) {
+                this.$notify({
+                    group: "foo",
+                    type: alertType,
+                    title: "BIEN",
+                    text: alertMessage
                 });
+            },
+            deleteReservation(id) {
+                let url = `/api/reservations/${id}`;
+                axios
+                    .delete(url)
+                    .then(res => {
+                        this.alert("warn", "La reservación ha sido eliminada");
+                        this.readReservations();
+                    })
+                    .catch(error => {
+                        this.alert("error", "Algo ha salido mal");
+                    });
+            }
         }
-    }
-};
+    };
 </script>

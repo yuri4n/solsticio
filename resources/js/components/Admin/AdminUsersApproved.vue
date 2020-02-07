@@ -6,50 +6,37 @@
         <notifications :speed="500" group="foo" position="bottom left"/>
         <div class="card text-left mb-3">
             <div class="card-body">
-                <div class="row justify-content-between mb-4">
-                    <div class="col-sm-8">
-                        <h4 class="card-title">
-                            Listado de censos exportados /
-                            <a class="btn btn-link" href="/admin/censo"
-                            >Listado de censos sin exportar</a
-                            >
-                        </h4>
-                    </div>
-                    <div class="col-sm-2">
-                        <a
-                            download="censos.xlsx"
-                            href="/api/export/censuses/"
-                            type="button"
-                        >
-                            <button class="btn btn-primary">
-                                Exportar Todos
-                            </button>
-                        </a>
-                    </div>
-                </div>
+                <h4 class="card-title">
+                    Lista completa /
+                    <a
+                        class="btn btn-link"
+                        href="http://solsticio.local/admin/usuarios"
+                    >Lista de Usuarios pendientes por aprobar</a
+                    >
+                </h4>
                 <table class="table table-striped">
                     <thead>
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Propietario</th>
                         <th scope="col">E-mail</th>
+                        <th scope="col">Tipo</th>
                         <th scope="col">Torre</th>
                         <th scope="col">Apartamento</th>
                         <th scope="col">Eliminar</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr :key="census.id" v-for="census in censuses">
-                        <th scope="row">{{ census.id }}</th>
-                        <td>{{ census.elaborado }}</td>
-                        <td>{{ census.nombre_propietario }}</td>
-                        <td>{{ census.email_propietario }}</td>
-                        <td>{{ census.torre }}</td>
-                        <td>{{ census.apartamento }}</td>
+                    <tr :key="user.id" v-for="user in users">
+                        <th scope="row">{{ user.id }}</th>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.role }}</td>
+                        <td>{{ user.torre }}</td>
+                        <td>{{ user.apartamento }}</td>
                         <td>
                             <button
-                                @click.prevent="rejectCensus(census)"
+                                @click.prevent="rejectUser(user)"
                                 class="btn btn-danger"
                             >
                                 Eliminar
@@ -69,7 +56,7 @@
                     v-bind:class="[{ disabled: !pagination.prev_page_url }]"
                 >
                     <a
-                        @click="readCensuses(pagination.prev_page_url)"
+                        @click="readUsers(pagination.prev_page_url)"
                         class="page-link"
                         href="#"
                     >Anterior</a
@@ -88,7 +75,7 @@
                     v-bind:class="[{ disabled: !pagination.next_page_url }]"
                 >
                     <a
-                        @click="readCensuses(pagination.next_page_url)"
+                        @click="readUsers(pagination.next_page_url)"
                         class="page-link"
                         href="#"
                     >Siguiente</a
@@ -103,23 +90,31 @@
     export default {
         created() {
             if (this.$auth.isAuthenticated()) this.getUser();
-            this.readCensuses();
+            this.readUsers();
         },
         data() {
             return {
-                censuses: [],
+                users: [],
                 pagination: {},
-                user: undefined
+                user: {}
             };
         },
         methods: {
-            readCensuses(page_url) {
+            alert(alertType, alertMessage) {
+                this.$notify({
+                    group: "foo",
+                    type: alertType,
+                    title: "BIEN",
+                    text: alertMessage
+                });
+            },
+            readUsers(page_url) {
                 let vm = this;
-                page_url = page_url || "/api/exported/censuses";
+                page_url = page_url || "/api/admin/users";
                 axios
                     .get(page_url)
                     .then(response => {
-                        this.censuses = response.data.data;
+                        this.users = response.data.data;
                         vm.makePagination(response.data);
                     })
                     .catch(err => console.log(err));
@@ -134,7 +129,7 @@
                 this.pagination = pagination;
             },
             getUser() {
-                let url = "http://solsticio.local/api/auth/user";
+                var url = "http://solsticio.local/api/auth/user";
                 axios
                     .get(url)
                     .then(response => {
@@ -142,26 +137,18 @@
                     })
                     .catch();
             },
-            alert(alertType, alertMessage) {
-                this.$notify({
-                    group: "foo",
-                    type: alertType,
-                    title: "BIEN",
-                    text: alertMessage
-                });
-            },
-            rejectCensus(census) {
-                let url = "http://solsticio.local/api/censuses/" + census.id;
-                let confirmacion = confirm(
-                    `¿Seguro que desea borrar el censo ${census.id}?`
+            rejectUser(user) {
+                var url = `/api/users/${user.id}"`;
+                var confirmacion = confirm(
+                    `¿Seguro que borrar el usuario ${user.id}?`
                 );
                 if (confirmacion) {
                     axios.delete(url).then(response => {
                         this.alert(
                             "warn",
-                            `El censo ${census.id} ha sido eliminado`
+                            `El usuario ${user.id} ha sido rechazado`
                         );
-                        this.readCensuses();
+                        this.readUsers();
                     });
                 }
             }

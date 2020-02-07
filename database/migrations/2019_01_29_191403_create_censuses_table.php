@@ -27,9 +27,9 @@ class CreateCensusesTable extends Migration
             $table->string('telefono_propietario');
             $table->string('nombre_residente');
             $table->string('email_residente');
-            $table->integer('tiempo_dias');
-            $table->integer('tiempo_meses');
-            $table->integer('tiempo_años');
+            $table->integer('time_days');
+            $table->integer('time_months');
+            $table->integer('time_years');
 
             $table->enum('carro', ['SI', 'NO'])->default('NO');
             $table->string('placa_carro')->nullable();
@@ -44,7 +44,7 @@ class CreateCensusesTable extends Migration
             $table->enum('bicicleta', ['SI', 'NO'])->default('NO');
             $table->string('gancho')->nullable();
 
-            for ($i = 1; $i <= 10; $i++) { 
+            for ($i = 1; $i <= 10; $i++) {
                 $table->string('residente'.$i)->nullable();
                 $table->enum('discapacitado'.$i, ['SI', 'NO'])->default('NO');
                 $table->integer('edad'.$i)->nullable();

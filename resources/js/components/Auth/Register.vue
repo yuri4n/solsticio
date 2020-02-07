@@ -9,8 +9,8 @@
                             <p>Error!</p>
                         </div>
                         <form
-                            autocomplete="off"
                             @submit.prevent="register"
+                            autocomplete="off"
                             method="post"
                         >
                             <div
@@ -21,15 +21,15 @@
                             >
                                 <label for="name">Nombre Completo:</label>
                                 <input
-                                    type="text"
-                                    id="name"
                                     class="form-control"
+                                    id="name"
+                                    type="text"
                                     v-model="name"
                                 />
                                 <span
                                     class="help-block"
                                     v-if="has_error && errors.name"
-                                    >{{ errors.name }}</span
+                                >{{ errors.name }}</span
                                 >
                             </div>
                             <div
@@ -40,16 +40,16 @@
                             >
                                 <label for="email">E-mail</label>
                                 <input
-                                    type="email"
-                                    id="email"
                                     class="form-control"
+                                    id="email"
                                     placeholder="usuario@ejemplo.com"
+                                    type="email"
                                     v-model="email"
                                 />
                                 <span
                                     class="help-block"
                                     v-if="has_error && errors.email"
-                                    >{{ errors.email }}</span
+                                >{{ errors.email }}</span
                                 >
                             </div>
                             <div
@@ -60,9 +60,9 @@
                             >
                                 <label for="role">Es usted:</label>
                                 <select
-                                    v-model="role"
                                     class="form-control"
                                     id="role"
+                                    v-model="role"
                                 >
                                     <option>ARRENDATARIO</option>
                                     <option>PROPIETARIO</option>
@@ -70,7 +70,7 @@
                                 <span
                                     class="help-block"
                                     v-if="has_error && errors.role"
-                                    >{{ errors.role }}</span
+                                >{{ errors.role }}</span
                                 >
                             </div>
                             <div
@@ -81,15 +81,15 @@
                             >
                                 <label for="torre">Torre</label>
                                 <input
-                                    type="number"
-                                    id="torre"
                                     class="form-control"
+                                    id="torre"
+                                    type="number"
                                     v-model="torre"
                                 />
                                 <span
                                     class="help-block"
                                     v-if="has_error && errors.torre"
-                                    >{{ errors.torre }}</span
+                                >{{ errors.torre }}</span
                                 >
                             </div>
                             <div
@@ -100,15 +100,15 @@
                             >
                                 <label for="apartamento">Apartamento</label>
                                 <input
-                                    type="number"
-                                    id="apartamento"
                                     class="form-control"
+                                    id="apartamento"
+                                    type="number"
                                     v-model="apartamento"
                                 />
                                 <span
                                     class="help-block"
                                     v-if="has_error && errors.apartamento"
-                                    >{{ errors.apartamento }}</span
+                                >{{ errors.apartamento }}</span
                                 >
                             </div>
                             <div
@@ -119,15 +119,15 @@
                             >
                                 <label for="password">Contraseña</label>
                                 <input
-                                    type="password"
-                                    id="password"
                                     class="form-control"
+                                    id="password"
+                                    type="password"
                                     v-model="password"
                                 />
                                 <span
                                     class="help-block"
                                     v-if="has_error && errors.password"
-                                    >{{ errors.password }}</span
+                                >{{ errors.password }}</span
                                 >
                             </div>
                             <div
@@ -137,16 +137,16 @@
                                 }"
                             >
                                 <label for="password_confirmation"
-                                    >Confirme la contraseña</label
+                                >Confirme la contraseña</label
                                 >
                                 <input
-                                    type="password"
-                                    id="password_confirmation"
                                     class="form-control"
+                                    id="password_confirmation"
+                                    type="password"
                                     v-model="password_confirmation"
                                 />
                             </div>
-                            <button type="submit" class="btn btn-default">
+                            <button class="btn btn-default" type="submit">
                                 Registrarse
                             </button>
                         </form>
@@ -162,7 +162,7 @@
                         Un administrador del sitio dará de alta tu cuenta, serás
                         notificado a tu correo
                     </p>
-                    <hr class="my-4" />
+                    <hr class="my-4"/>
                     <p>
                         Hasta entonces no podrás llenar formularios ni realizar
                         peticiones, así que procura ser honesto con tus datos
@@ -173,40 +173,40 @@
     </div>
 </template>
 <script>
-export default {
-    data() {
-        return {
-            name: "",
-            email: "",
-            role: "",
-            torre: "",
-            apartamento: "",
-            password: "",
-            password_confirmation: "",
-            has_error: false,
-            errors: null
-        };
-    },
-    methods: {
-        register() {
-            this.$auth
-                .register({
-                    name: this.name,
-                    email: this.email,
-                    role: this.role,
-                    password: this.password,
-                    password_confirmation: this.password_confirmation,
-                    torre: this.torre,
-                    apartamento: this.apartamento
-                })
-                .then(response => {
-                    window.location = response.data.redirect;
-                })
-                .catch(error => {
-                    this.has_error = true;
-                    this.errors = error.errors;
-                });
+    export default {
+        data() {
+            return {
+                name: "",
+                email: "",
+                role: "",
+                torre: "",
+                apartamento: "",
+                password: "",
+                password_confirmation: "",
+                has_error: false,
+                errors: null
+            };
+        },
+        methods: {
+            register() {
+                this.$auth
+                    .register({
+                        name: this.name,
+                        email: this.email,
+                        role: this.role,
+                        password: this.password,
+                        password_confirmation: this.password_confirmation,
+                        torre: this.torre,
+                        apartamento: this.apartamento
+                    })
+                    .then(response => {
+                        window.location = response.data.redirect;
+                    })
+                    .catch(error => {
+                        this.has_error = true;
+                        this.errors = error.errors;
+                    });
+            }
         }
-    }
-};
+    };
 </script>

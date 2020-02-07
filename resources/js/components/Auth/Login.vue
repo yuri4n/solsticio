@@ -11,32 +11,32 @@
                             </p>
                         </div>
                         <form
-                            autocomplete="off"
                             @submit.prevent="login"
+                            autocomplete="off"
                             method="post"
                         >
                             <div class="form-group">
                                 <label for="email">E-mail</label>
                                 <input
-                                    type="email"
-                                    id="email"
                                     class="form-control"
+                                    id="email"
                                     placeholder="usuario@ejemplo.com"
-                                    v-model="email"
                                     required
+                                    type="email"
+                                    v-model="email"
                                 />
                             </div>
                             <div class="form-group">
                                 <label for="password">Constraseña</label>
                                 <input
-                                    type="password"
-                                    id="password"
                                     class="form-control"
-                                    v-model="password"
+                                    id="password"
                                     required
+                                    type="password"
+                                    v-model="password"
                                 />
                             </div>
-                            <button type="submit" class="btn btn-default">
+                            <button class="btn btn-default" type="submit">
                                 Iniciar
                             </button>
                         </form>
@@ -63,28 +63,28 @@
     </div>
 </template>
 <script>
-export default {
-    data() {
-        return {
-            email: null,
-            password: null,
-            has_error: false
-        };
-    },
-    methods: {
-        login() {
-            this.$auth
-                .login({
-                    email: this.email,
-                    password: this.password
-                })
-                .then(response => {
-                    window.location = response.data.redirect;
-                })
-                .catch(error => {
-                    this.has_error = true;
-                });
+    export default {
+        data() {
+            return {
+                email: null,
+                password: null,
+                has_error: false
+            };
+        },
+        methods: {
+            login() {
+                this.$auth
+                    .login({
+                        email: this.email,
+                        password: this.password
+                    })
+                    .then(response => {
+                        window.location = response.data.redirect;
+                    })
+                    .catch(error => {
+                        this.has_error = true;
+                    });
+            }
         }
-    }
-};
+    };
 </script>

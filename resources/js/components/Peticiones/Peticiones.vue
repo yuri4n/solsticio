@@ -36,7 +36,7 @@
                                 <a
                                     class="btn btn-primary"
                                     href="http://solsticio.local/peticiones/genericas"
-                                    >Solicitar</a
+                                >Solicitar</a
                                 >
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                                 <a
                                     class="btn btn-primary"
                                     href="http://solsticio.local/peticiones/parqueadero"
-                                    >Solicitar</a
+                                >Solicitar</a
                                 >
                             </div>
                         </div>
@@ -80,3 +80,27 @@
         </div>
     </div>
 </template>
+
+<script>
+    export default {
+        created() {
+            if (this.$auth.isAuthenticated()) this.getUser();
+        },
+        data() {
+            return {
+                user: {}
+            }
+        },
+        methods: {
+            getUser() {
+                const url = "/api/auth/user";
+                axios
+                    .get(url)
+                    .then(response => {
+                        this.user = response.data.data;
+                    })
+                    .catch();
+            }
+        }
+    }
+</script>

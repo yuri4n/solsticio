@@ -3,23 +3,23 @@
         class="container my-5"
         v-if="$auth.isAuthenticated() && user.role == 'ADMIN'"
     >
-        <notifications group="foo" position="bottom left" :speed="500" />
+        <notifications :speed="500" group="foo" position="bottom left"/>
         <div class="card text-left mb-3">
             <div class="card-body">
                 <div class="row justify-content-between mb-4">
                     <div class="col-sm-8">
                         <h4 class="card-title">
                             {{
-                                this.generic
-                                    ? "Peticiones Genericas aprobadas"
-                                    : "Peticiones de Parqueadero aprobadas"
+                            this.generic
+                            ? "Peticiones Genericas aprobadas"
+                            : "Peticiones de Parqueadero aprobadas"
                             }}
                             /
-                            <a href="/admin/peticiones" class="btn btn-link">
+                            <a class="btn btn-link" href="/admin/peticiones">
                                 {{
-                                    this.generic
-                                        ? "Peticiones Genericas sin aprobar"
-                                        : "Peticiones de Parqueadero sin aprobar"
+                                this.generic
+                                ? "Peticiones Genericas sin aprobar"
+                                : "Peticiones de Parqueadero sin aprobar"
                                 }}
                             </a>
                         </h4>
@@ -30,112 +30,112 @@
                             class="btn btn-primary"
                         >
                             {{
-                                this.generic
-                                    ? "Peticiones de Parqueadero"
-                                    : "Peticiones Genericas"
+                            this.generic
+                            ? "Peticiones de Parqueadero"
+                            : "Peticiones Genericas"
                             }}
                         </button>
                     </div>
                 </div>
                 <h4 class="card-title">Lista de peticiones</h4>
-                <table v-if="this.generic" class="table table-striped">
+                <table class="table table-striped" v-if="this.generic">
                     <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Cédula</th>
-                            <th scope="col">Usuario</th>
-                            <th scope="col">Eliminar</th>
-                        </tr>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Cédula</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Eliminar</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="petition in petitions" :key="petition.id">
-                            <th scope="row">
-                                <button
-                                    @click.prevent="showDetail(petition)"
-                                    class="btn btn-link"
-                                >
-                                    {{ petition.id }}
-                                </button>
-                            </th>
-                            <td>{{ petition.nombre_responsable }}</td>
-                            <td>{{ petition.cedula }}</td>
-                            <td>
-                                <button
-                                    @click.prevent="
+                    <tr :key="petition.id" v-for="petition in petitions">
+                        <th scope="row">
+                            <button
+                                @click.prevent="showDetail(petition)"
+                                class="btn btn-link"
+                            >
+                                {{ petition.id }}
+                            </button>
+                        </th>
+                        <td>{{ petition.nombre_responsable }}</td>
+                        <td>{{ petition.cedula }}</td>
+                        <td>
+                            <button
+                                @click.prevent="
                                         showUserDetail(petition.user_id)
                                     "
-                                    class="btn btn-link"
-                                >
-                                    {{ petition.user_id }}
-                                </button>
-                            </td>
-                            <td>
-                                <button
-                                    @click.prevent="rejectPetition(petition)"
-                                    class="btn btn-danger"
-                                >
-                                    Eliminar
-                                </button>
-                            </td>
-                        </tr>
+                                class="btn btn-link"
+                            >
+                                {{ petition.user_id }}
+                            </button>
+                        </td>
+                        <td>
+                            <button
+                                @click.prevent="rejectPetition(petition)"
+                                class="btn btn-danger"
+                            >
+                                Eliminar
+                            </button>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
-                <table v-else class="table table-striped">
+                <table class="table table-striped" v-else>
                     <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Carro</th>
-                            <th scope="col">Moto</th>
-                            <th scope="col">Usuario</th>
-                            <th scope="col">Eliminar</th>
-                        </tr>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Carro</th>
+                        <th scope="col">Moto</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Eliminar</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="petition in petitions" :key="petition.id">
-                            <th scope="row">
-                                <button
-                                    @click.prevent="showDetail(petition)"
-                                    class="btn btn-link"
-                                >
-                                    {{ petition.id }}
-                                </button>
-                            </th>
-                            <td>{{ petition.nombre_propietario }}</td>
-                            <td>{{ petition.carro }}</td>
-                            <td>{{ petition.moto }}</td>
-                            <td>
-                                <button
-                                    @click.prevent="
+                    <tr :key="petition.id" v-for="petition in petitions">
+                        <th scope="row">
+                            <button
+                                @click.prevent="showDetail(petition)"
+                                class="btn btn-link"
+                            >
+                                {{ petition.id }}
+                            </button>
+                        </th>
+                        <td>{{ petition.nombre_propietario }}</td>
+                        <td>{{ petition.carro }}</td>
+                        <td>{{ petition.moto }}</td>
+                        <td>
+                            <button
+                                @click.prevent="
                                         showUserDetail(petition.user_id)
                                     "
-                                    class="btn btn-link"
-                                >
-                                    {{ petition.user_id }}
-                                </button>
-                            </td>
-                            <td>
-                                <button
-                                    @click.prevent="rejectPetition(petition)"
-                                    class="btn btn-danger"
-                                >
-                                    Eliminar
-                                </button>
-                            </td>
-                        </tr>
+                                class="btn btn-link"
+                            >
+                                {{ petition.user_id }}
+                            </button>
+                        </td>
+                        <td>
+                            <button
+                                @click.prevent="rejectPetition(petition)"
+                                class="btn btn-danger"
+                            >
+                                Eliminar
+                            </button>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
         </div>
         <!-- GENERIC DETAIL -->
         <div
+            aria-hidden="true"
+            aria-labelledby="myLargeModalLabel"
             class="modal fade"
             id="detail-generic"
-            tabindex="-1"
             role="dialog"
-            aria-labelledby="myLargeModalLabel"
-            aria-hidden="true"
+            tabindex="-1"
         >
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -144,10 +144,10 @@
                             Detalle de la petición
                         </h5>
                         <button
-                            type="button"
+                            aria-label="Close"
                             class="close"
                             data-dismiss="modal"
-                            aria-label="Close"
+                            type="button"
                         >
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -155,7 +155,7 @@
                     <div class="modal-body">
                         <h4 class="mt-2 mb-3">
                             <span class="font-weight-bold"
-                                >Nombre del responsable:
+                            >Nombre del responsable:
                             </span>
                             {{ this.currentPetition.nombre_responsable }}
                         </h4>
@@ -174,12 +174,12 @@
 
         <!-- PARKING DETAIL -->
         <div
+            aria-hidden="true"
+            aria-labelledby="myLargeModalLabel"
             class="modal fade"
             id="detail-parking"
-            tabindex="-1"
             role="dialog"
-            aria-labelledby="myLargeModalLabel"
-            aria-hidden="true"
+            tabindex="-1"
         >
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -188,10 +188,10 @@
                             Detalle de la petición
                         </h5>
                         <button
-                            type="button"
+                            aria-label="Close"
                             class="close"
                             data-dismiss="modal"
-                            aria-label="Close"
+                            type="button"
                         >
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -200,50 +200,50 @@
                         <div class="row">
                             <div class="col-md-2">
                                 <span class="font-weight-bold"
-                                    >Tiene deudas:
+                                >Tiene deudas:
                                 </span>
-                                <br />
+                                <br/>
                                 <p>{{ this.currentPetition.deudas }}</p>
                             </div>
                             <div class="col-md-2">
                                 <span class="font-weight-bold">Carro: </span>
-                                <br />
+                                <br/>
                                 <p>{{ this.currentPetition.carro }}</p>
                             </div>
                             <div class="col-md-2">
                                 <span class="font-weight-bold">Moto: </span>
-                                <br />
+                                <br/>
                                 <p>{{ this.currentPetition.moto }}</p>
                             </div>
                             <div class="col-md-2">
                                 <span class="font-weight-bold"
-                                    >Discapacidad:
+                                >Discapacidad:
                                 </span>
-                                <br />
+                                <br/>
                                 <p>{{ this.currentPetition.discapacidad }}</p>
                             </div>
                             <div class="col-md-2">
                                 <span class="font-weight-bold"
-                                    >Posee parqueadero:
+                                >Posee parqueadero:
                                 </span>
-                                <br />
+                                <br/>
                                 <p>{{ this.currentPetition.asignado }}</p>
                             </div>
                             <div class="col-md-2">
                                 <span class="font-weight-bold">Numero: </span>
-                                <br />
+                                <br/>
                                 <p>
                                     {{
-                                        this.currentPetition.asignado == "SI"
-                                            ? this.currentPetition.numero
-                                            : "N/a"
+                                    this.currentPetition.asignado == "SI"
+                                    ? this.currentPetition.numero
+                                    : "N/a"
                                     }}
                                 </p>
                             </div>
                         </div>
                         <div class="row mx-1">
                             <span class="font-weight-bold">ROL: </span>
-                            <br />
+                            <br/>
                             <p>
                                 {{ this.currentPetition.tipo }}
                             </p>
@@ -254,20 +254,20 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <span class="font-weight-bold">Nombre: </span>
-                                <br />
+                                <br/>
                                 <p>
                                     {{
-                                        this.currentPetition.nombre_propietario
+                                    this.currentPetition.nombre_propietario
                                     }}
                                 </p>
                             </div>
                             <div class="col-md-6">
                                 <span class="font-weight-bold">Telefono: </span>
-                                <br />
+                                <br/>
                                 <p>
                                     {{
-                                        this.currentPetition
-                                            .telefono_propietario
+                                    this.currentPetition
+                                    .telefono_propietario
                                     }}
                                 </p>
                             </div>
@@ -275,19 +275,19 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <span class="font-weight-bold"
-                                    >Direccion:
+                                >Direccion:
                                 </span>
-                                <br />
+                                <br/>
                                 <p>
                                     {{
-                                        this.currentPetition
-                                            .direccion_propietario
+                                    this.currentPetition
+                                    .direccion_propietario
                                     }}
                                 </p>
                             </div>
                             <div class="col-md-6">
                                 <span class="font-weight-bold">Correo: </span>
-                                <br />
+                                <br/>
                                 <p>
                                     {{ this.currentPetition.email_propietario }}
                                 </p>
@@ -299,17 +299,17 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <span class="font-weight-bold">Nombre: </span>
-                                <br />
+                                <br/>
                                 <p>
                                     {{ this.currentPetition.nombre_residente }}
                                 </p>
                             </div>
                             <div class="col-md-6">
                                 <span class="font-weight-bold">Telefono: </span>
-                                <br />
+                                <br/>
                                 <p>
                                     {{
-                                        this.currentPetition.telefono_residente
+                                    this.currentPetition.telefono_residente
                                     }}
                                 </p>
                             </div>
@@ -317,18 +317,18 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <span class="font-weight-bold"
-                                    >Direccion:
+                                >Direccion:
                                 </span>
-                                <br />
+                                <br/>
                                 <p>
                                     {{
-                                        this.currentPetition.direccion_residente
+                                    this.currentPetition.direccion_residente
                                     }}
                                 </p>
                             </div>
                             <div class="col-md-6">
                                 <span class="font-weight-bold">Correo: </span>
-                                <br />
+                                <br/>
                                 <p>
                                     {{ this.currentPetition.email_residente }}
                                 </p>
@@ -337,14 +337,14 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <span class="font-weight-bold">Torre: </span>
-                                <br />
+                                <br/>
                                 <p>{{ this.currentPetition.torre }}</p>
                             </div>
                             <div class="col-md-6">
                                 <span class="font-weight-bold"
-                                    >Apartamento:
+                                >Apartamento:
                                 </span>
-                                <br />
+                                <br/>
                                 <p>{{ this.currentPetition.apartamento }}</p>
                             </div>
                         </div>
@@ -352,55 +352,55 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <span class="font-weight-bold">Cedula: </span>
-                                <br />
+                                <br/>
                                 <a
-                                    class="btn btn-primary"
                                     :href="
                                         '/files/' + this.currentPetition.cedula
                                     "
+                                    class="btn btn-primary"
                                     download
-                                    >Descargar</a
+                                >Descargar</a
                                 >
                             </div>
                             <div class="col-md-3">
                                 <span class="font-weight-bold">Tarjeta: </span>
-                                <br />
+                                <br/>
                                 <a
-                                    class="btn btn-primary"
                                     :href="
                                         '/files/' +
                                             this.currentPetition
                                                 .tarjeta_propiedad
                                     "
+                                    class="btn btn-primary"
                                     download
-                                    >Descargar</a
+                                >Descargar</a
                                 >
                             </div>
                             <div class="col-md-3">
                                 <span class="font-weight-bold">Soat: </span>
-                                <br />
+                                <br/>
                                 <a
-                                    class="btn btn-primary"
                                     :href="
                                         '/files/' + this.currentPetition.soat
                                     "
+                                    class="btn btn-primary"
                                     download
-                                    >Descargar</a
+                                >Descargar</a
                                 >
                             </div>
                             <div class="col-md-3">
                                 <span class="font-weight-bold"
-                                    >Autorización
+                                >Autorización
                                 </span>
-                                <br />
+                                <br/>
                                 <a
-                                    class="btn btn-primary"
                                     :href="
                                         '/files/' +
                                             this.currentPetition.autorizacion
                                     "
+                                    class="btn btn-primary"
                                     download
-                                    >Descargar</a
+                                >Descargar</a
                                 >
                             </div>
                         </div>
@@ -408,56 +408,56 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <span class="font-weight-bold">Placa: </span>
-                                <br />
+                                <br/>
                                 <p>
                                     {{
-                                        this.currentPetition.placa1
-                                            ? this.currentPetition.placa1
-                                            : "N/a"
+                                    this.currentPetition.placa1
+                                    ? this.currentPetition.placa1
+                                    : "N/a"
                                     }}
                                 </p>
                             </div>
                             <div class="col-md-2">
                                 <span class="font-weight-bold">Color: </span>
-                                <br />
+                                <br/>
                                 <p>
                                     {{
-                                        this.currentPetition.color1
-                                            ? this.currentPetition.color1
-                                            : "N/a"
+                                    this.currentPetition.color1
+                                    ? this.currentPetition.color1
+                                    : "N/a"
                                     }}
                                 </p>
                             </div>
                             <div class="col-md-2">
                                 <span class="font-weight-bold">Clase: </span>
-                                <br />
+                                <br/>
                                 <p>
                                     {{
-                                        this.currentPetition.clase1
-                                            ? this.currentPetition.clase1
-                                            : "N/a"
+                                    this.currentPetition.clase1
+                                    ? this.currentPetition.clase1
+                                    : "N/a"
                                     }}
                                 </p>
                             </div>
                             <div class="col-md-2">
                                 <span class="font-weight-bold">Marca: </span>
-                                <br />
+                                <br/>
                                 <p>
                                     {{
-                                        this.currentPetition.marca1
-                                            ? this.currentPetition.marca1
-                                            : "N/a"
+                                    this.currentPetition.marca1
+                                    ? this.currentPetition.marca1
+                                    : "N/a"
                                     }}
                                 </p>
                             </div>
                             <div class="col-md-2">
                                 <span class="font-weight-bold">Modelo: </span>
-                                <br />
+                                <br/>
                                 <p>
                                     {{
-                                        this.currentPetition.modelo1
-                                            ? this.currentPetition.modelo1
-                                            : "N/a"
+                                    this.currentPetition.modelo1
+                                    ? this.currentPetition.modelo1
+                                    : "N/a"
                                     }}
                                 </p>
                             </div>
@@ -466,56 +466,56 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <span class="font-weight-bold">Placa: </span>
-                                <br />
+                                <br/>
                                 <p>
                                     {{
-                                        this.currentPetition.placa2
-                                            ? this.currentPetition.placa2
-                                            : "N/a"
+                                    this.currentPetition.placa2
+                                    ? this.currentPetition.placa2
+                                    : "N/a"
                                     }}
                                 </p>
                             </div>
                             <div class="col-md-2">
                                 <span class="font-weight-bold">Color: </span>
-                                <br />
+                                <br/>
                                 <p>
                                     {{
-                                        this.currentPetition.color2
-                                            ? this.currentPetition.color2
-                                            : "N/a"
+                                    this.currentPetition.color2
+                                    ? this.currentPetition.color2
+                                    : "N/a"
                                     }}
                                 </p>
                             </div>
                             <div class="col-md-2">
                                 <span class="font-weight-bold">Clase: </span>
-                                <br />
+                                <br/>
                                 <p>
                                     {{
-                                        this.currentPetition.clase2
-                                            ? this.currentPetition.clase2
-                                            : "N/a"
+                                    this.currentPetition.clase2
+                                    ? this.currentPetition.clase2
+                                    : "N/a"
                                     }}
                                 </p>
                             </div>
                             <div class="col-md-2">
                                 <span class="font-weight-bold">Marca: </span>
-                                <br />
+                                <br/>
                                 <p>
                                     {{
-                                        this.currentPetition.marca2
-                                            ? this.currentPetition.marca2
-                                            : "N/a"
+                                    this.currentPetition.marca2
+                                    ? this.currentPetition.marca2
+                                    : "N/a"
                                     }}
                                 </p>
                             </div>
                             <div class="col-md-2">
                                 <span class="font-weight-bold">Modelo: </span>
-                                <br />
+                                <br/>
                                 <p>
                                     {{
-                                        this.currentPetition.modelo2
-                                            ? this.currentPetition.modelo2
-                                            : "N/a"
+                                    this.currentPetition.modelo2
+                                    ? this.currentPetition.modelo2
+                                    : "N/a"
                                     }}
                                 </p>
                             </div>
@@ -524,56 +524,56 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <span class="font-weight-bold">Placa: </span>
-                                <br />
+                                <br/>
                                 <p>
                                     {{
-                                        this.currentPetition.placa3
-                                            ? this.currentPetition.placa3
-                                            : "N/a"
+                                    this.currentPetition.placa3
+                                    ? this.currentPetition.placa3
+                                    : "N/a"
                                     }}
                                 </p>
                             </div>
                             <div class="col-md-2">
                                 <span class="font-weight-bold">Color: </span>
-                                <br />
+                                <br/>
                                 <p>
                                     {{
-                                        this.currentPetition.color3
-                                            ? this.currentPetition.color3
-                                            : "N/a"
+                                    this.currentPetition.color3
+                                    ? this.currentPetition.color3
+                                    : "N/a"
                                     }}
                                 </p>
                             </div>
                             <div class="col-md-2">
                                 <span class="font-weight-bold">Clase: </span>
-                                <br />
+                                <br/>
                                 <p>
                                     {{
-                                        this.currentPetition.clase3
-                                            ? this.currentPetition.clase3
-                                            : "N/a"
+                                    this.currentPetition.clase3
+                                    ? this.currentPetition.clase3
+                                    : "N/a"
                                     }}
                                 </p>
                             </div>
                             <div class="col-md-2">
                                 <span class="font-weight-bold">Marca: </span>
-                                <br />
+                                <br/>
                                 <p>
                                     {{
-                                        this.currentPetition.marca3
-                                            ? this.currentPetition.marca3
-                                            : "N/a"
+                                    this.currentPetition.marca3
+                                    ? this.currentPetition.marca3
+                                    : "N/a"
                                     }}
                                 </p>
                             </div>
                             <div class="col-md-2">
                                 <span class="font-weight-bold">Modelo: </span>
-                                <br />
+                                <br/>
                                 <p>
                                     {{
-                                        this.currentPetition.modelo3
-                                            ? this.currentPetition.modelo3
-                                            : "N/a"
+                                    this.currentPetition.modelo3
+                                    ? this.currentPetition.modelo3
+                                    : "N/a"
                                     }}
                                 </p>
                             </div>
@@ -581,16 +581,16 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <span class="font-weight-bold"
-                                    >Diligenciador:
+                                >Diligenciador:
                                 </span>
-                                <br />
+                                <br/>
                                 <p>{{ this.currentPetition.diligenciador }}</p>
                             </div>
                             <div class="col-md-6">
                                 <span class="font-weight-bold"
-                                    >Documento:
+                                >Documento:
                                 </span>
-                                <br />
+                                <br/>
                                 <p>{{ this.currentPetition.documento }}</p>
                             </div>
                         </div>
@@ -601,12 +601,12 @@
 
         <!-- USER DETAIL -->
         <div
+            aria-hidden="true"
+            aria-labelledby="myLargeModalLabel"
             class="modal fade"
             id="detail-user"
-            tabindex="-1"
             role="dialog"
-            aria-labelledby="myLargeModalLabel"
-            aria-hidden="true"
+            tabindex="-1"
         >
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -615,10 +615,10 @@
                             Detalle del usuario
                         </h5>
                         <button
-                            type="button"
+                            aria-label="Close"
                             class="close"
                             data-dismiss="modal"
-                            aria-label="Close"
+                            type="button"
                         >
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -661,33 +661,33 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <li
-                    v-bind:class="[{ disabled: !pagination.prev_page_url }]"
                     class="page-item"
+                    v-bind:class="[{ disabled: !pagination.prev_page_url }]"
                 >
                     <a
+                        @click="readPetitions(pagination.prev_page_url)"
                         class="page-link"
                         href="#"
-                        @click="readPetitions(pagination.prev_page_url)"
-                        >Anterior</a
+                    >Anterior</a
                     >
                 </li>
 
                 <li class="page-item disabled">
                     <a class="page-link text-dark" href="#"
-                        >Página {{ pagination.current_page }} de
+                    >Página {{ pagination.current_page }} de
                         {{ pagination.last_page }}</a
                     >
                 </li>
 
                 <li
-                    v-bind:class="[{ disabled: !pagination.next_page_url }]"
                     class="page-item"
+                    v-bind:class="[{ disabled: !pagination.next_page_url }]"
                 >
                     <a
+                        @click="readPetitions(pagination.next_page_url)"
                         class="page-link"
                         href="#"
-                        @click="readPetitions(pagination.next_page_url)"
-                        >Siguiente</a
+                    >Siguiente</a
                     >
                 </li>
             </ul>
@@ -696,103 +696,103 @@
 </template>
 
 <script>
-export default {
-    created() {
-        if (this.$auth.isAuthenticated()) this.getUser();
-        this.readPetitions();
-    },
-    data() {
-        return {
-            petitions: [],
-            pagination: {},
-            user: {},
-            generic: true,
-            currentUser: {},
-            currentPetition: {}
-        };
-    },
-    methods: {
-        alert(alertType, alertMessage) {
-            this.$notify({
-                group: "foo",
-                type: alertType,
-                title: "BIEN",
-                text: alertMessage
-            });
-        },
-        getUser() {
-            const url = "http://solsticio.local/api/auth/user";
-            axios
-                .get(url)
-                .then(response => {
-                    this.user = response.data.data;
-                })
-                .catch();
-        },
-        readPetitions(page_url) {
-            let vm = this;
-            if (this.generic) {
-                page_url = page_url || "/api/approved/petitions";
-            } else {
-                page_url = page_url || "/api/approved/parkings";
-            }
-            axios
-                .get(page_url)
-                .then(response => {
-                    this.petitions = response.data.data;
-                    vm.makePagination(response.data);
-                })
-                .catch(err => console.log(err));
-        },
-        makePagination(meta) {
-            this.pagination = {
-                current_page: meta.current_page,
-                last_page: meta.last_page,
-                next_page_url: meta.next_page_url,
-                prev_page_url: meta.prev_page_url
-            };
-        },
-        showUserDetail(id) {
-            let url = `/api/users/${id}`;
-            axios
-                .get(url)
-                .then(response => {
-                    this.currentUser = response.data.user;
-                })
-                .catch(err => console.log(err));
-            $("#detail-user").modal("show");
-        },
-        showDetail(petition) {
-            this.currentPetition = petition;
-            this.generic
-                ? $("#detail-generic").modal("show")
-                : $("#detail-parking").modal("show");
-        },
-        toggleParking() {
-            this.generic = !this.generic;
+    export default {
+        created() {
+            if (this.$auth.isAuthenticated()) this.getUser();
             this.readPetitions();
         },
-        rejectPetition(petition) {
-            let url;
-            if (this.generic) {
-                url = "/api/petitions/" + petition.id;
-            } else {
-                url = "/api/parkings/" + petition.id;
-            }
-
-            const confirmacion = confirm(
-                `¿Seguro que desea eliminar la petición ${petition.id}?`
-            );
-            if (confirmacion) {
-                axios.delete(url).then(response => {
-                    this.alert(
-                        "warn",
-                        `La petición ${petition.id} ha sido eliminada`
-                    );
-                    this.readPetitions();
+        data() {
+            return {
+                petitions: [],
+                pagination: {},
+                user: {},
+                generic: true,
+                currentUser: {},
+                currentPetition: {}
+            };
+        },
+        methods: {
+            alert(alertType, alertMessage) {
+                this.$notify({
+                    group: "foo",
+                    type: alertType,
+                    title: "BIEN",
+                    text: alertMessage
                 });
+            },
+            getUser() {
+                const url = "http://solsticio.local/api/auth/user";
+                axios
+                    .get(url)
+                    .then(response => {
+                        this.user = response.data.data;
+                    })
+                    .catch();
+            },
+            readPetitions(page_url) {
+                let vm = this;
+                if (this.generic) {
+                    page_url = page_url || "/api/approved/petitions";
+                } else {
+                    page_url = page_url || "/api/approved/parkings";
+                }
+                axios
+                    .get(page_url)
+                    .then(response => {
+                        this.petitions = response.data.data;
+                        vm.makePagination(response.data);
+                    })
+                    .catch(err => console.log(err));
+            },
+            makePagination(meta) {
+                this.pagination = {
+                    current_page: meta.current_page,
+                    last_page: meta.last_page,
+                    next_page_url: meta.next_page_url,
+                    prev_page_url: meta.prev_page_url
+                };
+            },
+            showUserDetail(id) {
+                let url = `/api/users/${id}`;
+                axios
+                    .get(url)
+                    .then(response => {
+                        this.currentUser = response.data.user;
+                    })
+                    .catch(err => console.log(err));
+                $("#detail-user").modal("show");
+            },
+            showDetail(petition) {
+                this.currentPetition = petition;
+                this.generic
+                    ? $("#detail-generic").modal("show")
+                    : $("#detail-parking").modal("show");
+            },
+            toggleParking() {
+                this.generic = !this.generic;
+                this.readPetitions();
+            },
+            rejectPetition(petition) {
+                let url;
+                if (this.generic) {
+                    url = "/api/petitions/" + petition.id;
+                } else {
+                    url = "/api/parkings/" + petition.id;
+                }
+
+                const confirmacion = confirm(
+                    `¿Seguro que desea eliminar la petición ${petition.id}?`
+                );
+                if (confirmacion) {
+                    axios.delete(url).then(response => {
+                        this.alert(
+                            "warn",
+                            `La petición ${petition.id} ha sido eliminada`
+                        );
+                        this.readPetitions();
+                    });
+                }
             }
         }
-    }
-};
+    };
 </script>

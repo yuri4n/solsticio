@@ -18,7 +18,8 @@ Route::prefix('auth')->group(function () {
 
 Route::resource('users', 'UserController', array('except' => array('create', 'edit')));
 Route::get('/admin/users', 'UserController@complete');
-Route::put('/admin/users/{user}', 'UserController@updateStatus');
+Route::put('/approved/users/{user}', 'UserController@updateAndNotify');
+Route::put('/rejected/users/{user}', 'UserController@rejectAndNotify');
 
 Route::resource('posts', 'PostController', array('except' => array('create', 'edit')));
 Route::get('/admin/posts', 'PostController@admin');

@@ -3,60 +3,60 @@
         class="container my-5"
         v-if="$auth.isAuthenticated() && user.role == 'ADMIN'"
     >
-        <notifications group="foo" position="bottom left" :speed="500" />
+        <notifications :speed="500" group="foo" position="bottom left"/>
         <div class="card text-left mb-3">
             <div class="card-body">
                 <h4 class="card-title">
                     Clasificados Aprobados /
-                    <a href="/admin/clasificados" class="btn btn-link"
-                        >Clasificados pendientes por aprobar</a
+                    <a class="btn btn-link" href="/admin/clasificados"
+                    >Clasificados pendientes por aprobar</a
                     >
                 </h4>
                 <table class="table table-striped">
                     <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Título</th>
-                            <th scope="col">Usuario</th>
-                            <th scope="col">Eliminar</th>
-                            ``
-                        </tr>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Título</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Eliminar</th>
+                        ``
+                    </tr>
                     </thead>
                     <tbody>
-                        <tr
-                            v-for="classified in classifieds"
-                            :key="classified.id"
-                        >
-                            <th scope="row">{{ classified.id }}</th>
-                            <td>
-                                <button
-                                    @click.prevent="showDetail(classified)"
-                                    class="btn btn-link"
-                                >
-                                    {{ classified.title }}
-                                </button>
-                            </td>
-                            <td>
-                                <button
-                                    @click.prevent="
+                    <tr
+                        :key="classified.id"
+                        v-for="classified in classifieds"
+                    >
+                        <th scope="row">{{ classified.id }}</th>
+                        <td>
+                            <button
+                                @click.prevent="showDetail(classified)"
+                                class="btn btn-link"
+                            >
+                                {{ classified.title }}
+                            </button>
+                        </td>
+                        <td>
+                            <button
+                                @click.prevent="
                                         showUserDetail(classified.user_id)
                                     "
-                                    class="btn btn-link"
-                                >
-                                    {{ classified.user_id }}
-                                </button>
-                            </td>
-                            <td>
-                                <button
-                                    class="btn btn-danger"
-                                    v-on:click.prevent="
+                                class="btn btn-link"
+                            >
+                                {{ classified.user_id }}
+                            </button>
+                        </td>
+                        <td>
+                            <button
+                                class="btn btn-danger"
+                                v-on:click.prevent="
                                         deleteClassified(classified.id)
                                     "
-                                >
-                                    Eliminar
-                                </button>
-                            </td>
-                        </tr>
+                            >
+                                Eliminar
+                            </button>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -64,12 +64,12 @@
 
         <!-- CLASSIFIED DETAIL -->
         <div
+            aria-hidden="true"
+            aria-labelledby="myLargeModalLabel"
             class="modal fade"
             id="detail-classified"
-            tabindex="-1"
             role="dialog"
-            aria-labelledby="myLargeModalLabel"
-            aria-hidden="true"
+            tabindex="-1"
         >
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -78,10 +78,10 @@
                             Detalle del clasificado
                         </h5>
                         <button
-                            type="button"
+                            aria-label="Close"
                             class="close"
                             data-dismiss="modal"
-                            aria-label="Close"
+                            type="button"
                         >
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -101,12 +101,12 @@
 
         <!-- USER DETAIL -->
         <div
+            aria-hidden="true"
+            aria-labelledby="myLargeModalLabel"
             class="modal fade"
             id="detail-user"
-            tabindex="-1"
             role="dialog"
-            aria-labelledby="myLargeModalLabel"
-            aria-hidden="true"
+            tabindex="-1"
         >
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -115,10 +115,10 @@
                             Detalle del usuario
                         </h5>
                         <button
-                            type="button"
+                            aria-label="Close"
                             class="close"
                             data-dismiss="modal"
-                            aria-label="Close"
+                            type="button"
                         >
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -161,33 +161,33 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <li
-                    v-bind:class="[{ disabled: !pagination.prev_page_url }]"
                     class="page-item"
+                    v-bind:class="[{ disabled: !pagination.prev_page_url }]"
                 >
                     <a
+                        @click="readClassifieds(pagination.prev_page_url)"
                         class="page-link"
                         href="#"
-                        @click="readClassifieds(pagination.prev_page_url)"
-                        >Anterior</a
+                    >Anterior</a
                     >
                 </li>
 
                 <li class="page-item disabled">
                     <a class="page-link text-dark" href="#"
-                        >Página {{ pagination.current_page }} de
+                    >Página {{ pagination.current_page }} de
                         {{ pagination.last_page }}</a
                     >
                 </li>
 
                 <li
-                    v-bind:class="[{ disabled: !pagination.next_page_url }]"
                     class="page-item"
+                    v-bind:class="[{ disabled: !pagination.next_page_url }]"
                 >
                     <a
+                        @click="readClassifieds(pagination.next_page_url)"
                         class="page-link"
                         href="#"
-                        @click="readClassifieds(pagination.next_page_url)"
-                        >Siguiente</a
+                    >Siguiente</a
                     >
                 </li>
             </ul>
@@ -196,95 +196,95 @@
 </template>
 
 <script>
-export default {
-    created() {
-        if (this.$auth.isAuthenticated()) this.getUser();
-        this.readClassifieds();
-    },
-    data() {
-        return {
-            classifieds: [],
-            pagination: {},
-            status: "",
-            user: {},
-            currentClassified: {},
-            currentUser: {}
-        };
-    },
-    methods: {
-        alert(alertTitle, alertType, alertMessage) {
-            this.$notify({
-                group: "foo",
-                type: alertType,
-                title: alertTitle,
-                text: alertMessage
-            });
+    export default {
+        created() {
+            if (this.$auth.isAuthenticated()) this.getUser();
+            this.readClassifieds();
         },
-        getUser() {
-            let url = "http://solsticio.local/api/auth/user";
-            axios
-                .get(url)
-                .then(response => {
-                    this.user = response.data.data;
-                })
-                .catch();
-        },
-        readClassifieds(page_url) {
-            let vm = this;
-            page_url = page_url || "/api/admin/classifieds";
-            axios
-                .get(page_url)
-                .then(response => {
-                    this.classifieds = response.data.data;
-                    vm.makePagination(response.data);
-                })
-                .catch(err => console.log(err));
-        },
-        makePagination(meta) {
-            let pagination = {
-                current_page: meta.current_page,
-                last_page: meta.last_page,
-                next_page_url: meta.next_page_url,
-                prev_page_url: meta.prev_page_url
+        data() {
+            return {
+                classifieds: [],
+                pagination: {},
+                status: "",
+                user: {},
+                currentClassified: {},
+                currentUser: {}
             };
-            this.pagination = pagination;
         },
-        deleteClassified(id) {
-            let url = `/api/classifieds/${id}`;
-            axios
-                .delete(url)
-                .then(response => {
-                    this.alert(
-                        "Bien",
-                        "warn",
-                        "El clasificado ha sido eliminado satisfactoriamente"
-                    );
-                    this.readClassifieds();
-                })
-                .catch(error => {
-                    this.alert(
-                        "Error",
-                        "error",
-                        "Algo ha salido mal intentando borrar el clasificado"
-                    );
+        methods: {
+            alert(alertTitle, alertType, alertMessage) {
+                this.$notify({
+                    group: "foo",
+                    type: alertType,
+                    title: alertTitle,
+                    text: alertMessage
                 });
-        },
-        showUserDetail(id) {
-            let url = `/api/users/${id}`;
-            axios
-                .get(url)
-                .then(response => {
-                    this.currentUser = response.data.user;
-                })
-                .catch(err => console.log(err));
-            $("#detail-user").modal("show");
-        },
-        showDetail(classified) {
-            this.currentClassified = classified;
-            $("#detail-classified").modal("show");
+            },
+            getUser() {
+                let url = "http://solsticio.local/api/auth/user";
+                axios
+                    .get(url)
+                    .then(response => {
+                        this.user = response.data.data;
+                    })
+                    .catch();
+            },
+            readClassifieds(page_url) {
+                let vm = this;
+                page_url = page_url || "/api/admin/classifieds";
+                axios
+                    .get(page_url)
+                    .then(response => {
+                        this.classifieds = response.data.data;
+                        vm.makePagination(response.data);
+                    })
+                    .catch(err => console.log(err));
+            },
+            makePagination(meta) {
+                let pagination = {
+                    current_page: meta.current_page,
+                    last_page: meta.last_page,
+                    next_page_url: meta.next_page_url,
+                    prev_page_url: meta.prev_page_url
+                };
+                this.pagination = pagination;
+            },
+            deleteClassified(id) {
+                let url = `/api/classifieds/${id}`;
+                axios
+                    .delete(url)
+                    .then(response => {
+                        this.alert(
+                            "Bien",
+                            "warn",
+                            "El clasificado ha sido eliminado satisfactoriamente"
+                        );
+                        this.readClassifieds();
+                    })
+                    .catch(error => {
+                        this.alert(
+                            "Error",
+                            "error",
+                            "Algo ha salido mal intentando borrar el clasificado"
+                        );
+                    });
+            },
+            showUserDetail(id) {
+                let url = `/api/users/${id}`;
+                axios
+                    .get(url)
+                    .then(response => {
+                        this.currentUser = response.data.user;
+                    })
+                    .catch(err => console.log(err));
+                $("#detail-user").modal("show");
+            },
+            showDetail(classified) {
+                this.currentClassified = classified;
+                $("#detail-classified").modal("show");
+            }
         }
-    }
-};
+    };
 </script>
 
 <style></style>

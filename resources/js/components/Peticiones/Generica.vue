@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <notifications group="foo" position="bottom left" :speed="500" />
+        <notifications :speed="500" group="foo" position="bottom left"/>
         <div class="row my-5">
             <div class="col-md-8">
                 <div class="card text-left">
@@ -13,35 +13,35 @@
                             deleniti ipsum? Vitae odio debitis sapiente saepe
                             tempore consequatur aperiam?
                         </p>
-                        <form action="POST" @submit.prevent="sendPetition()">
+                        <form @submit.prevent="sendPetition()" action="POST">
                             <div class="form-group">
                                 <label for="name">Nombre del responsable</label>
                                 <input
-                                    type="text"
-                                    id="name"
-                                    class="form-control"
-                                    placeholder
                                     aria-describedby="nameHelp"
                                     autocomplete="off"
+                                    class="form-control"
+                                    id="name"
+                                    placeholder
+                                    type="text"
                                     v-model="newName"
                                 />
-                                <small id="nameHelp" class="text-muted"
-                                    >Help text</small
+                                <small class="text-muted" id="nameHelp"
+                                >Help text</small
                                 >
                             </div>
                             <div class="form-group">
                                 <label for="cedula">Número de cédula</label>
                                 <input
-                                    type="number"
-                                    id="cedula"
-                                    class="form-control"
-                                    placeholder
                                     aria-describedby="cedulaHelp"
                                     autocomplete="off"
+                                    class="form-control"
+                                    id="cedula"
+                                    placeholder
+                                    type="number"
                                     v-model="newCedula"
                                 />
-                                <small id="cedulaHelp" class="text-muted"
-                                    >Help text</small
+                                <small class="text-muted" id="cedulaHelp"
+                                >Help text</small
                                 >
                             </div>
                             <div class="form-group">
@@ -51,9 +51,9 @@
                                     id="texto"
                                     rows="6"
                                     v-model="newAdditional"
-                                ></textarea>
+                                />
                             </div>
-                            <button type="submit" class="btn btn-primary mb-2">
+                            <button class="btn btn-primary mb-2" type="submit">
                                 Enviar
                             </button>
                         </form>
@@ -76,59 +76,59 @@
 </template>
 
 <script>
-export default {
-    created() {
-        if (this.$auth.isAuthenticated()) this.getUser();
-    },
-    data() {
-        return {
-            newName: "",
-            newCedula: "",
-            newAdditional: "",
-            user: {}
-        };
-    },
-    methods: {
-        alert(alertTitle, alertType, alertMessage) {
-            this.$notify({
-                group: "foo",
-                type: alertType,
-                title: alertTitle,
-                text: alertMessage
-            });
+    export default {
+        created() {
+            if (this.$auth.isAuthenticated()) this.getUser();
         },
-        getUser() {
-            var url = "http://solsticio.local/api/auth/user";
-            axios
-                .get(url)
-                .then(response => {
-                    this.user = response.data.data;
-                })
-                .catch();
+        data() {
+            return {
+                newName: "",
+                newCedula: "",
+                newAdditional: "",
+                user: {}
+            };
         },
-        sendPetition() {
-            var url = "http://solsticio.local/api/petitions";
-            axios
-                .post(url, {
-                    user_id: this.user.id,
-                    nombre_responsable: this.newName,
-                    cedula: this.newCedula,
-                    additional: this.newAdditional
-                })
-                .then(response => {
-                    this.alert("success", "La reservación ha sido solicitada");
-                    (this.newName = ""),
-                        (this.newCedula = ""),
-                        (this.newAdditional = "");
-                })
-                .catch(error => {
-                    this.alert(
-                        "Error",
-                        "error",
-                        "Completa todos los campos requeridos"
-                    );
+        methods: {
+            alert(alertTitle, alertType, alertMessage) {
+                this.$notify({
+                    group: "foo",
+                    type: alertType,
+                    title: alertTitle,
+                    text: alertMessage
                 });
+            },
+            getUser() {
+                const url = "/api/auth/user";
+                axios
+                    .get(url)
+                    .then(response => {
+                        this.user = response.data.data;
+                    })
+                    .catch();
+            },
+            sendPetition() {
+                const url = "/api/petitions";
+                axios
+                    .post(url, {
+                        user_id: this.user.id,
+                        nombre_responsable: this.newName,
+                        cedula: this.newCedula,
+                        additional: this.newAdditional
+                    })
+                    .then(response => {
+                        this.alert("success", "La reservación ha sido solicitada");
+                        (this.newName = ""),
+                            (this.newCedula = ""),
+                            (this.newAdditional = "");
+                    })
+                    .catch(error => {
+                        this.alert(
+                            "Error",
+                            "error",
+                            "Completa todos los campos requeridos"
+                        );
+                    });
+            }
         }
-    }
-};
+    };
 </script>
