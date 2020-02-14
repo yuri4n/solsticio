@@ -1,8 +1,8 @@
 <?php
 
-namespace Solsticio\Exports;
+namespace App\Exports;
 
-use Solsticio\Census;
+use App\Census;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 class CensusExport implements FromCollection

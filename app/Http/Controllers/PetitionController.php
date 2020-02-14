@@ -1,13 +1,13 @@
 <?php
 
-namespace Solsticio\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
-use Solsticio\Mail\PetitionMail;
-use Solsticio\Petition;
-use Solsticio\User;
+use App\Mail\PetitionMail;
+use App\Petition;
+use App\User;
 
 class PetitionController extends Controller
 {

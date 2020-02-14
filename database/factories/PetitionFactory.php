@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(Solsticio\Petition::class, function (Faker $faker) {
+$factory->define(App\Petition::class, function (Faker $faker) {
     return [
         //
     ];

@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(Solsticio\Category::class, function (Faker $faker) {
+$factory->define(App\Category::class, function (Faker $faker) {
     $title = $faker->sentence(1);
     return [
         'name' => $title,

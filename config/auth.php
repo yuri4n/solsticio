@@ -66,7 +66,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Solsticio\User::class,
+            'model' => App\User::class,
         ],
 
         // 'users' => [

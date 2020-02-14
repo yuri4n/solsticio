@@ -1,13 +1,13 @@
 <?php
 
-namespace Solsticio\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Maatwebsite\Excel\Facades\Excel;
-use Solsticio\Census;
-use Solsticio\Exports\CensusExport;
-use Solsticio\Exports\CensusPendingExport;
+use App\Census;
+use App\Exports\CensusExport;
+use App\Exports\CensusPendingExport;
 
 class CensusController extends Controller
 {

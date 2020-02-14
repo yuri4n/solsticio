@@ -1,13 +1,13 @@
 <?php
 
-namespace Solsticio\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
-use Solsticio\Classified;
-use Solsticio\Mail\ClassifiedMail;
-use Solsticio\User;
+use App\Classified;
+use App\Mail\ClassifiedMail;
+use App\User;
 
 class ClassifiedController extends Controller
 {

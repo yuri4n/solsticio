@@ -1,10 +1,10 @@
 <?php
 
-namespace Solsticio\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Solsticio\Category;
+use App\Category;
 
 class CategoryController extends Controller
 {

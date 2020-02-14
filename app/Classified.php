@@ -1,6 +1,6 @@
 <?php
 
-namespace Solsticio;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,12 +12,12 @@ class Classified extends Model
 
     public function users()
     {
-        return $this . belongsTo('Solsticio\User');
+        return $this . belongsTo('App\User');
     }
 
     public function categories()
     {
-        return $this . belongsTo('Solsticio\Category');
+        return $this . belongsTo('App\Category');
     }
 
 }

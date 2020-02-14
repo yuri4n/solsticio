@@ -1,13 +1,13 @@
 <?php
 
-namespace Solsticio\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
-use Solsticio\Mail\ParkingMail;
-use Solsticio\Parking;
-use Solsticio\User;
+use App\Mail\ParkingMail;
+use App\Parking;
+use App\User;
 
 class ParkingController extends Controller
 {

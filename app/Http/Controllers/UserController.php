@@ -1,14 +1,14 @@
 <?php
 
-namespace Solsticio\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
-use Solsticio\Mail\UserMail;
-use Solsticio\User;
+use App\Mail\UserMail;
+use App\User;
 
 class UserController extends Controller
 {

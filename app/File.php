@@ -1,6 +1,6 @@
 <?php
 
-namespace Solsticio;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 

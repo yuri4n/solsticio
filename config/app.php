@@ -169,11 +169,11 @@ return [
         /*
          * Application Service Providers...
          */
-        Solsticio\Providers\AppServiceProvider::class,
-        Solsticio\Providers\AuthServiceProvider::class,
-        // Solsticio\Providers\BroadcastServiceProvider::class,
-        Solsticio\Providers\EventServiceProvider::class,
-        Solsticio\Providers\RouteServiceProvider::class,
+        App\Providers\AppServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
+        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
 
     ],
 

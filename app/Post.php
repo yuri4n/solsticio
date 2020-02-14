@@ -1,6 +1,6 @@
 <?php
 
-namespace Solsticio;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,6 +12,6 @@ class Post extends Model
 
     public function users()
     {
-        return $this . belongsTo('Solsticio\User');
+        return $this . belongsTo('App\User');
     }
 }

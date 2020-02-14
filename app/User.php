@@ -1,6 +1,6 @@
 <?php
 
-namespace Solsticio;
+namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;

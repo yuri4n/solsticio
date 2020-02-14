@@ -13,7 +13,7 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(Solsticio\User::class, function (Faker $faker) {
+$factory->define(App\User::class, function (Faker $faker) {
     $number1 = $faker->numberBetween($min = 1, $max = 12);
     $number2 = $faker->numberBetween($min = 1, $max = 4);
     return [
