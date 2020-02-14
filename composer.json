@@ -62,6 +62,7 @@
         ],
         "post-install-cmd": [
             "chmod -R 755 bootstrap\/cache",
+            "php artisan cache:clear",
             "php artisan vendor:publish --provider=\"Tymon\\JWTAuth\\Providers\\LaravelServiceProvider\"",
             "php artisan jwt:secret"
         ]
