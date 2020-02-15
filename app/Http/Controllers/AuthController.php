@@ -9,6 +9,11 @@ use App\User;
 
 class AuthController extends Controller
 {
+    private function guard()
+    {
+        return Auth::guard();
+    }
+
     public function register(Request $request)
     {
         $v = Validator::make($request->all(), [
@@ -38,16 +43,20 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
-        if ($token = $this->guard()->attempt($credentials)) {
-            return response()->json(['status' => 'success', 'redirect' => route('inicio'), 'token' => $token], 200)->header('Authorization', 'Bearer' . $token);
-        }
-        return response()->json(['error' => 'login_error'], 401);
-    }
+        $credentials = $this->validate(request(), [
+            'email' => 'email|required|string',
+            'password' => 'required|string'
+        ]);
 
-    private function guard()
-    {
-        return Auth::guard();
+        if (Auth::attempt($credentials)) {
+            if ($token = $this->guard()->attempt($credentials)) {
+                return response()->json(['status' => 'success', 'redirect' => route('inicio'), 'token' => $token], 200)->header('Authorization', 'Bearer' . $token);
+            }
+
+            return response()->json(['error' => 'login_error'], 401);
+        }
+
+        return back()->withErrors(['email' => "Tus credenciales no coinciden con nuestros registros"]);
     }
 
     public function logout()

@@ -97,7 +97,7 @@
             },
             readPost() {
                 let path = window.location.pathname.split("/");
-                let url = "http://solsticio.local/api/posts/" + path[2];
+                let url = "/api/posts/" + path[2];
                 axios
                     .get(url)
                     .then(response => {
@@ -109,7 +109,7 @@
                     });
             },
             getUser() {
-                let user_url = "http://solsticio.local/api/users/" + this.post.user_id;
+                let user_url = "/api/users/" + this.post.user_id;
                 axios
                     .get(user_url)
                     .then(response => {

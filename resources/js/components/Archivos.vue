@@ -68,12 +68,12 @@
                             </p>
                             <a
                                 class="btn btn-primary"
-                                href="http://solsticio.local/login"
+                                href="/login"
                             >Iniciar sesión</a
                             >
                             <a
                                 class="btn btn-primary"
-                                href="http://solsticio.local/register"
+                                href="/register"
                             >Registrarse</a
                             >
                         </div>

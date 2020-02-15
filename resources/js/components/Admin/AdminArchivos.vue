@@ -197,7 +197,7 @@
                 this.pagination = pagination;
             },
             deleteFile(file) {
-                var url = "http://solsticio.local/api/files/" + file.id;
+                var url = "/api/files/" + file.id;
                 var confirmacion = confirm(
                     `¿Seguro que deseas borrar el archivo ${file.id}?`
                 );
@@ -223,7 +223,7 @@
                 };
             },
             createFile() {
-                var url = "http://solsticio.local/api/files";
+                var url = "/api/files";
                 axios
                     .post(url, {
                         description: this.newDescription,
@@ -245,7 +245,7 @@
                 $("#edit").modal("show");
             },
             updateFile(id) {
-                var url = "http://solsticio.local/api/files/" + id;
+                var url = "/api/files/" + id;
                 axios
                     .put(url, this.fillFile)
                     .then(response => {
@@ -262,7 +262,7 @@
                     });
             },
             getUser() {
-                var url = "http://solsticio.local/api/auth/user";
+                var url = "/api/auth/user";
                 axios
                     .get(url)
                     .then(response => {

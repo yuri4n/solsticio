@@ -134,12 +134,12 @@
                         </p>
                         <a
                             class="btn btn-link"
-                            href="http://solsticio.local/login"
+                            href="/login"
                         >Ingresa</a
                         >
                         <a
                             class="btn btn-link"
-                            href="http://solsticio.local/register"
+                            href="/register"
                         >Regístrate</a
                         >
                     </div>
@@ -328,7 +328,7 @@
                 return day + " de " + monthNames[monthIndex - 1] + " de " + year;
             },
             getCategories() {
-                let url = "http://solsticio.local/api/categories";
+                let url = "/api/categories";
                 axios
                     .get(url)
                     .then(response => {
@@ -389,7 +389,7 @@
                 return id;
             },
             createClassified() {
-                var url = "http://solsticio.local/api/classifieds";
+                var url = "/api/classifieds";
                 axios
                     .post(url, {
                         user_id: this.user.id,

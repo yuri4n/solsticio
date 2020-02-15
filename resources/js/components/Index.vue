@@ -2,7 +2,7 @@
     <div>
         <header class="background-overlay text-white">
             <div class="container text-center">
-                <h1 v-if="user == undefined">Bienvenido a la página de Solsticio</h1>
+                <h1 v-if="this.user == {}">Bienvenido a la página de Solsticio</h1>
                 <h1 v-else>Bienvenido {{user.name}} a la página de Solsticio</h1>
                 <p class="lead">Parque Residencial etapa 5</p>
             </div>
@@ -71,12 +71,12 @@
         },
         data() {
             return {
-                user: undefined,
+                user: {},
             }
         },
         methods: {
             getUser() {
-                var url = 'http://solsticio.local/api/auth/user';
+                var url = '/api/auth/user';
                 axios.get(url).then(response => {
                     this.user = response.data.data;
                 }).catch();
@@ -90,7 +90,7 @@
     header {
         width: 100%;
         height: 100%;
-        background-image: url(http://solsticio.local/images/background.jpg);
+        background-image: url(/images/background.jpg);
         background-size: cover;
         background-attachment: fixed;
         background-position: center;

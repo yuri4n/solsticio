@@ -721,7 +721,7 @@
                 });
             },
             getUser() {
-                const url = "http://solsticio.local/api/auth/user";
+                const url = "/api/auth/user";
                 axios
                     .get(url)
                     .then(response => {

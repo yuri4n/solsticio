@@ -139,7 +139,7 @@
                     .catch();
             },
             sendReservation() {
-                var url = 'http://solsticio.local/api/reservations';
+                var url = '/api/reservations';
                 axios.post(url, {
                     user_id: this.user.id,
                     nombre_responsable: this.newResponsable,

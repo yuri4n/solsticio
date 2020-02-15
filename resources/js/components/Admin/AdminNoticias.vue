@@ -325,7 +325,7 @@
                 return "noticias/" + post.slug;
             },
             deletePost(post) {
-                var url = "http://solsticio.local/api/posts/" + post.id;
+                var url = "/api/posts/" + post.id;
                 var confirmacion = confirm(
                     `¿Seguro que deseas borrar la noticia ${post.id}?`
                 );
@@ -364,7 +364,7 @@
                 };
             },
             createPost() {
-                var url = "http://solsticio.local/api/posts";
+                var url = "/api/posts";
                 axios
                     .post(url, {
                         user_id: this.user.id,
@@ -395,7 +395,7 @@
                 $("#edit").modal("show");
             },
             updatePost(id) {
-                var url = "http://solsticio.local/api/posts/" + id;
+                var url = "/api/posts/" + id;
                 axios
                     .put(url, this.fillPost)
                     .then(response => {
@@ -417,7 +417,7 @@
                     });
             },
             getUser() {
-                var url = "http://solsticio.local/api/auth/user";
+                var url = "/api/auth/user";
                 axios
                     .get(url)
                     .then(response => {

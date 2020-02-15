@@ -26,19 +26,22 @@ Route::view('/censo', 'web.censo');
 Route::view('/pagos', 'web.pagos');
 
 //Admin
-Route::view('/admin', 'admin.index');
-Route::view('/admin/noticias', 'admin.noticias');
-Route::view('/admin/servicios', 'admin.servicios');
-Route::view('/admin/servicios/aprobadas', 'admin.servicios_approved');
-Route::view('/admin/archivos', 'admin.archivos');
-Route::view('/admin/clasificados', 'admin.classifieds');
-Route::view('/admin/clasificados/aprobados', 'admin.classifieds_approved');
-Route::view('/admin/peticiones', 'admin.petitions');
-Route::view('/admin/peticiones/aprobadas', 'admin.petitions_approved');
-Route::view('/admin/censo', 'admin.censuses');
-Route::view('/admin/censo/exportados', 'admin.censuses_exported');
-Route::view('/admin/usuarios', 'admin.usuarios');
-Route::view('/admin/usuarios/completos', 'admin.usuarios_completos');
+Route::group(['middleware' => ['auth:api', 'checkAdmin:api']], function() {
+    Route::view('/admin', 'admin.index');
+    Route::view('/admin/noticias', 'admin.noticias');
+    Route::view('/admin/servicios', 'admin.servicios');
+    Route::view('/admin/servicios/aprobadas', 'admin.servicios_approved');
+    Route::view('/admin/archivos', 'admin.archivos');
+    Route::view('/admin/clasificados', 'admin.classifieds');
+    Route::view('/admin/clasificados/aprobados', 'admin.classifieds_approved');
+    Route::view('/admin/peticiones', 'admin.petitions');
+    Route::view('/admin/peticiones/aprobadas', 'admin.petitions_approved');
+    Route::view('/admin/censo', 'admin.censuses');
+    Route::view('/admin/censo/exportados', 'admin.censuses_exported');
+    Route::view('/admin/usuarios', 'admin.usuarios');
+    Route::view('/admin/usuarios/completos', 'admin.usuarios_completos');
+});
+
 
 Route::view('/login', 'web.auth.login')->name('login');
 Route::view('/register', 'web.auth.register');

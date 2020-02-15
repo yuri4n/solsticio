@@ -3,7 +3,7 @@
         <div class="row my-5">
             <div class="col-xl-4">
                 <div class="card text-left">
-                    <img alt="" class="card-img-top" src="http://placehold.it/1280x720">
+                    <img alt="salon_de_juntas" class="card-img-top" src="http://placehold.it/1280x720">
                     <div class="card-body">
                         <h4 class="card-title">Salon de Juntas</h4>
                         <p class="card-text">Lorem ipsum dolor sit amet consectetur adipiscing elit tortor fringilla
@@ -17,7 +17,7 @@
             </div>
             <div class="col-xl-4">
                 <div class="card text-left">
-                    <img alt="" class="card-img-top" src="http://placehold.it/1280x720">
+                    <img alt="salon_social" class="card-img-top" src="http://placehold.it/1280x720">
                     <div class="card-body">
                         <h4 class="card-title">Salon Social</h4>
                         <p class="card-text">Lorem ipsum dolor sit amet consectetur adipiscing elit tortor fringilla
@@ -31,7 +31,7 @@
             </div>
             <div class="col-xl-4">
                 <div class="card text-left">
-                    <img alt="" class="card-img-top" src="http://placehold.it/1280x720">
+                    <img alt="bbq" class="card-img-top" src="http://placehold.it/1280x720">
                     <div class="card-body">
                         <h4 class="card-title">BBQ</h4>
                         <p class="card-text">Lorem ipsum dolor sit amet consectetur adipiscing elit tortor fringilla

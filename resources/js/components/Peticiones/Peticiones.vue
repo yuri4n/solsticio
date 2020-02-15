@@ -35,7 +35,7 @@
                                 </ul>
                                 <a
                                     class="btn btn-primary"
-                                    href="http://solsticio.local/peticiones/genericas"
+                                    href="/peticiones/genericas"
                                 >Solicitar</a
                                 >
                             </div>
@@ -55,7 +55,7 @@
                                 </p>
                                 <a
                                     class="btn btn-primary"
-                                    href="http://solsticio.local/peticiones/parqueadero"
+                                    href="/peticiones/parqueadero"
                                 >Solicitar</a
                                 >
                             </div>

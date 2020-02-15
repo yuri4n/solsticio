@@ -101,7 +101,7 @@
             },
             readPost() {
                 let path = window.location.pathname.split("/");
-                let url = "http://solsticio.local/api/classifieds/" + path[2];
+                let url = "/api/classifieds/" + path[2];
                 axios
                     .get(url)
                     .then(response => {
@@ -114,7 +114,7 @@
             },
             getUser() {
                 let user_url =
-                    "http://solsticio.local/api/users/" + this.classified.user_id;
+                    "/api/users/" + this.classified.user_id;
                 axios
                     .get(user_url)
                     .then(response => {
@@ -125,7 +125,7 @@
                     });
             },
             getCategories() {
-                let url = "http://solsticio.local/api/categories";
+                let url = "/api/categories";
                 axios
                     .get(url)
                     .then(response => {

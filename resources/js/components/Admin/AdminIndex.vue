@@ -18,7 +18,7 @@
                 <img
                     alt="Card image cap"
                     class="card-img-bottom"
-                    src="http://solsticio.local/images/background.jpg"
+                    src="/images/background.jpg"
                 >
             </div>
         </div>
@@ -35,8 +35,8 @@
                 >Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima ad eligendi id sunt in expedita. Fugit
                     accusamus ipsum delectus quo repellendus sit omnis ad, voluptate impedit quisquam adipisci repellat.
                     Consequatur.</p>
-                <a class="btn btn-primary" href="http://solsticio.local/login">Iniciar sesión</a>
-                <a class="btn btn-primary" href="http://solsticio.local/register">Registrarse</a>
+                <a class="btn btn-primary" href="/login">Iniciar sesión</a>
+                <a class="btn btn-primary" href="/register">Registrarse</a>
             </div>
         </div>
     </div>
@@ -54,7 +54,7 @@
         },
         methods: {
             getUser() {
-                var url = "http://solsticio.local/api/auth/user";
+                var url = "/api/auth/user";
                 axios
                     .get(url)
                     .then(response => {

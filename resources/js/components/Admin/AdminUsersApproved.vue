@@ -10,7 +10,7 @@
                     Lista completa /
                     <a
                         class="btn btn-link"
-                        href="http://solsticio.local/admin/usuarios"
+                        href="/admin/usuarios"
                     >Lista de Usuarios pendientes por aprobar</a
                     >
                 </h4>
@@ -129,7 +129,7 @@
                 this.pagination = pagination;
             },
             getUser() {
-                var url = "http://solsticio.local/api/auth/user";
+                var url = "/api/auth/user";
                 axios
                     .get(url)
                     .then(response => {

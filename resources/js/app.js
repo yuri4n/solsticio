@@ -15,7 +15,7 @@ window.Vue = require('vue');
 
 Vue.use(VueAxios, axios);
 Vue.use(VueAuthenticate, {
-    baseUrl: 'http://solsticio.local/api/',
+    baseUrl: '/api/',
 });
 
 require('./bootstrap');

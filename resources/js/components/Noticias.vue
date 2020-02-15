@@ -140,7 +140,7 @@
                 return "noticias/" + post.slug;
             },
             getUser(user_id) {
-                let user_url = "http://solsticio.local/api/users/" + user_id;
+                let user_url = "/api/users/" + user_id;
                 var user_name;
                 axios
                     .get(user_url)

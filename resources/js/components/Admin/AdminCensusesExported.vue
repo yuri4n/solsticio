@@ -134,7 +134,7 @@
                 this.pagination = pagination;
             },
             getUser() {
-                let url = "http://solsticio.local/api/auth/user";
+                let url = "/api/auth/user";
                 axios
                     .get(url)
                     .then(response => {
@@ -151,7 +151,7 @@
                 });
             },
             rejectCensus(census) {
-                let url = "http://solsticio.local/api/censuses/" + census.id;
+                let url = "/api/censuses/" + census.id;
                 let confirmacion = confirm(
                     `¿Seguro que desea borrar el censo ${census.id}?`
                 );

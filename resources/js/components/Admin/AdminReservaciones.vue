@@ -251,7 +251,7 @@
         },
         methods: {
             getAuthUser() {
-                let url = "http://solsticio.local/api/auth/user";
+                let url = "/api/auth/user";
                 axios
                     .get(url)
                     .then(response => {
