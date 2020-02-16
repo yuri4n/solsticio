@@ -12,10 +12,8 @@ env_variables:
     APP_KEY: base64:rKtFKJak3c+D8lWuG4pMR8Dm+rsl+OtFJXflO8+y3TY=
     CACHE_DRIVER: file
     SESSION_DRIVER: file
-    DB_HOST: localhost
     DB_DATABASE: solsticiodb
     DB_USERNAME: root
     DB_PASSWORD: root
     DB_SOCKET: "/cloudsql/solsticio-267600:us-east1:solsticiodb"
     APP_URL: https://solsticio-267600.appspot.com/
-    APP_DEBUG: true

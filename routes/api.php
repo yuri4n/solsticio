@@ -22,11 +22,13 @@ Route::put('/approved/users/{user}', 'UserController@updateAndNotify');
 Route::put('/rejected/users/{user}', 'UserController@rejectAndNotify');
 
 Route::resource('posts', 'PostController', array('except' => array('create', 'edit')));
+Route::get('/landing/posts', 'PostController@landing');
 Route::get('/admin/posts', 'PostController@admin');
 
 Route::resource('files', 'FileController', array('except' => array('create', 'edit')));
 
 Route::resource('classifieds', 'ClassifiedController', array('except' => array('create', 'edit')));
+Route::get('/landing/classifieds', 'ClassifiedController@landing');
 Route::get('/admin/classifieds', 'ClassifiedController@admin');
 Route::put('/admin/classifieds/{classified}', 'ClassifiedController@updateStatus');
 Route::put('/reject/classifieds/{classified}', 'ClassifiedController@rejectClassified');

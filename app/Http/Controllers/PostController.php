@@ -24,6 +24,17 @@ class PostController extends Controller
      *
      * @return Response
      */
+    public function landing()
+    {
+        $posts = Post::orderBy('id', 'DESC')->where('status', 'PUBLISHED')->take(2)->get();
+        return $posts;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
     public function admin()
     {
         $posts = Post::orderBy('id', 'DESC')->where('status', 'PUBLISHED')->paginate(25);
@@ -64,8 +75,8 @@ class PostController extends Controller
             file_put_contents($path, $decoded);
 
             Post::create($request->except('file') + [
-                    'file' => 'files/' . $fileName,
-                ]);
+                'file' => 'files/' . $fileName,
+            ]);
         } else {
             Post::create($request->except('file'));
         }
@@ -120,8 +131,8 @@ class PostController extends Controller
             file_put_contents($path, $decoded);
 
             Post::find($id)->update($request->except('file') + [
-                    'file' => 'files/' . $fileName,
-                ]);
+                'file' => 'files/' . $fileName,
+            ]);
         } else {
             Post::find($id)->update($request->except('file'));
         }

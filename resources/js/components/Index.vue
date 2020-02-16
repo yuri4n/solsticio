@@ -2,9 +2,13 @@
     <div>
         <header class="background-overlay text-white">
             <div class="container text-center">
-                <h1 v-if="this.user == {}">Bienvenido a la página de Solsticio</h1>
-                <h1 v-else>Bienvenido {{user.name}} a la página de Solsticio</h1>
-                <p class="lead">Parque Residencial etapa 5</p>
+                <h1 v-if="this.user == {}">
+                    Bienvenido a la página de Solsticio
+                </h1>
+                <h1 v-else>
+                    Bienvenido {{ user.name }} a la página de Solsticio
+                </h1>
+                <p class="lead">Parque Residencial Etapa 5</p>
             </div>
         </header>
 
@@ -13,34 +17,105 @@
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
                         <h2>Acerca de esta página</h2>
-                        <p
-                            class="lead"
-                        >This is a great place to talk about your webpage. This template is purposefully unstyled so you
-                            can use it as a boilerplate or starting point for you own landing page designs! This
-                            template features:</p>
-                        <ul>
-                            <li>Clickable nav links that smooth scroll to page sections</li>
-                            <li>Responsive behavior when clicking nav links perfect for a one page website</li>
-                            <li>Bootstrap's scrollspy feature which highlights which section of the page you're on in
-                                the navbar
-                            </li>
-                            <li>Minimal custom CSS so you are free to explore your own unique design options</li>
-                        </ul>
+                        <p class="lead">
+                            Aquí podrás encontrar todo tipo de contenido
+                            relacionado con tu conjunto, como noticias, archivo
+                            y mucho más. También podrás ver y crear tus propios
+                            clasificados, contribuyendo al bienestar de nuestra
+                            comunidad.
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="bg-light" id="services">
-            <div class="container mt-5">
+        <section>
+            <div class="container my-5">
                 <div class="row">
-                    <div class="col-lg-8 mx-auto">
-                        <h2>Services we offer</h2>
-                        <p
-                            class="lead"
-                        >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut optio velit inventore, expedita
-                            quo laboriosam possimus ea consequatur vitae, doloribus consequuntur ex. Nemo assumenda
-                            laborum vel, labore ut velit dignissimos.</p>
+                    <div class="col-md-6">
+                        <h3>Noticias</h3>
+                        <div class="row">
+                            <div
+                                :key="post.id"
+                                v-for="post in posts"
+                                class="col-md-6"
+                            >
+                                <div class="card" style="width: 100%;">
+                                    <img
+                                        v-if="post.file"
+                                        class="card-img-top"
+                                        :src="post.file"
+                                        style="width:100%;"
+                                        alt="post_image"
+                                    />
+                                    <div class="card-body">
+                                        <h2 class="card-title">
+                                            {{ post.title }}
+                                        </h2>
+                                        <p class="card-text">
+                                            {{ post.excerpt }}
+                                        </p>
+                                        <a
+                                            :href="postRoute(post)"
+                                            class="btn btn-primary"
+                                            >Leer Más &rarr;</a
+                                        >
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                        {{ formatDate(post.created_at) }}
+                                        <a href="#">{{
+                                            getUserName(post.user_id)
+                                        }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="btn btn-link mt-3" href="/noticias"
+                            >Ver todas las noticias &rarr;</a
+                        >
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class="text-align-center">Clasificados</h3>
+                        <div class="row">
+                            <div
+                                class="col-sm-6"
+                                v-bind:key="classified.id"
+                                v-for="classified in classifieds"
+                            >
+                                <div
+                                    class="card sm-4 mb-3"
+                                    style="width: 100%;"
+                                >
+                                    <img
+                                        :src="classified.file"
+                                        alt="Card image cap"
+                                        class="card-img-top"
+                                        v-if="classified.file"
+                                        style="width: 100%"
+                                    />
+                                    <div class="card-body">
+                                        <h2 class="card-title">
+                                            {{ classified.title }}
+                                        </h2>
+                                        <p class="card-text">
+                                            {{ classified.excerpt }}
+                                        </p>
+                                        <a
+                                            :href="classifiedRoute(classified)"
+                                            class="btn btn-primary"
+                                            >Leer Más &rarr;</a
+                                        >
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                        Publicado el
+                                        {{ formatDate(classified.created_at) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="btn btn-link mt-2" href="/clasificados"
+                            >Ver todos los clasificados &rarr;</a
+                        >
                     </div>
                 </div>
             </div>
@@ -50,12 +125,13 @@
             <div class="container mt-5 mb-5">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
-                        <h2>Contact us</h2>
-                        <p
-                            class="lead"
-                        >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero odio fugiat voluptatem dolor,
-                            provident officiis, id iusto! Obcaecati incidunt, qui nihil beatae magnam et repudiandae
-                            ipsa exercitationem, in, quo totam.</p>
+                        <h2>Contáctenos</h2>
+                        <p class="lead">
+                            Si tienes alguna duda, o algo que no puedas resolver
+                            desde este portal, te invitamos a acercarte a la
+                            administración del conjunto en los horarios
+                            habituales de atención.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -64,43 +140,114 @@
 </template>
 
 <script>
-    export default {
-        mounted() {
-            if (this.$auth.isAuthenticated())
-                this.getUser();
-        },
-        data() {
-            return {
-                user: {},
-            }
-        },
-        methods: {
-            getUser() {
-                var url = '/api/auth/user';
-                axios.get(url).then(response => {
+export default {
+    mounted() {
+        if (this.$auth.isAuthenticated()) this.getUser();
+        this.getPosts();
+        this.getClassifieds();
+    },
+    data() {
+        return {
+            user: {},
+            posts: [],
+            classifieds: []
+        };
+    },
+    methods: {
+        getUser() {
+            const url = "/api/auth/user";
+            axios
+                .get(url)
+                .then(response => {
                     this.user = response.data.data;
-                }).catch();
-            }
+                })
+                .catch();
+        },
+        getPosts() {
+            const url = "/api/landing/posts";
+            axios
+                .get(url)
+                .then(response => {
+                    this.posts = response.data;
+                })
+                .catch();
+        },
+        getClassifieds() {
+            const url = "/api/landing/classifieds";
+            axios
+                .get(url)
+                .then(response => {
+                    this.classifieds = response.data;
+                })
+                .catch();
+        },
+        postRoute(post) {
+            return "/noticias/" + post.slug;
+        },
+        classifiedRoute(classified) {
+            return "/clasificados/" + classified.slug;
+        },
+        getUserName(user_id) {
+            const url = "/api/users/" + user_id;
+            let user_name;
+            axios
+                .get(url)
+                .then(response => {
+                    user_name = response.data.user.name;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            return user_name;
+        },
+        formatDate(date) {
+            const monthNames = [
+                "Enero",
+                "Febrero",
+                "Marzo",
+                "Abril",
+                "Mayo",
+                "Junio",
+                "Julio",
+                "Agosto",
+                "Septiembre",
+                "Octubre",
+                "Noviembre",
+                "Diciembre"
+            ];
+
+            const ndate = date.split(" ");
+            const fdate = ndate[0].split("-");
+
+            let month = fdate[1];
+
+            while (month.charAt(0) == "0") month = month.substr(1);
+
+            const day = fdate[2];
+            const monthIndex = month;
+            const year = fdate[0];
+
+            return day + " de " + monthNames[monthIndex - 1] + " de " + year;
         }
     }
+};
 </script>
 
-
 <style>
-    header {
-        width: 100%;
-        height: 100%;
-        background-image: url(/images/background.jpg);
-        background-size: cover;
-        background-attachment: fixed;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
+header {
+    width: 100%;
+    height: 100%;
+    background-image: url(/images/background.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
-    @media (min-width: 992px) {
-        header {
-            padding: 156px 0 100px;
-        }
+@media (min-width: 992px) {
+    header {
+        padding: 156px 0 100px;
     }
+}
 </style>

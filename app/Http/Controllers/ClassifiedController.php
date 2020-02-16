@@ -27,6 +27,17 @@ class ClassifiedController extends Controller
      *
      * @return Response
      */
+    public function landing()
+    {
+        $classifieds = Classified::orderBy('id', 'DESC')->where('status', 'PUBLISHED')->take(2)->get();
+        return $classifieds;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
     public function admin()
     {
         $classifieds = Classified::orderBy('id', 'DESC')->where('status', 'PENDING')->paginate(25);
@@ -68,8 +79,8 @@ class ClassifiedController extends Controller
             file_put_contents($path, $decoded);
 
             Classified::create($request->except('file') + [
-                    'file' => 'files/' . $fileName,
-                ]);
+                'file' => 'files/' . $fileName,
+            ]);
         } else {
             Classified::create($request->except('file'));
         }
