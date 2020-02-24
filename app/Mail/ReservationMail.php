@@ -28,6 +28,6 @@ class ReservationMail extends Mailable
      */
     public function build()
     {
-        return $this->from('juliangarzondeveloper@gmail.com')->subject('Estado reservación Solsticio Etapa 5')->view('mails/reservation')->with('data', $this->data);
+        return $this->from('lady@mail.solsticioetapa5.com')->subject('Estado reservación Solsticio Etapa 5')->view('mails/reservation')->with('data', $this->data);
     }
 }

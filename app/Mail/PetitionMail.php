@@ -28,6 +28,6 @@ class PetitionMail extends Mailable
      */
     public function build()
     {
-        return $this->from('juliangarzondeveloper@gmail.com')->subject('Estado de petición Solsticio Etapa 5')->view('mails/petition')->with('data', $this->data);
+        return $this->from('lady@mail.solsticioetapa5.com')->subject('Estado de petición Solsticio Etapa 5')->view('mails/petition')->with('data', $this->data);
     }
 }

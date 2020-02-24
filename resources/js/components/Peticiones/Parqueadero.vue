@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="vh-100 container">
         <notifications :speed="500" group="foo" position="bottom left"/>
         <div class="row my-5">
             <div class="col-md-8">
@@ -774,3 +774,9 @@
         }
     };
 </script>
+
+<style scoped>
+    .vh-100 {
+        min-height: 74vh;
+    }
+</style>

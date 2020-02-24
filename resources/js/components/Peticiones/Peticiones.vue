@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container vh-100">
         <div class="row my-5">
             <div class="col-md-8">
                 <div class="card text-left">
@@ -68,11 +68,8 @@
                     <div class="card-body">
                         <h4 class="card-title">Bienvenido!</h4>
                         <p class="card-text">
-                            Lorem ipsum dolor sit, amet consectetur adipisicing
-                            elit. Iusto, in numquam quibusdam quisquam ad
-                            dolorum itaque deleniti impedit? Ea ad blanditiis
-                            possimus aliquid! Rerum blanditiis, culpa pariatur
-                            esse quibusdam odit.
+                            Recuerda que para poder realizar una petición deberás estar registrado y aprobado en el
+                            sitio
                         </p>
                     </div>
                 </div>
@@ -104,3 +101,9 @@
         }
     }
 </script>
+
+<style scoped>
+    .vh-100 {
+        min-height: 74vh;
+    }
+</style>

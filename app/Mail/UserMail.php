@@ -28,6 +28,6 @@ class UserMail extends Mailable
      */
     public function build()
     {
-        return $this->from('juliangarzondeveloper@gmail.com')->subject('Estado de tu usuario Solsticio Etapa 5')->view('mails/user')->with('data', $this->data);
+        return $this->from('lady@mail.solsticioetapa5.com')->subject('Estado de tu usuario Solsticio Etapa 5')->view('mails/user')->with('data', $this->data);
     }
 }

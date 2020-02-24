@@ -2,10 +2,10 @@
     <div>
         <header class="background-overlay text-white">
             <div class="container text-center">
-                <h1 v-if="this.user == {}">
+                <h1 class="font-weight-bold" v-if="this.user == {}">
                     Bienvenido a la página de Solsticio
                 </h1>
-                <h1 v-else>
+                <h1 class="font-weight-bold" v-else>
                     Bienvenido {{ user.name }} a la página de Solsticio
                 </h1>
                 <p class="lead">Parque Residencial Etapa 5</p>
@@ -16,7 +16,7 @@
             <div class="container mt-5">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
-                        <h2>Acerca de esta página</h2>
+                        <h2 class="font-weight-bold">Acerca de esta página</h2>
                         <p class="lead">
                             Aquí podrás encontrar todo tipo de contenido
                             relacionado con tu conjunto, como noticias, archivo
@@ -33,7 +33,7 @@
             <div class="container my-5">
                 <div class="row">
                     <div class="col-md-6">
-                        <h3>Noticias</h3>
+                        <h3 class="font-weight-bold right-align">Noticias</h3>
                         <div class="row">
                             <div
                                 :key="post.id"
@@ -70,12 +70,14 @@
                                 </div>
                             </div>
                         </div>
-                        <a class="btn btn-link mt-3" href="/noticias"
+                        <h5 class="font-weight-light right-align" v-if="posts.length === 0">No hay noticias para
+                            mostrar</h5>
+                        <a v-if="posts.length < 0" class="btn btn-link mt-3 right-align" href="/noticias"
                             >Ver todas las noticias &rarr;</a
                         >
                     </div>
                     <div class="col-md-6">
-                        <h3 class="text-align-center">Clasificados</h3>
+                        <h3 class="font-weight-bold">Clasificados</h3>
                         <div class="row">
                             <div
                                 class="col-sm-6"
@@ -113,8 +115,12 @@
                                 </div>
                             </div>
                         </div>
-                        <a class="btn btn-link mt-2" href="/clasificados"
+                        <a v-if="posts.length < 0" class="btn btn-link mt-2" href="/clasificados"
                             >Ver todos los clasificados &rarr;</a
+                        >
+                        <h5 class="font-weight-light" v-if="posts.length === 0">No hay clasificados para mostrar</h5>
+                        <a v-if="posts.length === 0" class="btn btn-link mt-1 create_own_link" href="/clasificados"
+                            >Crea tu propio clasificado &rarr;</a
                         >
                     </div>
                 </div>
@@ -125,7 +131,7 @@
             <div class="container mt-5 mb-5">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
-                        <h2>Contáctenos</h2>
+                        <h2 class="font-weight-bold">Contáctenos</h2>
                         <p class="lead">
                             Si tienes alguna duda, o algo que no puedas resolver
                             desde este portal, te invitamos a acercarte a la
@@ -243,6 +249,14 @@ header {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.create_own_link {
+    padding: 0 !important;
+}
+
+.right-align {
+    text-align: right;
 }
 
 @media (min-width: 992px) {

@@ -1,5 +1,5 @@
 <template>
-    <div class="container my-5" v-if="$auth.isAuthenticated() && user.role == 'ADMIN'">
+    <div class="container vh-100 my-5" v-if="$auth.isAuthenticated() && user.role == 'ADMIN' && user.status === 'APPROVED'">
         <notifications :speed="500" group="foo" position="bottom left"/>
         <!-- Tabla -->
         <div class="card text-left mb-3">
@@ -273,3 +273,9 @@
         }
     };
 </script>
+
+<style scoped>
+    .vh-100 {
+        min-height: 69vh;
+    }
+</style>

@@ -11,7 +11,7 @@
                         <form
                             @submit.prevent="register"
                             autocomplete="off"
-                            method="post"
+                            method="POST"
                         >
                             <div
                                 class="form-group"

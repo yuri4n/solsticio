@@ -28,6 +28,6 @@ class ParkingMail extends Mailable
      */
     public function build()
     {
-        return $this->from('juliangarzondeveloper@gmail.com')->subject('Estado petición de parqueadero Solsticio Etapa 5')->view('mails/parking')->with('data', $this->data);
+        return $this->from('lady@mail.solsticioetapa5.com')->subject('Estado petición de parqueadero Solsticio Etapa 5')->view('mails/parking')->with('data', $this->data);
     }
 }

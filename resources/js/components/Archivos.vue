@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container vh-100">
         <div class="row">
             <div class="col-md-8">
                 <h1 class="my-4">Archivos</h1>
@@ -201,3 +201,9 @@
         }
     };
 </script>
+
+<style scoped>
+    .vh-100 {
+        min-height: 79vh;
+    }
+</style>

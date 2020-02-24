@@ -1,5 +1,5 @@
 <template>
-    <div class="container my-5">
+    <div class="vh-100 container my-5">
         <div class="row">
             <div class="col-md-8">
                 <div class="card text-left">
@@ -38,3 +38,9 @@
         </div>
     </div>
 </template>
+
+<style scoped>
+    .vh-100 {
+        min-height: 69vh;
+    }
+</style>

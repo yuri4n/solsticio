@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container vh-100">
         <notifications :speed="500" group="foo" position="bottom left"/>
         <div class="row">
             <!-- Blog Entries Column -->
@@ -418,8 +418,14 @@
                     });
             },
             classifiedRoute(post) {
-                return "clasificados/" + post.slug;
+                return "/clasificados/" + post.slug;
             }
         }
     };
 </script>
+
+<style scoped>
+    .vh-100 {
+        min-height: 79vh;
+    }
+</style>

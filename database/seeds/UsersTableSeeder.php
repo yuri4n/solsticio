@@ -11,13 +11,13 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Solsticio\User::class, 29)->create();
-        Solsticio\User::create([
+        factory(App\User::class, 29)->create();
+        App\User::create([
             'role' => 'ADMIN',
             'name' => 'Julian Garzon',
-        	'email'=> 'bryangarzon22@gmail.com',
-        	'password' => bcrypt('123'),
-        	'torre' => '1',
+            'email' => 'bryangarzon22@gmail.com',
+            'password' => bcrypt('123'),
+            'torre' => '1',
             'apartamento' => '404',
             'status' => 'APPROVED'
         ]);

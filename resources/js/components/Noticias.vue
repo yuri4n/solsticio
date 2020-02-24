@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container vh-100">
         <div class="row">
             <!-- Blog Entries Column -->
             <div class="col-md-8">
@@ -169,7 +169,7 @@ export default {
             this.pagination = pagination;
         },
         postRoute(post) {
-            return "noticias/" + post.slug;
+            return "/noticias/" + post.slug;
         },
         getUser(user_id) {
             const url = "/api/users/" + user_id;
@@ -187,3 +187,9 @@ export default {
     }
 };
 </script>
+
+<style scoped>
+    .vh-100 {
+        min-height: 79vh;
+    }
+</style>

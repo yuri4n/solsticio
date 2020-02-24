@@ -1,7 +1,7 @@
 <template>
     <nav
         class="navbar navbar-expand-lg navbar-dark bg-dark"
-        v-if="$auth.isAuthenticated() && user.role == 'ADMIN'"
+        v-if="$auth.isAuthenticated() && user.role == 'ADMIN' && user.status === 'APPROVED'"
     >
         <a class="navbar-brand" href="/inicio/">
             <img alt height="30" src="/images/icon.png" width="30">

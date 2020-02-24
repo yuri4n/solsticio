@@ -28,6 +28,6 @@ class ClassifiedMail extends Mailable
      */
     public function build()
     {
-        return $this->from('juliangarzondeveloper@gmail.com')->subject('Estado del clasificado Solsticio Etapa 5')->view('mails/classified')->with('data', $this->data);
+        return $this->from('lady@mail.solsticioetapa5.com')->subject('Estado del clasificado Solsticio Etapa 5')->view('mails/classified')->with('data', $this->data);
     }
 }

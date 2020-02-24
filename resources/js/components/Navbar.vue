@@ -20,34 +20,34 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
+                    <li class="nav-item" :class="{ active : path === 'inicio' || path === ''}">
                         <a class="nav-link" href="/inicio/">Inicio</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" :class="{ active : path === 'noticias'}">
                         <a class="nav-link" href="/noticias/">Noticias</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" :class="{ active : path === 'servicios'}">
                         <a class="nav-link" href="/servicios/">Servicios</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" :class="{ active : path === 'archivos'}">
                         <a class="nav-link" href="/archivos/">Archivos</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" :class="{ active : path === 'clasificados'}">
                         <a class="nav-link" href="/clasificados/">Clasificados</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" :class="{ active : path === 'peticiones'}">
                         <a class="nav-link" href="/peticiones/">Peticiones</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" :class="{ active : path === 'censo'}">
                         <a class="nav-link" href="/censo/">Censo</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" :class="{ active : path === 'pagos'}">
                         <a class="nav-link" href="/pagos/">Pagos</a>
                     </li>
-                    <li class="nav-item auth" v-if="!$auth.isAuthenticated()">
+                    <li class="nav-item auth" :class="{ active : path === 'login'}" v-if="!$auth.isAuthenticated()">
                         <a class="nav-link" href="/login/">Ingresar</a>
                     </li>
-                    <li class="nav-item auth" v-if="!$auth.isAuthenticated()">
+                    <li class="nav-item auth" :class="{ active : path === 'register'}" v-if="!$auth.isAuthenticated()">
                         <a class="nav-link" href="/register/">Registrar</a>
                     </li>
                     <li class="nav-item auth" v-if="$auth.isAuthenticated() && user.role === 'ADMIN'">
@@ -78,10 +78,12 @@
     export default {
         mounted() {
             if (this.$auth.isAuthenticated()) this.getUser();
+            this.getPath();
         },
         data() {
             return {
-                user: {}
+                user: {},
+                path: ""
             };
         },
         methods: {
@@ -93,6 +95,9 @@
                         this.user = response.data.data;
                     })
                     .catch();
+            },
+            getPath() {
+                this.path = window.location.pathname.split("/")[1];
             }
         }
     };

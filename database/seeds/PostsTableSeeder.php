@@ -11,6 +11,6 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Solsticio\Post::class, 100)->create();
+        factory(App\Post::class, 100)->create();
     }
 }

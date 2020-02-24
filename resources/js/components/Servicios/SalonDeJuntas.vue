@@ -7,7 +7,7 @@
             <div class="col-xl-7">
                 <div class="card">
                     <div class="card-header"><h2>Salon de Juntas</h2></div>
-                    <img alt="" class="card-img-top" src="http://placehold.it/1280x720">
+                    <img alt="imagen_salon_juntas" class="card-img-top" src="../../../images/juntas.jpg">
                     <div class="card-body">
                         <h4 class="card-title">Normas y Requisitos</h4>
                         <p class="card-text">Lorem ipsum dolor sit amet consectetur adipiscing elit, vestibulum proin
@@ -42,7 +42,7 @@
             </div>
             <div class="col-xl-5">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body" v-if="this.$auth.isAuthenticated() && user.status === 'APPROVED'">
                         <h4 class="card-title">Reserva Ya!</h4>
                         <p class="card-text">Lorem ipsum dolor sit amet consectetur adipiscing elit varius nascetur
                             rhoncus eros, neque facilisi parturient ligula nam orci convallis fusce netus dignissim
@@ -65,6 +65,22 @@
                             </div>
                             <button class="btn btn-primary mb-2" type="submit" v-on:click="newType='SJ'">Enviar</button>
                         </form>
+                    </div>
+                    <div class="card-body" v-if="this.$auth.isAuthenticated() && user.status === 'PENDING'">
+                        <h4 class="card-title">Tu cuenta no está aprobada</h4>
+                        <p class="card-text">
+                            Primero deberás esperar a que un administrador del sitio apruebe tu
+                            cuenta, por favor revisa el correo con el que te registraste
+                        </p>
+                    </div>
+                    <div class="card-body" v-else>
+                        <h4 class="card-title">Deberás iniciar sesión para realizar la petición</h4>
+                        <p class="card-text">
+                            El contenido de esta página es exclusiva para usuarios registrados. Si perteneces a la
+                            comunidad de Solsticio Etapa 5, por favor registrate o inicia sesión.
+                        </p>
+                        <a class="btn btn-primary" href="/login">Iniciar sesión</a>
+                        <a class="btn btn-primary" href="/register">Registrarse</a>
                     </div>
                 </div>
             </div>
