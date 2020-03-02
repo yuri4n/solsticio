@@ -5,6 +5,10 @@ I have developed compleatly alone, as a Fullstack Developer.
 
 -   [Live site](https://solsticioetapa5.com)
 
+## Thumbnail
+
+![Website Thumbnail][thumbnail]
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
@@ -26,3 +30,5 @@ Vue (pronounced /vjuː/, like view) is a progressive framework for building user
 ## License
 
 Copyright &copy; Solsticio Parque Residencial Etapa 5. 2018.
+
+[thumbnail]: https://repository-images.githubusercontent.com/244270289/61987b00-5c0b-11ea-9078-0367b18d6c65 "Thumbnail"
